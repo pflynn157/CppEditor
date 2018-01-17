@@ -1,0 +1,10 @@
+platforms/qwindows.dll
+libEGL.dll
+libgcc_s_dw2-1.dll
+libstdc++-6.dll
+libwinpthread-1.dll
+Qt5Core.dll
+Qt5Gui.dll
+Qt5Widgets.dll
+
+The executable can be found in build

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<settings>
+    <systray>
+        <display>true</display>
+    </systray>
+    <language>
+        <name>English</name>
+        <path>:/lang/rsc/english.xml</path>
+    </language>
+    <subwindows>
+        <date_selector>true</date_selector>
+        <console>true</console>
+    </subwindows>
+    <window css="default">
+        <winX>700</winX>
+        <winY>600</winY>
+    </window>
+    <toolbar css="default">
+        <newFile>true</newFile>
+        <openFile>true</openFile>
+        <saveFile>true</saveFile>
+        <saveFileAs>true</saveFileAs>
+        <cut>true</cut>
+        <copy>true</copy>
+        <paste>true</paste>
+        <undo>true</undo>
+        <redo>true</redo>
+        <syntaxmenu>true</syntaxmenu>
+        <fontsize>true</fontsize>
+    </toolbar>
+    <statusbar css="default" />
+    <editor>
+        <autoindent>true</autoindent>
+        <line_color>#d9d9d9</line_color>
+    </editor>
+</settings>

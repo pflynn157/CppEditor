@@ -1,0 +1,16 @@
+/build
+*.user
+*.directory
+/.kdev4
+/build-deb
+*.deb
+/xml_old
+/tools/BuildSystemGenerator/nbproject/private/
+build_custom.sh
+*.zip
+/winbin
+/py
+qrc_icons.cpp
+qrc_lang.cpp
+qrc_rsc.cpp
+win32/winbin

@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<title>CppEditor Translator's Guide</title>
+<meta name="author" content="pdf4664">
+
+</head>
+<body>
+
+<h1>Greetings, Translator!</h1>
+<hr />
+
+<h3>Introduction</h3>
+<p>
+Welcome, translator. As of version 14, we are proud to announce that CppEditor now has localization support. However, we do not use any existing framework such as Getext or i18n. CppEditor's goal is to be 100% cross-platform, and part of this requirement is not being dependent on any library except Qt. Our localization library is simple to use, and proved to be relatively simple to implement. Like CppEditor's other frameworks (settings, syntax-highlighting), it heavily uses XML. We are proud to say, however, that the syntax for the language files is much simpler than the syntax-highlighting files. Even if you are not a programmer, you can still add translations.
+</p>
+
+<h3>How to add new translations</h3>
+<p>
+CppEditor has a lot of translatable fields. We have provided a template file. It is located in the base of the CppEditor source directory, and is called translation_template.xml.txt. If you are using a code editor, turn on syntax-highlighting for XML. First, copy the file into <code>src/lang/rsc</code>. Then rename it. <strong>Note:</strong> In our examples, we will be using Dutch (Nederlands) as our example. Therefore, we will rename the file to <code>nederlands.xml</code>. The file name really does not matter; however, it <strong><em>must</em></strong> end in <code>.xml</code> for it to be detected.<br />
+Now we have created our file. Can we begin translation? <em>No!</em> The file is not automatically picked up by the program. All translation files are build directly into the program binary. Therefore, we must add the file as a resource. All language files are added as resources in the <code>lang.qrc</code> file located in the <code>src</code> directory. For our example, you would add the following line:<br />
+<code>&lt;lang/rsc/nederlands.xml&gt;</code><br />
+This element is nested in the &lt;qresource&gt; element. When you are done, <code>lang.qrc</code> should look something like this:<br />
+<code><pre>
+&lt;RCC&gt;
+    &lt;qresource prefix="/"&gt;
+        &lt;file&gt;lang/rsc/available.txt&lt;/file&gt;
+        &lt;file&gt;lang/rsc/english.xml&lt;/file&gt;
+        &lt;file&gt;lang/rsc/nederlands.xml&lt;/file&gt;
+    &lt;/qresource&gt;
+&lt;/RCC&gt;
+</pre></code><br />
+Are we done? <em>No!</em> We have one last step. In the <code>src/lang/rsc</code> directory, there is a file entitled "available.txt". This contains a list of all available languages. Put your language in this file. <em>Make sure it is on its own line. Also, please avoid extra lines!</em> We recommend that you put the name of your language in its native name; in other words, instead of putting "Dutch" in the file, instead, put "Nederlands".
+</p>
+
+<h3>Creating a translation file</h3>
+<p>
+Great! So, now everything is set up. Now, we can begin translating. Open up the file you created from the template file. The first thing you <em>must</em> do is edit the very first line. The first line looks like this:<br />
+<code>&lt;language name=""&gt;</code><br />
+You must edit this line to what your language is. <strong><em>It must match whatever entry you put into the <code>available.txt</code> file. It does not have to match your file name.</em></strong> Let us continue with our example (if you don't know what this example is, you have not read this whole document. Its stated in the previous section). We put "Nederlands" into <code>available.txt</code>. Therefore, we must change the name attribute to "Nederlands". However, we are free to name our file "dutch.txt" if we want; the translator does not care. <br />
+Okay. We are now done setting everything up. The rest of the file is probably fairly self-explanatory. If it isn't to you, then read on. Look at the first child element under the language element:<br />
+<code>&lt;phrase name="CppEditor"&gt;&lt;/phrase&gt;</code><br />
+Everything is in a phrase tag. The name attribute is the original English name for this label. The tag we have above is for the application title. If we leave the tag empty, the application title will be CppEditor. For example's sake, let's say you were to change the value to "C++Editor". Well, now the tag has content, so it will return "C++Editor" rather than "CppEditor". If this doesn't make sense to you, then read the next section that describes how the translator works. Basically, it boils down to this: the "name" attribute in each phrase tag represents the original English string. It is up to you to translate the name attribute, and then put your result as the phrase tag's value. So, if we did want to change the application name to "C++Editor", the element shown above would look like this:<br />
+<code>&lt;phrase name="CppEditor"&gt;C++Editor&lt;/phrase&gt;</code><br />
+As of version 14, CppEditor comes with two translations: English and Dutch. If the explanation above still doesn't make sense, look at the Dutch file "nederlands.xml" in <code>src/lang/rsc</code>.
+</p>
+
+<h3>Checking your work</h3>
+<p>
+The only way to check your work (other than proof-reading) is to build the program. If your translation does not appear, than re-read this document. Look at existing translation files. I am sure that you will find your issue.
+</p>
+
+<h3>How the translator works</h3>
+<p>
+This is an optional article on how the localization framework works.<br />
+As of version 14, only embedded translation files can be used. The translator and the files are located in the "lang" subfolder, which is located in the "src" directory. In the "src" directory is a Qt resource file entitled "lang.qrc". This file contains the available.txt file, which lists all available language names, and a list containing all language xml files. To change the language, the user would navigate to the help menu, and click the "Switch Language" item. He would then be greeted with a small dialog containing a combo box. The combo box contains all available languages; this list is taken from the available.txt file. Once the user selects a language, a manager function would scan all embedded xml files for the file that contains a root "language" element with a name attribute matching the value chosen in the combo box. Once the file is found, both the file and the chosen language name are saved as settings. When CppEditor is restarted, the language manager reads the settings file and sets the values of two static variables containing the current language name the the current language file path. The current language name variable is used if the user decides to switch the language again (it is displayed as the current value in the combo box). The path is used by the translator itself. Prior to version 14, all labels were hard-coded English language strings. The translator is a function (called <code>trans(QString str)</code>) that takes a string (the original hard-coded English string) and returns a string. After receiving the string, the function opens up the file indicated in the translation file path that was set on startup. It then iterates through every phrase element until it finds one with the name attribute matching the string that was originally passed to the function. If no such element is found, the original string is simply returned. If an element is found, the parser retrieves value, and returns this value as a string. Whichever string is returned is what is used in labels, tooltips, etc.
+</p>
+
+</body>
+</html>

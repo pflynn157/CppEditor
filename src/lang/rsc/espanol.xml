@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language name="Español">
+	<phrase name="CppEditor">CppEditor</phrase>
+	<phrase name="File">Archivo</phrase>
+	<phrase name="Edit">Editar</phrase>
+	<phrase name="Insert">Insertar</phrase>
+	<phrase name="View">Ver</phrase>
+	<phrase name="Settings">Configuraciones</phrase>
+	<phrase name="Templates">Plantillas</phrase>
+	<phrase name="Help">Ayuda</phrase>
+	<phrase name="New">Nuevo</phrase>
+	<phrase name="Open">Abierto</phrase>
+	<phrase name="Save">Salvar</phrase>
+	<phrase name="Save As">Guardar como</phrase>
+	<phrase name="Quit">Dejar</phrase>
+	<phrase name="Recent">Reciente</phrase>
+	<phrase name="Clear List">Limpiar lista</phrase>
+	<phrase name="None">Ninguna</phrase>
+	<phrase name="Cut">Cortar</phrase>
+	<phrase name="Copy">Dupdo</phrase>
+	<phrase name="Paste">Pegar</phrase>
+	<phrase name="Select All">Seleccionar todo</phrase>
+	<phrase name="Undo">Deshacer</phrase>
+	<phrase name="Redo">Rehacer</phrase>
+	<phrase name="Find Text">Buscar texto</phrase>
+	<phrase name="Insert a date">Insertar una fecha</phrase>
+	<phrase name="Fullscreen">Pantalla completa</phrase>
+	<phrase name="Display Project Panel">Mostrar el panel del proyecto</phrase>
+	<phrase name="Display Rich Text Previewer">Mostrar vista previa de texto enriquecido</phrase>
+	<phrase name="Display Console">Consola de visualización</phrase>
+	<phrase name="Open Settings Dialog">Abrir el cuadro de diálogo de configuración</phrase>
+	<phrase name="Set program theme">Establecer el tema del programa</phrase>
+	<phrase name="Use system theme">Usa el tema del sistema</phrase>
+	<phrase name="Open settings file">Abrir archivo de configuraciones</phrase>
+	<phrase name="Themes">Temas</phrase>
+	<phrase name="Choose CSS Theme">Elige el tema CSS</phrase>
+	<phrase name="Save as template">Guardar como plantilla</phrase>
+	<phrase name="Switch Language">Cambiar idioma</phrase>
+	<phrase name="About Qt">Acerca de Qt</phrase>
+	<phrase name="About">Acerca de</phrase>
+	<phrase name="About CppEditor">Acerca de CppEditor</phrase>
+	<phrase name="Windows">Windows</phrase>
+	<phrase name="Open Command Prompt">Abrir el símbolo del sistema</phrase>
+	<phrase name="Open PowerShell">Abrir Powershell</phrase>
+	<phrase name="Open Notepad">Abrir el bloc de notas</phrase>
+	<phrase name="New file">Archivo nuevo</phrase>
+	<phrase name="Open a file">Abra un archivo</phrase>
+	<phrase name="Save current file">Guarde el archivo actual</phrase>
+	<phrase name="Save current file as">Guarde el archivo actual como</phrase>
+	<phrase name="Change font size">Cambia tamaño de fuente</phrase>
+	<phrase name="Change Application Language">Cambiar el idioma de la aplicación</phrase>
+	<phrase name="Choose Language:">Elige lengua:</phrase>
+	<phrase name="Submit">Enviar</phrase>
+	<phrase name="Notice">Darse cuenta</phrase>
+	<phrase name="Find Next">Encontrar Siguiente</phrase>
+	<phrase name="Find">Encontrar</phrase>
+	<phrase name="Close">Cerca</phrase>
+	<phrase name="Date Picker">Selector de fechas</phrase>
+	<phrase name="Add">Añadir</phrase>
+	<phrase name="Editor Settings">Configuración del editor</phrase>
+	<phrase name="Choose font for current page: ">Elija fuente para la página actual:</phrase>
+	<phrase name="Choose">Escoger</phrase>
+	<phrase name="Choose color for current line highlighter: ">Elija el color para el resaltador de línea actual:</phrase>
+	<phrase name="Auto indent">Sangría automática</phrase>
+	<phrase name="Insert Lorem Ipsum text">Insertar texto de Lorem Ipsum</phrase>
+	<phrase name="IPC Settings">Configuraciones de IPC</phrase>
+	<phrase name="Display IPC dialog">Mostrar el diálogo de IPC</phrase>
+    <phrase name="Insert a color">Insertar un color</phrase>
+    <phrase name="System Tray Icon Settings">Configuración del icono de la bandeja del sistema</phrase>
+	<phrase name="Show System Tray Icon">Mostrar icono de bandeja del sistema</phrase>
+	
+	<!--
+	Messages
+	The following lines are messages found in dialog boxes in the program.
+	Please translate the comment above the line.
+	-->
+	
+	<!--The language will be changed the next time you start CppEditor.-->
+	<phrase name="lang-change-msg">El idioma se cambiará la próxima vez que inicie CppEditor.</phrase>
+</language> 

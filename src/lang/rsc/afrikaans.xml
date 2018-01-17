@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language name="Afrikaans">
+	<phrase name="CppEditor">CppEditor</phrase>
+	<phrase name="File">Lêer</phrase>
+	<phrase name="Edit">Wysig</phrase>
+	<phrase name="Insert">Voeg</phrase>
+	<phrase name="View">Beskou</phrase>
+	<phrase name="Settings">Instellings</phrase>
+	<phrase name="Templates">Templates</phrase>
+	<phrase name="Help">Help</phrase>
+	<phrase name="New">Nuwe</phrase>
+	<phrase name="Open">Oop</phrase>
+	<phrase name="Save">Red</phrase>
+	<phrase name="Save As">Stoor As</phrase>
+	<phrase name="Quit">Afsluit</phrase>
+	<phrase name="Recent">Onlangse</phrase>
+	<phrase name="Clear List">Maak Lys Skoon</phrase>
+	<phrase name="None">Geen</phrase>
+	<phrase name="Cut">Sny</phrase>
+	<phrase name="Copy">Kopie</phrase>
+	<phrase name="Paste">Plak</phrase>
+	<phrase name="Select All">Kies Alles</phrase>
+	<phrase name="Undo">Ongedaan Te Maak</phrase>
+	<phrase name="Redo">Oordoen</phrase>
+	<phrase name="Find Text">Vind Teks</phrase>
+	<phrase name="Insert a date">Voeg 'n Datum In</phrase>
+	<phrase name="Fullscreen">Volskerm</phrase>
+	<phrase name="Display Project Panel">Vertoon Projekpaneel</phrase>
+	<phrase name="Display Rich Text Previewer">Vertoon Ryk Teksvoorskouer</phrase>
+	<phrase name="Display Console">Vertoon Konsole</phrase>
+	<phrase name="Open Settings Dialog">Open Instellings Dialoog</phrase>
+	<phrase name="Set program theme">Stel program tema</phrase>
+	<phrase name="Use system theme">Gebruik stelsel tema</phrase>
+	<phrase name="Open settings file">Maak instellingslêer oop</phrase>
+	<phrase name="Themes">Temas</phrase>
+	<phrase name="Choose CSS Theme">Kies CSS Tema</phrase>
+	<phrase name="Save as template">Stoor as sjabloon</phrase>
+	<phrase name="Switch Language">Skakel Taal</phrase>
+	<phrase name="About Qt">Oor Qt</phrase>
+	<phrase name="About">Oor</phrase>
+	<phrase name="About CppEditor">Oor CppEditor</phrase>
+	<phrase name="Windows">Windows</phrase>
+	<phrase name="Open Command Prompt">Oop Opdrag Prompt</phrase>
+	<phrase name="Open PowerShell">Oop kragskerm</phrase>
+	<phrase name="Open Notepad">Oop Notaboek</phrase>
+	<phrase name="New file">Nuwe lêer</phrase>
+	<phrase name="Open a file">Maak 'n lêer oop</phrase>
+	<phrase name="Save current file">Stoor huidige lêer</phrase>
+	<phrase name="Save current file as">Stoor huidige lêer as</phrase>
+	<phrase name="Change font size">Verander lettergrootte</phrase>
+	<phrase name="Change Application Language">Verander aansoektaal</phrase>
+	<phrase name="Choose Language:">Kies taal:</phrase>
+	<phrase name="Submit">Indien</phrase>
+	<phrase name="Notice">Kennisgewing</phrase>
+	<phrase name="Find Next">Vind Volgende</phrase>
+	<phrase name="Find">Vind</phrase>
+	<phrase name="Close">Naby</phrase>
+	<phrase name="Date Picker">Date Picker</phrase>
+	<phrase name="Add">Voeg</phrase>
+	<phrase name="Editor Settings">Redigeerder instellings</phrase>
+	<phrase name="Choose font for current page: ">Kies font vir huidige bladsy: </phrase>
+	<phrase name="Choose">Kies</phrase>
+	<phrase name="Choose color for current line highlighter: ">Kies kleur vir huidige lynstrokies: </phrase>
+	<phrase name="Auto indent">Outo-indent</phrase>
+	<phrase name="Insert Lorem Ipsum text">Voeg Lorem Ipsum-teks in</phrase>
+	<phrase name="IPC Settings">IPC-instellings</phrase>
+	<phrase name="Display IPC dialog">Wys IPC dialoog</phrase>
+    <phrase name="Insert a color">Voeg 'n kleur in</phrase>
+    <phrase name="System Tray Icon Settings">Stelsel ikoon instellings</phrase>
+	<phrase name="Show System Tray Icon">Wys stelselbak ikoon</phrase>
+	
+	<!--
+	Messages
+	The following lines are messages found in dialog boxes in the program.
+	Please translate the comment above the line.
+	-->
+	
+	<!--The language will be changed the next time you start CppEditor.-->
+	<phrase name="lang-change-msg">Die taal sal verander word die volgende keer as jy CppEditor begin.</phrase>
+</language> 

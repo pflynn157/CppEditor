@@ -1,0 +1,40 @@
+/*Winter theme*/
+
+/*This is the program's main menubar.*/
+MenuBar {
+	background-color:#ffffff;
+}
+
+/*These are the menubar's items*/
+MenuBar::item {
+}
+
+/*Called when an item is selected/hovered over*/
+MenuBar::item:selected {
+	background:#00ccff;
+}
+
+/*All QMenus throughout the program (context,menubar,etc)*/
+QMenu {
+	background-color:#ffffff;
+}
+
+/*Called when an item is clicked/hovered over*/
+QMenu::item:selected {
+	background:#00ccff;
+}
+
+/*All QToolBars in the program.*/
+QToolBar {
+	background-color:#ffffff;
+}
+
+/*All QStatusBars in the program.*/
+QStatusBar {
+	background-color:#ffffff;
+}
+
+/*The editor widget.*/
+Editor {
+	background-color:#ffffff;
+} 

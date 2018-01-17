@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=CppEditor %U
+GenericName[en_US]=CppEditor
+GenericName=CppEditor
+Icon=accessories-text-editor
+MimeType=text/plain;
+Name[en_US]=CppEditor
+Name=CppEditor
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+Categories=Utility
