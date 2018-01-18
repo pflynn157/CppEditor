@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017-2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,12 +24,10 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QIcon>
-#include <QPixmap>
-
 #include "filemenu.hh"
 #include "../global/slots.hh"
 #include "../lang/lang-parser.hh"
+#include "../icon.hh"
 
 RecentMenu *FileMenu::recentMenu;
 
@@ -44,25 +42,11 @@ FileMenu::FileMenu(QMainWindow *window) {
     saveFileAs = new QAction(trans("Save As"),this);
     quit = new QAction(trans("Quit"),this);
 
-    QPixmap newDocIcon(":/icons/document-new.png");
-    QPixmap openIcon(":/icons/document-open.png");
-    QPixmap saveIcon(":/icons/document-save.png");
-    QPixmap saveAsIcon(":/icons/document-save-as.png");
-    QPixmap quitIcon(":/icons/application-exit.png");
-
-#ifdef NO_THEME_ICONS
-    newFile->setIcon(newDocIcon);
-    openFile->setIcon(openIcon);
-    saveFile->setIcon(saveIcon);
-    saveFileAs->setIcon(saveAsIcon);
-    quit->setIcon(quitIcon);
-#else
-    newFile->setIcon(QIcon::fromTheme("document-new",newDocIcon));
-    openFile->setIcon(QIcon::fromTheme("document-open",openIcon));
-    saveFile->setIcon(QIcon::fromTheme("document-save",saveIcon));
-    saveFileAs->setIcon(QIcon::fromTheme("document-save-as",saveAsIcon));
-    quit->setIcon(QIcon::fromTheme("application-exit",quitIcon));
-#endif
+    newFile->setIcon(IconManager::getIcon("document-new"));
+    openFile->setIcon(IconManager::getIcon("document-open"));
+    saveFile->setIcon(IconManager::getIcon("document-save"));
+    saveFileAs->setIcon(IconManager::getIcon("document-save-as"));
+    quit->setIcon(IconManager::getIcon("application-exit"));
 
     connect(newFile,&QAction::triggered,new Slots,&Slots::newFileSlot);
     connect(openFile,&QAction::triggered,new Slots,&Slots::openFileSlot);

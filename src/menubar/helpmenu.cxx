@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017-2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,8 +24,6 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QIcon>
-#include <QPixmap>
 #include <QApplication>
 #include <QMessageBox>
 #include <iostream>
@@ -34,6 +32,7 @@
 #include "../lang/lang-dialog.hh"
 #include "../global/file_actions.hh"
 #include "../lang/lang-parser.hh"
+#include "../icon.hh"
 
 HelpMenu::HelpMenu() {
     this->setTitle(trans("Help"));
@@ -42,13 +41,7 @@ HelpMenu::HelpMenu() {
     aboutQt = new QAction(trans("About Qt"),this);
     about = new QAction(trans("About"),this);
 
-	QPixmap aboutIcon(":/icons/help-about.png");
-
-#ifdef NO_THEME_ICONS
-	about->setIcon(aboutIcon);
-#else
-	about->setIcon(QIcon::fromTheme("help-about",aboutIcon));
-#endif
+    about->setIcon(IconManager::getIcon("help-about"));
 
     connect(switchLang,&QAction::triggered,this,&HelpMenu::onSwitchLangClicked);
     connect(aboutQt,&QAction::triggered,qApp,&QApplication::aboutQt);

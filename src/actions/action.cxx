@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017-2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,17 +24,10 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QIcon>
-#include <QPixmap>
-
 #include "action.hh"
 #include "../lang/lang-parser.hh"
+#include "../icon.hh"
 
 Action::Action(QString name, QString iconName, QObject *parent) : QAction(trans(name),parent) {
-    QPixmap icon(":/icons/"+iconName+".png");
-#ifdef NO_THEME_ICONS
-    this->setIcon(icon);
-#else
-    this->setIcon(QIcon::fromTheme(iconName,icon));
-#endif
+    this->setIcon(IconManager::getIcon(iconName));
 }

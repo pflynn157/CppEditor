@@ -44,6 +44,7 @@
 #include "tabpane.hh"
 #include "lang/lang-parser.hh"
 #include "global.hh"
+#include "icon.hh"
 
 QComboBox *MainToolBar::syntaxmenu;
 FontSpinner *MainToolBar::fontSize;
@@ -78,37 +79,15 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow) {
     syntaxItems.push_front("Plain Text");
     syntaxmenu->addItems(syntaxItems);
 
-    QPixmap newFileIcon(":/icons/document-new.png");
-    QPixmap openFileIcon(":/icons/document-open.png");
-    QPixmap saveFileIcon(":/icons/document-save.png");
-    QPixmap saveFileAsIcon(":/icons/document-save-as");
-    QPixmap cutIcon(":/icons/edit-cut.png");
-    QPixmap copyIcon(":/icons/edit-copy.png");
-    QPixmap pasteIcon(":/icons/edit-paste.png");
-    QPixmap undoIcon(":/icons/edit-undo.png");
-    QPixmap redoIcon(":/icons/edit-redo.png");
-
-#ifdef NO_THEME_ICONS
-    newFile->setIcon(newFileIcon);
-    openFile->setIcon(openFileIcon);
-    saveFile->setIcon(saveFileIcon);
-    saveFileAs->setIcon(saveFileAsIcon);
-    cut->setIcon(cutIcon);
-    copy->setIcon(copyIcon);
-    paste->setIcon(pasteIcon);
-    undo->setIcon(undoIcon);
-    redo->setIcon(redoIcon);
-#else
-    newFile->setIcon(QIcon::fromTheme("document-new", newFileIcon));
-    openFile->setIcon(QIcon::fromTheme("document-open", openFileIcon));
-    saveFile->setIcon(QIcon::fromTheme("document-save", saveFileIcon));
-    saveFileAs->setIcon(QIcon::fromTheme("document-save-as", saveFileAsIcon));
-    cut->setIcon(QIcon::fromTheme("edit-cut",cutIcon));
-    copy->setIcon(QIcon::fromTheme("edit-copy",copyIcon));
-    paste->setIcon(QIcon::fromTheme("edit-paste",pasteIcon));
-    undo->setIcon(QIcon::fromTheme("edit-undo",undoIcon));
-    redo->setIcon(QIcon::fromTheme("edit-redo",redoIcon));
-#endif
+    newFile->setIcon(IconManager::getIcon("document-new"));
+    openFile->setIcon(IconManager::getIcon("document-open"));
+    saveFile->setIcon(IconManager::getIcon("document-save"));
+    saveFileAs->setIcon(IconManager::getIcon("document-save-as"));
+    cut->setIcon(IconManager::getIcon("edit-cut"));
+    copy->setIcon(IconManager::getIcon("edit-copy"));
+    paste->setIcon(IconManager::getIcon("edit-copy"));
+    undo->setIcon(IconManager::getIcon("edit-undo"));
+    redo->setIcon(IconManager::getIcon("edit-redo"));
 
     newFile->setToolTip(trans("New file"));
     openFile->setToolTip(trans("Open a file"));

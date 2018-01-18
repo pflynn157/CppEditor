@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017-2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,12 +24,10 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QIcon>
-#include <QPixmap>
-
 #include "viewmenu.hh"
 #include "../window.hh"
 #include "../lang/lang-parser.hh"
+#include "../icon.hh"
 
 ViewMenu::ViewMenu(QMainWindow *parent) {
     parentWindow = parent;
@@ -45,13 +43,7 @@ ViewMenu::ViewMenu(QMainWindow *parent) {
     projectPane->setCheckable(true);
     projectPane->setChecked(false);
 
-	QPixmap fullscreenIcon(":/icons/view-fullscreen.png");
-
-#ifdef NO_THEME_ICONS
-	fullscreen->setIcon(fullscreenIcon);
-#else
-	fullscreen->setIcon(QIcon::fromTheme("view-fullscreen",fullscreenIcon));
-#endif
+    fullscreen->setIcon(IconManager::getIcon("view-fullscreen"));
 
     connect(fullscreen,&QAction::triggered,this,&ViewMenu::onFullscreenClicked);
     connect(projectPane,&QAction::triggered,this,&ViewMenu::onProjectPaneClicked);

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017-2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,12 +24,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QIcon>
-
 #include "editmenu.hh"
 #include "../window.hh"
 #include "../finder/finder.hh"
 #include "../lang/lang-parser.hh"
+#include "../icon.hh"
 
 EditMenu::EditMenu() {
     this->setTitle(trans("Edit"));
@@ -40,7 +39,7 @@ EditMenu::EditMenu() {
     selectAll = new SelectAllAction(this);
     undo = new UndoAction(this);
     redo = new RedoAction(this);
-    displayFinderToolbar = new QAction(QIcon::fromTheme("edit-find",QPixmap(":/icons/edit-find.png")),trans("Find Text"),this);
+    displayFinderToolbar = new QAction(IconManager::getIcon("edit-find"),trans("Find Text"),this);
 
     connect(displayFinderToolbar,&QAction::triggered,this,&EditMenu::dspFinderToolbarClicked);
 
