@@ -16,6 +16,9 @@ The following are needed to build CppEditor:
 5. libsettings
 6. KDE syntax-highlighting
 
+### Icons
+On Linux, CppEditor pulls icons from the current theme. However, on desktops (like Fluxbox) or systems (like Windows) without this support, an included icon is used instead. All icons are from the Oxygen icon theme. Don't want to use the theme icons at all? You don't have to. Open the settings file by clicking Settings (in the menubar)-> Open settings file. Change the value of the "sysicons" node to "false" and restart the program. To resume using theme icons if they are available, change the "sysicons" node back to true. You can also use different icons if you do not like the theme or Oxygen icons. Simply swap out the Oxygen icon for what you want in the {source root}/src/icons folder. Important: you must rename your new icon to the same name that the previous icon had, or it will not work. Also, this cannot be done at runtime; you must rebuild the program after swapping your icons.
+
 #### Languages
 CppEditor has experimental internationalization support. Currently, there is support for the following languages:   
 1. Afrikaans
