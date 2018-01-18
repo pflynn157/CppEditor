@@ -14,10 +14,10 @@
         <file>icons/view-fullscreen.png</file>
         <file>icons/preferences-desktop-font.png</file>
         <file>icons/help-about.png</file>
-        <file>icons/text-editor.png</file>
         <file>icons/edit-find.png</file>
         <file>icons/inode-directory.png</file>
         <file>icons/text-x-generic.png</file>
         <file>icons/document-edit.png</file>
+        <file>icons/accessories-text-editor.png</file>
     </qresource>
 </RCC>

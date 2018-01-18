@@ -84,6 +84,7 @@ set(BASE_SRC
     icons.qrc
     lang.qrc
     rsc.qrc
+    icon.cxx
 )
 
 add_executable(CppEditor

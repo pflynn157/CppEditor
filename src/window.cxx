@@ -48,6 +48,7 @@
 #include "global/css.hh"
 #include "menus/system_tray_menu.hh"
 #include "lang/lang-parser.hh"
+#include "icon.hh"
 
 using namespace CppLib;
 
@@ -66,18 +67,11 @@ QSystemTrayIcon *Window::trayIcon;
 
 Window::Window() {
     this->setWindowTitle(trans("CppEditor"));
+    this->setWindowIcon(IconManager::getIcon("accessories-text-editor"));
     int winX = Settings::getSetting("window/winX","700").toInt();
     int winY = Settings::getSetting("window/winY","600").toInt();
     this->resize(winX,winY);
     qApp->setStyleSheet(CssManager::stylesheetContent("window"));
-
-	QPixmap windowIcon(":/icons/text-editor.png");
-
-#ifdef NO_THEME_ICONS
-	this->setWindowIcon(windowIcon);
-#else
-    this->setWindowIcon(QIcon::fromTheme("accessories-text-editor",windowIcon));
-#endif
 
     filemenu = new FileMenu(this);
     editmenu = new EditMenu;
@@ -156,11 +150,7 @@ Window::Window() {
     SystemTrayMenu *sysTrayMenu = new SystemTrayMenu(this);
     trayIcon->setContextMenu(sysTrayMenu);
 
-#ifdef NO_THEME_ICONS
-    trayIcon->setIcon(windowIcon);
-#else
-    trayIcon->setIcon(QIcon::fromTheme("accessories-text-editor",windowIcon));
-#endif
+    trayIcon->setIcon(IconManager::getIcon("accessories-text-editor"));
     bool showTrayIcon = QVariant(Settings::getSetting("systray/display","true")).toBool();
     trayIcon->setVisible(showTrayIcon);
 

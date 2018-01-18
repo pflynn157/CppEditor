@@ -45,6 +45,7 @@
 #include "template/template.hh"
 #include "macros.hh"
 #include "lang/lang-manager.hh"
+#include "icon.hh"
 #include "ipc.hh"
 
 Repository *repository;
@@ -70,6 +71,7 @@ int main(int argc, char *argv[]) {
     Template::initTemplates();
     Editor::updateSettings();
     LangManager::init();
+    IconManager::init();
 
     Window window;
     window.show();
