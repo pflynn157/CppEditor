@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QKeySequence>
+
 #include "filemenu.hh"
 #include "../global/slots.hh"
 #include "../lang/lang-parser.hh"
@@ -47,6 +49,12 @@ FileMenu::FileMenu(QMainWindow *window) {
     saveFile->setIcon(IconManager::getIcon("document-save"));
     saveFileAs->setIcon(IconManager::getIcon("document-save-as"));
     quit->setIcon(IconManager::getIcon("application-exit"));
+
+    newFile->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_N));
+    openFile->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_O));
+    saveFile->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_S));
+    saveFileAs->setShortcut(QKeySequence(Qt::SHIFT+Qt::CTRL+Qt::Key_S));
+    quit->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_Q));
 
     connect(newFile,&QAction::triggered,new Slots,&Slots::newFileSlot);
     connect(openFile,&QAction::triggered,new Slots,&Slots::openFileSlot);
