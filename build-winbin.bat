@@ -78,6 +78,8 @@ copy "%qtpath%\bin\libwinpthread-1.dll" .\
 copy "%qtpath%\bin\Qt5Core.dll" .\
 copy "%qtpath%\bin\Qt5Gui.dll" .\
 copy "%qtpath%\bin\Qt5Widgets.dll" .\
+copy "%qtpath%\bin\Qt5DBus.dll" .\
+copy "%qtpath%\bin\Qt5Network.dll" .\
 
 copy "C:\Unix\bin\libKF5DBusAddons.dll" .\
 copy "C:\Unix\bin\libKF5SyntaxHighlighting.dll" .\

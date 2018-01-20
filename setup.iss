@@ -45,10 +45,12 @@ Source: "{#HOME}\Projects\CppEditor\winbin\libwinpthread-1.dll"; DestDir: "{app}
 Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\Qt5DBus.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\libsettings.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\libKF5DBusAddons.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\libKF5SyntaxHighlighting.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\platforms\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#HOME}\Projects\CppEditor\winbin\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
