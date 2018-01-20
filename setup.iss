@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CppEditor"
-#define MyAppVersion "17"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "Patrick Flynn"
 #define MyAppExeName "CppEditor.exe"
 #define Home GetEnv('USERPROFILE')
@@ -19,7 +19,7 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile={#HOME}\Projects\CppEditor\COPYING.txt
+LicenseFile={#HOME}\Projects\CppEditor\COPYING
 OutputDir={#HOME}\Projects\CppEditor\winbin
 OutputBaseFilename=CppEditor_setup
 Compression=lzma
@@ -42,9 +42,12 @@ Source: "{#HOME}\Projects\CppEditor\winbin\libEGL.dll"; DestDir: "{app}"; Flags:
 Source: "{#HOME}\Projects\CppEditor\winbin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Cored.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Guid.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Widgetsd.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\libsettings.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\libKF5DBusAddons.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#HOME}\Projects\CppEditor\winbin\libKF5SyntaxHighlighting.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#HOME}\Projects\CppEditor\winbin\platforms\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
