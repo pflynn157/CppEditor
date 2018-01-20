@@ -29,7 +29,7 @@
 #include "ipc.hh"
 #include "window.hh"
 
-IPC::IPC() : KDBusService(KDBusService::Unique) {
+IPC::IPC() : KDBusService(KDBusService::Unique | KDBusService::NoExitOnFailure) {
     connect(this,SIGNAL(activateRequested(QStringList,QString)),this,SLOT(onActivate(QStringList,QString)));
 }
 
