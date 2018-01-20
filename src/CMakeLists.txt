@@ -87,7 +87,7 @@ set(BASE_SRC
     icon.cxx
 )
 
-add_executable(CppEditor
+set(SRC_ALL
     ${ACTIONS_SRC}
     ${FINDER_SRC}
     ${GLOBAL_SRC}
@@ -101,6 +101,12 @@ add_executable(CppEditor
     ${WINDOWS_SRC}
     ${BASE_SRC}
 )
+
+if (WIN32)
+	add_executable(CppEditor WIN32 ${SRC_ALL})
+else()
+	add_executable(CppEditor ${SRC_ALL})
+endif()
 
 target_link_libraries(CppEditor
     Qt5::Core
