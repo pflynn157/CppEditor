@@ -78,7 +78,7 @@ cd CppEditor
 if not exist build md build
 cd build
 
-cmake -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH=C:/Unix/share/ECM -DCMAKE_INSTALL_PREFIX=C:/Unix -DCMAKE_CXX_FLAGS="-IC:/Unix/include -IC:/Unix/include/cpplib -LC:/Unix/lib" ..
+cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Unix/share/ECM -DCMAKE_INSTALL_PREFIX=C:/Unix -DCMAKE_CXX_FLAGS="-IC:/Unix/include -IC:/Unix/include/cpplib -LC:/Unix/lib" ..
 mingw32-make
 
 cd ../..
