@@ -115,3 +115,10 @@ target_link_libraries(CppEditor
     KF5::DBusAddons
     settings
 )
+
+if (UNIX)
+	if (APPLE)
+	else()
+		install(TARGETS CppEditor DESTINATION /usr/local/bin)
+	endif()
+endif()
