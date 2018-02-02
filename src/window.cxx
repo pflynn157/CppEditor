@@ -57,7 +57,6 @@ QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;
 QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
-FinderToolbar *Window::finderToolbar;
 DateDockWidget *Window::dateDockWidget;
 #ifndef _WIN32
 ConsoleWin *Window::consoleWidget;
@@ -153,18 +152,11 @@ Window::Window() {
     trayIcon->setIcon(IconManager::getIcon("accessories-text-editor"));
     bool showTrayIcon = QVariant(Settings::getSetting("systray/display","true")).toBool();
     trayIcon->setVisible(showTrayIcon);
-
-    finderToolbar = new FinderToolbar;
-    finderToolbar->setAllowedAreas(Qt::BottomToolBarArea);
-    finderToolbar->setVisible(false);
-    finderToolbar->setMovable(false);
-    this->addToolBar(Qt::BottomToolBarArea,finderToolbar);
 }
 
 Window::~Window() {
     delete statusbar;
     delete centralSplitter;
-    delete finderToolbar;
     delete dateDockWidget;
     delete templateMenu;
     delete filemenu;
@@ -268,14 +260,6 @@ void Window::displayRichTextPane() {
 
 bool Window::isRichTextPaneVisible() {
     return richTextPane->isVisible();
-}
-
-void Window::displayFinderToolbar() {
-    if (finderToolbar->isVisible()) {
-        finderToolbar->setVisible(false);
-    } else {
-        finderToolbar->setVisible(true);
-    }
 }
 
 void Window::dispalyDateSelector() {

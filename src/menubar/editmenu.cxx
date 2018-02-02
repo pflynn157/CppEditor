@@ -26,7 +26,6 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "editmenu.hh"
 #include "../window.hh"
-#include "../finder/finder.hh"
 #include "../lang/lang-parser.hh"
 #include "../icon.hh"
 
@@ -39,9 +38,9 @@ EditMenu::EditMenu() {
     selectAll = new SelectAllAction(this);
     undo = new UndoAction(this);
     redo = new RedoAction(this);
-    displayFinderToolbar = new QAction(IconManager::getIcon("edit-find"),trans("Find Text"),this);
+    find = new QAction(IconManager::getIcon("edit-find"),trans("Find Text"),this);
 
-    connect(displayFinderToolbar,&QAction::triggered,this,&EditMenu::dspFinderToolbarClicked);
+    connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
 
     this->addAction(cut);
     this->addAction(copy);
@@ -51,7 +50,7 @@ EditMenu::EditMenu() {
     this->addAction(undo);
     this->addAction(redo);
     this->addSeparator();
-    this->addAction(displayFinderToolbar);
+    this->addAction(find);
 }
 
 EditMenu::~EditMenu() {
@@ -61,10 +60,9 @@ EditMenu::~EditMenu() {
     delete selectAll;
     delete undo;
     delete redo;
-    delete displayFinderToolbar;
+    delete find;
 }
 
-void EditMenu::dspFinderToolbarClicked() {
-    Window::displayFinderToolbar();
-    TextFinder::clear();
+void EditMenu::onFindClicked() {
+
 }

@@ -11,11 +11,6 @@ set(ACTIONS_SRC
     actions/undoAction.cxx
 )
 
-set(FINDER_SRC
-    finder/finder.cxx
-    finder/finder_toolbar.cxx
-)
-
 set(GLOBAL_SRC
     global/css.cxx
     global/file_actions.cxx
@@ -89,7 +84,6 @@ set(BASE_SRC
 
 set(SRC_ALL
     ${ACTIONS_SRC}
-    ${FINDER_SRC}
     ${GLOBAL_SRC}
     ${IPC_SRC}
     ${LANG_SRC}

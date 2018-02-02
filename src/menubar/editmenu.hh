@@ -48,7 +48,7 @@ private:
     SelectAllAction *selectAll;
     UndoAction *undo;
     RedoAction *redo;
-    QAction *displayFinderToolbar;
+    QAction *find;
 private:
-    void dspFinderToolbarClicked();
+    void onFindClicked();
 };
