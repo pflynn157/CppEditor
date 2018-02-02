@@ -5,7 +5,7 @@ CppEditor is an advanced text/code editor written in C++. It has all the feature
 CppEditor is currently licensed under the BSD 3-clause license. The included TinyXML2 source code is licensed under the zlib license. The libsettings library is licensed under the BSD-3 license. The including Oxygen icons, the KDE syntax-highlighting and KDE KDBusAddons library, and the Qt framework are all licensed under LGPL.
 
 #### Supported Platforms
-CppEditor is fully supported on Linux and mostly supported on Windows. Additionally, it should run with no issues on FreeBSD. For more information, see this link: https://sites.google.com/site/patrick4664tech/cppeditor
+CppEditor has been tested on Linux, FreeBSD, MacOS, and Windows. We fully support Linux and are working on providing full support for other platforms.
 
 #### Dependencies
 The following are needed to build CppEditor:   
