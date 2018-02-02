@@ -80,6 +80,7 @@ set(BASE_SRC
     lang.qrc
     rsc.qrc
     icon.cxx
+    finder.cxx
 )
 
 set(SRC_ALL

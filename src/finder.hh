@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,46 +24,31 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include "editmenu.hh"
-#include "../window.hh"
-#include "../lang/lang-parser.hh"
-#include "../icon.hh"
-#include "../finder.hh"
+#pragma once
 
-EditMenu::EditMenu() {
-    this->setTitle(trans("Edit"));
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QToolBar>
+#include <QPushButton>
+#include <QLineEdit>
+#include <QTextEdit>
 
-    cut = new CutAction(this);
-    copy = new CopyAction(this);
-    paste = new PasteAction(this);
-    selectAll = new SelectAllAction(this);
-    undo = new UndoAction(this);
-    redo = new RedoAction(this);
-    find = new QAction(IconManager::getIcon("edit-find"),trans("Find Text"),this);
-
-    connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
-
-    this->addAction(cut);
-    this->addAction(copy);
-    this->addAction(paste);
-    this->addAction(selectAll);
-    this->addSeparator();
-    this->addAction(undo);
-    this->addAction(redo);
-    this->addSeparator();
-    this->addAction(find);
-}
-
-EditMenu::~EditMenu() {
-    delete cut;
-    delete copy;
-    delete paste;
-    delete selectAll;
-    delete undo;
-    delete redo;
-    delete find;
-}
-
-void EditMenu::onFindClicked() {
-	FinderDialog().exec();
-}
+class FinderDialog : public QDialog {
+	Q_OBJECT
+public:
+	FinderDialog();
+	~FinderDialog();
+private:
+	QVBoxLayout *layout;
+	QToolBar *toolbar;
+	QPushButton *find, *findNext;
+	QLineEdit *entry;
+	QTextEdit *output;
+    int count, current;
+private slots:
+    void onFindClicked();
+    void onFindNextClicked();
+    void findText(QString phrase, int no);
+    void findText(QString phrase);
+    void findNextTxt(QString phrase);
+};
