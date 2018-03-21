@@ -84,6 +84,7 @@ void FinderDialog::findText(QString phrase, int no) {
     QTextCursor findCursor(doc);
     QTextCursor cursor(doc);
 
+    doc->undo();
     cursor.beginEditBlock();
 
     QTextCharFormat format;
