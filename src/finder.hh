@@ -32,6 +32,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QTextEdit>
+#include <QPushButton>
 
 class FinderDialog : public QDialog {
 	Q_OBJECT
@@ -44,6 +45,7 @@ private:
 	QPushButton *find, *findNext;
 	QLineEdit *entry;
 	QTextEdit *output;
+    QPushButton *close;
     int count, current;
 private slots:
     void onFindClicked();

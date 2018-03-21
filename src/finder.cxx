@@ -38,7 +38,8 @@ FinderDialog::FinderDialog()
 	find(new QPushButton),
 	findNext(new QPushButton),
 	entry(new QLineEdit),
-	output(new QTextEdit)
+    output(new QTextEdit),
+    close(new QPushButton)
 {
 	this->setWindowTitle(trans("Find Text"));
 	this->setFixedSize(650,450);
@@ -46,6 +47,7 @@ FinderDialog::FinderDialog()
 	
 	find->setText(trans("Find"));
 	findNext->setText(trans("Find Next"));
+    close->setText(trans("Close"));
 	
 	toolbar->addWidget(find);
 	toolbar->addWidget(findNext);
@@ -56,9 +58,11 @@ FinderDialog::FinderDialog()
 	
 	layout->addWidget(toolbar);
 	layout->addWidget(output);
+    layout->addWidget(close);
 
     connect(find,&QPushButton::clicked,this,&FinderDialog::onFindClicked);
     connect(findNext,&QPushButton::clicked,this,&FinderDialog::onFindNextClicked);
+    connect(close,&QPushButton::clicked,this,&QDialog::close);
 
     count = 0;
     current = 0;
@@ -68,6 +72,7 @@ FinderDialog::~FinderDialog() {
 	delete layout;
 	delete entry;
 	delete output;
+    delete close;
 }
 
 void FinderDialog::onFindClicked() {
