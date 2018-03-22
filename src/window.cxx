@@ -337,13 +337,10 @@ void Window::keyPressEvent(QKeyEvent *event) {
 void Window::onWindowStateChanged(Qt::ApplicationState state) {
     switch (state) {
     case Qt::ApplicationSuspended: {
-        std::cout << "Suspend" << std::endl;
     } break;
     case Qt::ApplicationHidden: {
-        std::cout << "Hidden" << std::endl;
     } break;
     case Qt::ApplicationInactive: {
-        std::cout << "Inactive" << std::endl;
     } break;
     case Qt::ApplicationActive: {
         if (TabPane::currentWidget()->isUntitled()) {
@@ -366,6 +363,8 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
                 QString content = FileActions::fileContents(path);
                 TabPane::setCurrentTabText(content);
                 TabPane::currentWidget()->setModified(false);
+            } else {
+                return;
             }
         }
     } break;
