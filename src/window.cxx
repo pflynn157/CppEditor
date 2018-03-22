@@ -346,7 +346,14 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
         std::cout << "Inactive" << std::endl;
     } break;
     case Qt::ApplicationActive: {
-        std::cout << "Active" << std::endl;
+        if (TabPane::currentWidget()->isUntitled()) {
+            return;
+        }
+        QString currentContent = TabPane::currentTabText();
+        QString oldContent = TabPane::currentWidget()->saveContent();
+        if (currentContent==oldContent) {
+            std::cout << "Changed outside" << std::endl;
+        }
     } break;
     }
 }

@@ -54,6 +54,8 @@ public:
     QString currentID();
     void setHasFoundText(bool found);
     bool hasFoundText();
+    void setSavedContent(QString content);
+    QString saveContent();
 protected:
     void keyPressEvent(QKeyEvent *event);
     void contextMenuEvent(QContextMenuEvent *);
@@ -63,6 +65,7 @@ private:
     SyntaxHighlighter *highlight;
     bool modified = false;
     bool foundText = false;
+    QString lastSavedContent = "";
 private slots:
     void onModified();
     void highlightCurrentLine();

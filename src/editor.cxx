@@ -100,6 +100,10 @@ bool Editor::isModified() {
 void Editor::setModified(bool mod) {
     modified = mod;
     Window::setStatusBarModified(mod);
+
+    if (mod==false) {
+        setSavedContent(this->toPlainText());
+    }
 }
 
 void Editor::setEditorText(QString text) {
@@ -129,6 +133,14 @@ void Editor::setHasFoundText(bool found) {
 
 bool Editor::hasFoundText() {
     return foundText;
+}
+
+void Editor::setSavedContent(QString content) {
+    lastSavedContent = content;
+}
+
+QString Editor::saveContent() {
+    return lastSavedContent;
 }
 
 void Editor::keyPressEvent(QKeyEvent *event) {
