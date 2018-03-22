@@ -34,6 +34,7 @@
 #include <QMenuBar>
 #include <QFileInfo>
 #include <QFile>
+#include <iostream>
 #ifdef _WIN32
 #include <settings.hh>
 #else
@@ -152,6 +153,8 @@ Window::Window() {
     trayIcon->setIcon(IconManager::getIcon("accessories-text-editor"));
     bool showTrayIcon = QVariant(Settings::getSetting("systray/display","true")).toBool();
     trayIcon->setVisible(showTrayIcon);
+
+    connect(qApp,SIGNAL(applicationStateChanged(Qt::ApplicationState)),this,SLOT(onWindowStateChanged(Qt::ApplicationState)));
 }
 
 Window::~Window() {
@@ -328,5 +331,22 @@ void Window::keyPressEvent(QKeyEvent *event) {
         if (event->key()==Qt::Key_S) {
             FileActions::saveFileAs();
         }
+    }
+}
+
+void Window::onWindowStateChanged(Qt::ApplicationState state) {
+    switch (state) {
+    case Qt::ApplicationSuspended: {
+        std::cout << "Suspend" << std::endl;
+    } break;
+    case Qt::ApplicationHidden: {
+        std::cout << "Hidden" << std::endl;
+    } break;
+    case Qt::ApplicationInactive: {
+        std::cout << "Inactive" << std::endl;
+    } break;
+    case Qt::ApplicationActive: {
+        std::cout << "Active" << std::endl;
+    } break;
     }
 }

@@ -89,4 +89,6 @@ private:
     static ConsoleWin *consoleWidget;
 #endif
     static QSystemTrayIcon *trayIcon;
+private slots:
+    void onWindowStateChanged(Qt::ApplicationState state);
 };
