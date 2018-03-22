@@ -349,10 +349,24 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
         if (TabPane::currentWidget()->isUntitled()) {
             return;
         }
-        QString currentContent = TabPane::currentTabText();
+        QString path = TabPane::currentWidget()->path();
+        QString currentContent = FileActions::fileContents(path);
         QString oldContent = TabPane::currentWidget()->saveContent();
-        if (currentContent==oldContent) {
-            std::cout << "Changed outside" << std::endl;
+        if (currentContent!=oldContent) {
+            TabPane::currentWidget()->setReadOnly(true);
+            QMessageBox msg;
+            msg.setWindowTitle("File Changed");
+            msg.setText("This file has been changed outside of the editor.\n"
+                        "Do you wish to reload it?");
+            msg.setIcon(QMessageBox::Question);
+            msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+            int ret = msg.exec();
+            TabPane::currentWidget()->setReadOnly(false);
+            if (ret==QMessageBox::Yes) {
+                QString content = FileActions::fileContents(path);
+                TabPane::setCurrentTabText(content);
+                TabPane::currentWidget()->setModified(false);
+            }
         }
     } break;
     }
