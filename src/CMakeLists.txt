@@ -98,9 +98,9 @@ set(SRC_ALL
 )
 
 if (WIN32)
-	add_executable(CppEditor WIN32 ${SRC_ALL})
+    add_executable(CppEditor WIN32 ${SRC_ALL})
 else()
-	add_executable(CppEditor ${SRC_ALL})
+    add_executable(CppEditor ${SRC_ALL})
 endif()
 
 target_link_libraries(CppEditor
@@ -112,8 +112,8 @@ target_link_libraries(CppEditor
 )
 
 if (UNIX)
-	if (APPLE)
-	else()
-		install(TARGETS CppEditor DESTINATION /usr/local/bin)
+    if (APPLE)
+        else()
+            install(TARGETS CppEditor DESTINATION /usr/local/bin)
 	endif()
 endif()
