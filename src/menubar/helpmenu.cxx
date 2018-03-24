@@ -68,8 +68,9 @@ void HelpMenu::onAboutClicked() {
     msg.setWindowTitle(trans("About CppEditor"));
     msg.setText("CppEditor\n"
                 "An advanced, cross-platform text editor written in C++ using the Qt libraries.\n\n"
-                "Written by pdf4664 <pdf4664@outlook.com>\n");
+                "Written by Patrick <patrick_dev2000@outlook.com>\n");
     msg.setDetailedText("License:\n"+FileActions::fileContents(":/rsc/license.txt"));
+    msg.setStandardButtons(QMessageBox::Ok);
 #ifdef _WIN32
     QString extra = msg.text();
     extra+="\nBuilt for Windows OS";
