@@ -65,7 +65,6 @@ public:
     static TemplateMenu *templateMenu;
 protected:
 	void closeEvent(QCloseEvent *event);
-    void keyPressEvent(QKeyEvent *event);
 private:
     static QLabel *modLabel, *pathLabel, *lineCountLabel;
     static QSplitter *centralSplitter;

@@ -27,7 +27,6 @@
 #include <QIcon>
 #include <QPixmap>
 #include <QCloseEvent>
-#include <QKeyEvent>
 #include <QStringList>
 #include <QMessageBox>
 #include <QApplication>
@@ -265,24 +264,6 @@ void Window::closeEvent(QCloseEvent *event) {
         event->accept();
     } else {
         event->ignore();
-    }
-}
-
-void Window::keyPressEvent(QKeyEvent *event) {
-    if ((event->modifiers()==Qt::ControlModifier)&&(event->key()==Qt::Key_Q)) {
-        if (checkSave()) {
-            qApp->exit(0);
-        }
-    } else if ((event->modifiers()==Qt::ControlModifier)&&(event->key()==Qt::Key_N)) {
-        FileActions::newFile();
-    } else if ((event->modifiers()==Qt::ControlModifier)&&(event->key()==Qt::Key_O)) {
-        FileActions::openFile();
-    } else if ((event->modifiers()==Qt::ControlModifier)&&(event->key()==Qt::Key_S)) {
-        FileActions::saveFile();
-    } else if (event->modifiers()==Qt::ControlModifier | Qt::ShiftModifier) {
-        if (event->key()==Qt::Key_S) {
-            FileActions::saveFileAs();
-        }
     }
 }
 
