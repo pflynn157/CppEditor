@@ -39,12 +39,8 @@ private:
     QMainWindow *parentWindow;
     bool wasMax = false;
     QAction *projectPane, *richTextPane, *fullscreen;
-#ifndef _WIN32
-    QAction *displayConsole;
-#endif
 private slots:
     void onFullscreenClicked();
     void onProjectPaneClicked();
     void onRichTextPaneClicked();
-    void onDisplayConsoleClicked();
 };

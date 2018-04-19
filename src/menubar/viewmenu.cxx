@@ -52,20 +52,11 @@ ViewMenu::ViewMenu(QMainWindow *parent) {
     this->addAction(fullscreen);
     this->addAction(projectPane);
     this->addAction(richTextPane);
-
-#ifndef _WIN32
-    displayConsole = new QAction(trans("Display Console"),this);
-    connect(displayConsole,&QAction::triggered,this,&ViewMenu::onDisplayConsoleClicked);
-    this->addAction(displayConsole);
-#endif
 }
 
 ViewMenu::~ViewMenu() {
     delete fullscreen;
     delete projectPane;
-#ifndef _WIN32
-    delete displayConsole;
-#endif
 }
 
 void ViewMenu::onFullscreenClicked() {
@@ -92,11 +83,3 @@ void ViewMenu::onProjectPaneClicked() {
 void ViewMenu::onRichTextPaneClicked() {
     Window::displayRichTextPane();
 }
-
-#ifndef _WIN32
-void ViewMenu::onDisplayConsoleClicked() {
-    Window::displayConsole();
-}
-#else
-void ViewMenu::onDisplayConsoleClicked() { }
-#endif

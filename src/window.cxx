@@ -58,9 +58,6 @@ QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
-#ifndef _WIN32
-ConsoleWin *Window::consoleWidget;
-#endif
 TemplateMenu *Window::templateMenu;
 QSystemTrayIcon *Window::trayIcon;
 
@@ -135,15 +132,7 @@ Window::Window() {
         dateDockWidget->show();
     }
     this->addDockWidget(Qt::LeftDockWidgetArea,dateDockWidget);
-#ifndef _WIN32
-    consoleWidget = new ConsoleWin;
-    if (QVariant(Settings::getSetting("subwindows/console","true")).toBool()) {
-        consoleWidget->hide();
-    } else {
-        consoleWidget->show();
-    }
-    this->addDockWidget(Qt::BottomDockWidgetArea,consoleWidget);
-#endif
+
     trayIcon = new QSystemTrayIcon();
     SystemTrayMenu *sysTrayMenu = new SystemTrayMenu(this);
     trayIcon->setContextMenu(sysTrayMenu);
@@ -271,18 +260,6 @@ void Window::dispalyDateSelector() {
     }
 }
 
-#ifndef _WIN32
-void Window::displayConsole() {
-    if (consoleWidget->isHidden()) {
-        consoleWidget->show();
-    } else {
-        consoleWidget->hide();
-    }
-}
-#else
-void Window::displayConsole() { }
-#endif
-
 void Window::displaySysTrayIcon() {
     if (trayIcon->isVisible()) {
         trayIcon->hide();
@@ -293,9 +270,6 @@ void Window::displaySysTrayIcon() {
 
 void Window::appExit(QMainWindow *win, bool quit) {
     Settings::writeSetting("subwindows/date_selector",QVariant(dateDockWidget->isHidden()).toString());
-#ifndef _WIN32
-    Settings::writeSetting("subwindows/console",QVariant(consoleWidget->isHidden()).toString());
-#endif
     Settings::writeSetting("window/winX",QString::number(win->width()));
     Settings::writeSetting("window/winY",QString::number(win->height()));
     Recent::write();

@@ -62,8 +62,6 @@ set(TEMPLATE_SRC
 set(WINDOWS_SRC
     windows/date_selector.cxx
     windows/subwindow.cxx
-    windows/console/console_win.cxx
-    windows/console/process.cxx
 )
 
 set(BASE_SRC

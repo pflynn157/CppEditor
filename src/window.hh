@@ -34,7 +34,6 @@
 #include <QStatusBar>
 
 #include "windows/date_selector.hh"
-#include "windows/console/console_win.hh"
 #include "project/project_pane.hh"
 
 #include "menubar/filemenu.hh"
@@ -63,7 +62,6 @@ public:
     static void displayRichTextPane();
     static bool isRichTextPaneVisible();
     static void dispalyDateSelector();
-    static void displayConsole();
     static void displaySysTrayIcon();
     static void appExit(QMainWindow *win, bool quit);
     static TemplateMenu *templateMenu;
@@ -85,9 +83,6 @@ private:
     WindowsMenu *windowsMenu;
 #endif
     HelpMenu *helpmenu;
-#ifndef _WIN32
-    static ConsoleWin *consoleWidget;
-#endif
     static QSystemTrayIcon *trayIcon;
 private slots:
     void onWindowStateChanged(Qt::ApplicationState state);
