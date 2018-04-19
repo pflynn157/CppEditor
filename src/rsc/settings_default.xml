@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <settings>
 	<sysicons>true</sysicons>
-    <systray>
-        <display>true</display>
-    </systray>
     <subwindows>
         <date_selector>true</date_selector>
     </subwindows>
