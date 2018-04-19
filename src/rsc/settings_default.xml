@@ -4,10 +4,6 @@
     <systray>
         <display>true</display>
     </systray>
-    <language>
-        <name>English</name>
-        <path>:/lang/rsc/english.xml</path>
-    </language>
     <subwindows>
         <date_selector>true</date_selector>
     </subwindows>
