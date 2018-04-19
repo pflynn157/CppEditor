@@ -60,6 +60,7 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow)
 {
     parent = parentWindow;
     this->setContextMenuPolicy(Qt::PreventContextMenu);
+    this->setMovable(false);
 
     syntaxmenu = new QComboBox;
     fontSize = new QSpinBox;
@@ -91,6 +92,11 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow)
     openFile->setToolTip("Open a file");
     saveFile->setToolTip("Save current file");
     saveFileAs->setToolTip("Save current file as");
+    cut->setToolTip("Cut text");
+    copy->setToolTip("Copy text");
+    paste->setToolTip("Paste text");
+    undo->setToolTip("Undo last edit");
+    redo->setToolTip("Redo last edit");
     fontSize->setToolTip("Change font size");
 
     connect(newFile,&QToolButton::clicked,new Slots,&Slots::newFileSlot);
