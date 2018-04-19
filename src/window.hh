@@ -41,7 +41,6 @@
 #include "menubar/viewmenu.hh"
 #include "menubar/template_menu.hh"
 #include "menubar/settingsmenu.hh"
-#include "menubar/windows_menu.hh"
 #include "menubar/helpmenu.hh"
 
 class Window : public QMainWindow {
@@ -76,9 +75,6 @@ private:
     InsertMenu *insertmenu;
     ViewMenu *viewmenu;
     SettingsMenu *settingsmenu;
-#ifdef _WIN32
-    WindowsMenu *windowsMenu;
-#endif
     HelpMenu *helpmenu;
 private slots:
     void onWindowStateChanged(Qt::ApplicationState state);

@@ -70,9 +70,6 @@ Window::Window() {
     viewmenu = new ViewMenu(this);
     settingsmenu = new SettingsMenu;
     templateMenu = new TemplateMenu;
-#ifdef _WIN32
-    windowsMenu = new WindowsMenu;
-#endif
     helpmenu = new HelpMenu;
 
     this->menuBar()->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -82,9 +79,6 @@ Window::Window() {
     this->menuBar()->addMenu(viewmenu);
     this->menuBar()->addMenu(settingsmenu);
     this->menuBar()->addMenu(templateMenu);
-#ifdef _WIN32
-    this->menuBar()->addMenu(windowsMenu);
-#endif
     this->menuBar()->addMenu(helpmenu);
 
     statusbar = new QStatusBar();
@@ -142,9 +136,6 @@ Window::~Window() {
     delete insertmenu;
     delete viewmenu;
     delete settingsmenu;
-#ifdef _WIN32
-    delete windowsMenu;
-#endif
     delete helpmenu;
 }
 

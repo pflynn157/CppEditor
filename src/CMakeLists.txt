@@ -26,7 +26,6 @@ set(MENUBAR_SRC
     menubar/settingsmenu.cxx
     menubar/template_menu.cxx
     menubar/viewmenu.cxx
-    menubar/windows_menu.cxx
 )
 
 set(MENUS_SRC
