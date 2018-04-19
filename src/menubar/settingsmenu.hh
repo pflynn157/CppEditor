@@ -36,12 +36,8 @@ public:
     ~SettingsMenu();
 private:
     QAction *openSettingsDialog;
-    QMenu *themeMenu;
-    QAction *setTheme, *sysTheme;
     QAction *openSettingsFile;
 private slots:
     void onOpenSettingsDialogClicked();
-    void onSetThemeClicked();
-    void onSysThemeClicked();
     void onOpenSettingsFileClicked();
 };

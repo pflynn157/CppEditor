@@ -26,11 +26,6 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE..
 #include <QIcon>
 #include <QPixmap>
-#include <QFontDialog>
-#include <QFileDialog>
-#include <QColorDialog>
-#include <QColor>
-#include <QVariant>
 #ifdef _WIN32
 #include <settings.hh>
 #else
@@ -52,22 +47,12 @@ SettingsMenu::SettingsMenu() {
     this->setTitle(trans("Settings"));
 
     openSettingsDialog = new QAction(trans("Open Settings Dialog"),this);
-    setTheme = new QAction(trans("Set program theme"),this);
-    sysTheme = new QAction(trans("Use system theme"),this);
     openSettingsFile = new QAction(trans("Open settings file"),this);
 
     connect(openSettingsDialog,&QAction::triggered,this,&SettingsMenu::onOpenSettingsDialogClicked);
-    connect(setTheme,&QAction::triggered,this,&SettingsMenu::onSetThemeClicked);
-    connect(sysTheme,&QAction::triggered,this,&SettingsMenu::onSysThemeClicked);
     connect(openSettingsFile,&QAction::triggered,this,&SettingsMenu::onOpenSettingsFileClicked);
 
     this->addAction(openSettingsDialog);
-
-    themeMenu = new QMenu(trans("Themes"));
-    this->addMenu(themeMenu);
-
-    themeMenu->addAction(setTheme);
-    themeMenu->addAction(sysTheme);
 
     if (Settings::settingsPath!=nullptr) {
         this->addAction(openSettingsFile);
@@ -76,33 +61,12 @@ SettingsMenu::SettingsMenu() {
 
 SettingsMenu::~SettingsMenu() {
     delete openSettingsDialog;
-    delete themeMenu;
-    delete setTheme;
-    delete sysTheme;
     delete openSettingsFile;
 }
 
 void SettingsMenu::onOpenSettingsDialogClicked() {
     SettingsDialog dialog;
     dialog.exec();
-}
-
-void SettingsMenu::onSetThemeClicked() {
-    QFileDialog cssChooser;
-    cssChooser.setWindowTitle(trans("Choose CSS Theme"));
-    cssChooser.setAcceptMode(QFileDialog::AcceptOpen);
-    cssChooser.exec();
-    if (cssChooser.selectedFiles().size()==0) {
-        return;
-    }
-    QString file = cssChooser.selectedFiles().at(0);
-    Settings::writeSetting("window","css",file,"");
-    TabPane::settingsSaved->animatedShow();
-}
-
-void SettingsMenu::onSysThemeClicked() {
-    Settings::writeSetting("window","css","default","");
-    TabPane::settingsSaved->animatedShow();
 }
 
 void SettingsMenu::onOpenSettingsFileClicked() {

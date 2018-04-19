@@ -46,7 +46,6 @@
 #include "main_toolbar.hh"
 #include "global/file_actions.hh"
 #include "global/recent.hh"
-#include "global/css.hh"
 #include "menus/system_tray_menu.hh"
 #include "lang/lang-parser.hh"
 #include "icon.hh"
@@ -71,7 +70,6 @@ Window::Window() {
     int winX = Settings::getSetting("window/winX","700").toInt();
     int winY = Settings::getSetting("window/winY","600").toInt();
     this->resize(winX,winY);
-    qApp->setStyleSheet(CssManager::stylesheetContent("window"));
 
     filemenu = new FileMenu(this);
     editmenu = new EditMenu;

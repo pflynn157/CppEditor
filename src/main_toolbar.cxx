@@ -40,7 +40,6 @@
 
 #include "main_toolbar.hh"
 #include "global/slots.hh"
-#include "global/css.hh"
 #include "tabpane.hh"
 #include "lang/lang-parser.hh"
 #include "global.hh"
@@ -54,7 +53,6 @@ using namespace KSyntaxHighlighting;
 
 MainToolBar::MainToolBar(QMainWindow *parentWindow) {
     parent = parentWindow;
-    this->setStyleSheet(CssManager::stylesheetContent("toolbar"));
     this->setContextMenuPolicy(Qt::PreventContextMenu);
 
     newFile = new ToolButton("newFile");

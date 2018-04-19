@@ -12,7 +12,6 @@ set(ACTIONS_SRC
 )
 
 set(GLOBAL_SRC
-    global/css.cxx
     global/file_actions.cxx
     global/recent.cxx
     global/slots.cxx
