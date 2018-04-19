@@ -62,6 +62,7 @@ TabPane::TabPane(Window *parent) {
 
     tabs->setTabsClosable(true);
     tabs->setMovable(true);
+    tabs->setTabBarAutoHide(true);
     tabs->addTab(new Editor("untitled"),"untitled");
 
     Window::setStatusBarPath(currentWidget()->path());
