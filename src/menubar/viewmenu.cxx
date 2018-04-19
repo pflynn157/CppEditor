@@ -26,16 +26,15 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "viewmenu.hh"
 #include "../window.hh"
-#include "../lang/lang-parser.hh"
 #include "../icon.hh"
 
 ViewMenu::ViewMenu(QMainWindow *parent) {
     parentWindow = parent;
-    this->setTitle(trans("View"));
+    this->setTitle("View");
 
-    fullscreen = new QAction(trans("Fullscreen"),this);
-    projectPane = new QAction(trans("Display Project Panel"),this);
-    richTextPane = new QAction(trans("Display Rich Text Previewer"),this);
+    fullscreen = new QAction("Fullscreen",this);
+    projectPane = new QAction("Display Project Panel",this);
+    richTextPane = new QAction("Display Rich Text Previewer",this);
 
     richTextPane->setCheckable(true);
     richTextPane->setChecked(false);

@@ -28,14 +28,13 @@
 #include <QStringList>
 
 #include "windows_menu.hh"
-#include "../lang/lang-parser.hh"
 
 WindowsMenu::WindowsMenu() {
-    this->setTitle(trans("Windows"));
+    this->setTitle("Windows");
 
-    openCMD = new QAction(trans("Open Command Prompt"),this);
-    openPS = new QAction(trans("Open PowerShell"),this);
-    openNotepad = new QAction(trans("Open Notepad"),this);
+    openCMD = new QAction("Open Command Prompt",this);
+    openPS = new QAction("Open PowerShell",this);
+    openNotepad = new QAction("Open Notepad",this);
 
     connect(openCMD,&QAction::triggered,this,&WindowsMenu::onOpenCmdClicked);
     connect(openPS,&QAction::triggered,this,&WindowsMenu::onOpenPSClicked);

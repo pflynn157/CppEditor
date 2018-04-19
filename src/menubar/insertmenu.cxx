@@ -28,18 +28,17 @@
 
 #include "insertmenu.hh"
 #include "../window.hh"
-#include "../lang/lang-parser.hh"
 #include "../global/file_actions.hh"
 #include "../tabpane.hh"
 #include "../editor.hh"
 
 InsertMenu::InsertMenu(QMainWindow *parent) {
     window = parent;
-    this->setTitle(trans("Insert"));
+    this->setTitle("Insert");
 
-    datePicker = new QAction(trans("Insert a date"),this);
-    loremIpsum = new QAction(trans("Insert Lorem Ipsum text"),this);
-    colorDialog = new QAction(trans("Insert a color"),this);
+    datePicker = new QAction("Insert a date",this);
+    loremIpsum = new QAction("Insert Lorem Ipsum text",this);
+    colorDialog = new QAction("Insert a color",this);
 
     connect(datePicker,&QAction::triggered,this,&InsertMenu::onDatePickerClicked);
     connect(loremIpsum,&QAction::triggered,this,&InsertMenu::onLoremIpsumClicked);

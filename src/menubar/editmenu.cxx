@@ -26,12 +26,11 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "editmenu.hh"
 #include "../window.hh"
-#include "../lang/lang-parser.hh"
 #include "../icon.hh"
 #include "../finder.hh"
 
 EditMenu::EditMenu() {
-    this->setTitle(trans("Edit"));
+    this->setTitle("Edit");
 
     cut = new CutAction(this);
     copy = new CopyAction(this);
@@ -39,7 +38,7 @@ EditMenu::EditMenu() {
     selectAll = new SelectAllAction(this);
     undo = new UndoAction(this);
     redo = new RedoAction(this);
-    find = new QAction(IconManager::getIcon("edit-find"),trans("Find Text"),this);
+    find = new QAction(IconManager::getIcon("edit-find"),"Find Text",this);
 
     connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
 

@@ -34,7 +34,6 @@
 #include "systray_page.hh"
 #include "ui_systray_page.h"
 #include "../window.hh"
-#include "../lang/lang-parser.hh"
 
 using namespace CppLib;
 
@@ -44,7 +43,7 @@ SysTrayPage::SysTrayPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->showIconBox->setText(trans("Show System Tray Icon"));
+    ui->showIconBox->setText("Show System Tray Icon");
     ui->showIconBox->setChecked(QVariant(Settings::getSetting("systray/display","true")).toBool());
 }
 

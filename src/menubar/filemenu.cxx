@@ -28,21 +28,20 @@
 
 #include "filemenu.hh"
 #include "../global/slots.hh"
-#include "../lang/lang-parser.hh"
 #include "../icon.hh"
 
 RecentMenu *FileMenu::recentMenu;
 
 FileMenu::FileMenu(QMainWindow *window) {
-    this->setTitle(trans("File"));
+    this->setTitle("File");
     win = window;
 
-    newFile = new QAction(trans("New"),this);
-    openFile = new QAction(trans("Open"),this);
+    newFile = new QAction("New",this);
+    openFile = new QAction("Open",this);
     recentMenu = new RecentMenu;
-    saveFile = new QAction(trans("Save"),this);
-    saveFileAs = new QAction(trans("Save As"),this);
-    quit = new QAction(trans("Quit"),this);
+    saveFile = new QAction("Save",this);
+    saveFileAs = new QAction("Save As",this);
+    quit = new QAction("Quit",this);
 
     newFile->setIcon(IconManager::getIcon("document-new"));
     openFile->setIcon(IconManager::getIcon("document-open"));

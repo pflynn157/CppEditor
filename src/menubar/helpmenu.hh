@@ -35,8 +35,7 @@ public:
     HelpMenu();
     ~HelpMenu();
 private:
-    QAction *switchLang, *aboutQt, *about;
+    QAction *aboutQt, *about;
 private slots:
-    void onSwitchLangClicked();
     void onAboutClicked();
 };

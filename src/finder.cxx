@@ -29,7 +29,6 @@
 #include <QTextCharFormat>
 
 #include "finder.hh"
-#include "lang/lang-parser.hh"
 #include "tabpane.hh"
 
 FinderDialog::FinderDialog() 
@@ -41,13 +40,13 @@ FinderDialog::FinderDialog()
     output(new QTextEdit),
     close(new QPushButton)
 {
-	this->setWindowTitle(trans("Find Text"));
+    this->setWindowTitle("Find Text");
 	this->setFixedSize(650,450);
 	this->setLayout(layout);
 	
-	find->setText(trans("Find"));
-	findNext->setText(trans("Find Next"));
-    close->setText(trans("Close"));
+    find->setText("Find");
+    findNext->setText("Find Next");
+    close->setText("Close");
 	
 	toolbar->addWidget(find);
 	toolbar->addWidget(findNext);

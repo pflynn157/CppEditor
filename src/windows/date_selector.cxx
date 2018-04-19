@@ -26,10 +26,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "date_selector.hh"
 #include "../tabpane.hh"
-#include "../lang/lang-parser.hh"
 
 DateDockWidget::DateDockWidget() {
-    this->setWindowTitle(trans("Date Picker"));
+    this->setWindowTitle("Date Picker");
 
     mainWidget = new QFrame;
     mainLayout = new QVBoxLayout;
@@ -50,7 +49,7 @@ DateDockWidget::DateDockWidget() {
     dateDisplay->setDate(calendar->selectedDate());
     bottomLayout->addWidget(dateDisplay);
 
-    submit = new QPushButton(trans("Add"));
+    submit = new QPushButton("Add");
     bottomLayout->addWidget(submit);
 
     connect(calendar,SIGNAL(clicked(QDate)),this,SLOT(onDateClicked(QDate)));

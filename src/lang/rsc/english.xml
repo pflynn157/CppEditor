@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<language name="English">
-	<phrase name="CppEditor">CppEditor</phrase>
-	<phrase name="lang-change-msg">The language will be changed the next time you start CppEditor.</phrase>
-</language> 

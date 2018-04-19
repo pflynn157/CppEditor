@@ -41,7 +41,6 @@
 #include "editor_page.hh"
 #include "../tabpane.hh"
 #include "../editor.hh"
-#include "../lang/lang-parser.hh"
 
 using namespace CppLib;
 
@@ -62,10 +61,10 @@ EditorPage::EditorPage() {
     fontWidget->setLayout(fontLayout);
     subLayout->addWidget(fontWidget);
 
-    QLabel *fontLabel = new QLabel(trans("Choose font for current page: "));
+    QLabel *fontLabel = new QLabel("Choose font for current page: ");
     fontLayout->addWidget(fontLabel);
 
-    QPushButton *chooseFontButton = new QPushButton(trans("Choose"));
+    QPushButton *chooseFontButton = new QPushButton("Choose");
     connect(chooseFontButton,&QPushButton::clicked,this,&EditorPage::onChooseFontClicked);
     fontLayout->addWidget(chooseFontButton);
 
@@ -75,7 +74,7 @@ EditorPage::EditorPage() {
     lineColorWidget->setLayout(lineColorLayout);
     subLayout->addWidget(lineColorWidget);
 
-    QLabel *lineColorLabel = new QLabel(trans("Choose color for current line highlighter: "));
+    QLabel *lineColorLabel = new QLabel("Choose color for current line highlighter: ");
     lineColorLayout->addWidget(lineColorLabel);
 
     currentColor = new QLineEdit;
@@ -84,7 +83,7 @@ EditorPage::EditorPage() {
     currentColor->setFixedWidth(50);
     lineColorLayout->addWidget(currentColor);
 
-    QPushButton *lineColorButton = new QPushButton(trans("Choose"));
+    QPushButton *lineColorButton = new QPushButton("Choose");
     connect(lineColorButton,&QPushButton::clicked,this,&EditorPage::onChooseLineHighlighterClicked);
     lineColorLayout->addWidget(lineColorButton);
 
@@ -94,7 +93,7 @@ EditorPage::EditorPage() {
     aiWidget->setLayout(aiLayout);
     subLayout->addWidget(aiWidget);
 
-    QCheckBox *aiCheckBox = new QCheckBox(trans("Auto indent"));
+    QCheckBox *aiCheckBox = new QCheckBox("Auto indent");
     aiCheckBox->setChecked(QVariant(Settings::getSetting("editor/autoindent","true")).toBool());
     connect(aiCheckBox,SIGNAL(clicked(bool)),this,SLOT(onAutoIndentClicked(bool)));
     aiLayout->addWidget(aiCheckBox);

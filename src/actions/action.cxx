@@ -25,9 +25,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "action.hh"
-#include "../lang/lang-parser.hh"
 #include "../icon.hh"
 
-Action::Action(QString name, QString iconName, QObject *parent) : QAction(trans(name),parent) {
+Action::Action(QString name, QString iconName, QObject *parent) : QAction(name,parent) {
     this->setIcon(IconManager::getIcon(iconName));
 }

@@ -47,7 +47,6 @@
 #include "global/file_actions.hh"
 #include "global/recent.hh"
 #include "menus/system_tray_menu.hh"
-#include "lang/lang-parser.hh"
 #include "icon.hh"
 
 using namespace CppLib;
@@ -62,7 +61,7 @@ TemplateMenu *Window::templateMenu;
 QSystemTrayIcon *Window::trayIcon;
 
 Window::Window() {
-    this->setWindowTitle(trans("CppEditor"));
+    this->setWindowTitle("CppEditor");
     this->setWindowIcon(IconManager::getIcon("accessories-text-editor"));
     int winX = Settings::getSetting("window/winX","700").toInt();
     int winY = Settings::getSetting("window/winY","600").toInt();

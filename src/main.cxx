@@ -43,8 +43,6 @@
 #include "global/file_actions.hh"
 #include "global/recent.hh"
 #include "template/template.hh"
-#include "macros.hh"
-#include "lang/lang-manager.hh"
 #include "icon.hh"
 #include "ipc.hh"
 
@@ -70,7 +68,6 @@ int main(int argc, char *argv[]) {
     Recent::initRecentItems();
     Template::initTemplates();
     Editor::updateSettings();
-    LangManager::init();
     IconManager::init();
 
     Window window;

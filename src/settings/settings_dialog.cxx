@@ -27,10 +27,9 @@
 #include "settings_dialog.hh"
 #include "editor_page.hh"
 #include "systray_page.hh"
-#include "../lang/lang-parser.hh"
 
 SettingsDialog::SettingsDialog() {
-    this->setWindowTitle(trans("Settings"));
+    this->setWindowTitle("Settings");
     this->resize(400,300);
 
     layout = new QVBoxLayout;
@@ -41,10 +40,10 @@ SettingsDialog::SettingsDialog() {
     layout->addWidget(tabs);
 
     EditorPage *page1 = new EditorPage;
-    tabs->addTab(page1,trans("Editor Settings"));
+    tabs->addTab(page1,"Editor Settings");
 
     SysTrayPage *page2 = new SysTrayPage;
-    tabs->addTab(page2,trans("System Tray Icon Settings"));
+    tabs->addTab(page2,"System Tray Icon Settings");
 }
 
 SettingsDialog::~SettingsDialog() {

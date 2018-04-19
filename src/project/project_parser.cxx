@@ -35,7 +35,6 @@
 
 #include "project_parser.hh"
 #include "../tinyxml2.h"
-#include "../macros.hh"
 
 using namespace tinyxml2;
 

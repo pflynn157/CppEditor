@@ -39,15 +39,14 @@
 #include "../editor.hh"
 #include "../window.hh"
 #include "../settings/settings_dialog.hh"
-#include "../lang/lang-parser.hh"
 
 using namespace CppLib;
 
 SettingsMenu::SettingsMenu() {
-    this->setTitle(trans("Settings"));
+    this->setTitle("Settings");
 
-    openSettingsDialog = new QAction(trans("Open Settings Dialog"),this);
-    openSettingsFile = new QAction(trans("Open settings file"),this);
+    openSettingsDialog = new QAction("Open Settings Dialog",this);
+    openSettingsFile = new QAction("Open settings file",this);
 
     connect(openSettingsDialog,&QAction::triggered,this,&SettingsMenu::onOpenSettingsDialogClicked);
     connect(openSettingsFile,&QAction::triggered,this,&SettingsMenu::onOpenSettingsFileClicked);

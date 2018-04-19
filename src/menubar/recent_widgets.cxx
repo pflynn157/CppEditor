@@ -31,7 +31,6 @@
 #include "recent_widgets.hh"
 #include "../window.hh"
 #include "../global/recent.hh"
-#include "../lang/lang-parser.hh"
 
 RecentAction::RecentAction(QString title, QMenu *parent) : QAction(title,parent) {
     path = title;
@@ -44,7 +43,7 @@ void RecentAction::onClicked() {
 }
 
 RecentMenu::RecentMenu() {
-    this->setTitle(trans("Recent"));
+    this->setTitle("Recent");
     loadEntries();
 }
 
@@ -54,14 +53,14 @@ RecentMenu::~RecentMenu() {
 
 void RecentMenu::loadEntries() {
     this->clear();
-    clearItems = new QAction(trans("Clear List"),this);
+    clearItems = new QAction("Clear List",this);
     connect(clearItems,&QAction::triggered,this,&RecentMenu::onClearItemsClicked);
     this->addAction(clearItems);
     this->addSeparator();
 
     QStringList *items = Recent::allItems();
     if (items->size()==0) {
-        QAction *action = new QAction(trans("None"),this);
+        QAction *action = new QAction("None",this);
         action->setEnabled(false);
         this->addAction(action);
     } else {

@@ -29,43 +29,32 @@
 #include <iostream>
 
 #include "helpmenu.hh"
-#include "../lang/lang-dialog.hh"
 #include "../global/file_actions.hh"
-#include "../lang/lang-parser.hh"
 #include "../icon.hh"
 
 HelpMenu::HelpMenu() {
-    this->setTitle(trans("Help"));
+    this->setTitle("Help");
 
-    switchLang = new QAction(trans("Switch Language"),this);
-    aboutQt = new QAction(trans("About Qt"),this);
-    about = new QAction(trans("About"),this);
+    aboutQt = new QAction("About Qt",this);
+    about = new QAction("About",this);
 
     about->setIcon(IconManager::getIcon("help-about"));
 
-    connect(switchLang,&QAction::triggered,this,&HelpMenu::onSwitchLangClicked);
     connect(aboutQt,&QAction::triggered,qApp,&QApplication::aboutQt);
     connect(about,&QAction::triggered,this,&HelpMenu::onAboutClicked);
 
-    this->addAction(switchLang);
     this->addAction(aboutQt);
     this->addAction(about);
 }
 
 HelpMenu::~HelpMenu() {
-    delete switchLang;
     delete aboutQt;
     delete about;
 }
 
-void HelpMenu::onSwitchLangClicked() {
-    LangDialog dialog;
-    dialog.exec();
-}
-
 void HelpMenu::onAboutClicked() {
     QMessageBox msg;
-    msg.setWindowTitle(trans("About CppEditor"));
+    msg.setWindowTitle("About CppEditor");
     msg.setText("CppEditor\n"
                 "An advanced, cross-platform text editor written in C++ using the Qt libraries.\n\n"
                 "Written by Patrick <patrick_dev2000@outlook.com>\n");

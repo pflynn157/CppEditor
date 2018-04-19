@@ -34,7 +34,6 @@
 #include "../tabpane.hh"
 #include "../window.hh"
 #include "../global/file_actions.hh"
-#include "../lang/lang-parser.hh"
 
 TemplateAction::TemplateAction(QString path, QMenu *parent) : QAction(path,parent) {
     name = path;
@@ -46,12 +45,12 @@ void TemplateAction::onClick() {
 }
 
 TemplateMenu::TemplateMenu() {
-    this->setTitle(trans("Templates"));
-    templateList = new QMenu(trans("Templates"));
+    this->setTitle("Templates");
+    templateList = new QMenu("Templates");
     this->addMenu(templateList);
     loadEntries();
 
-    saveAsTemplate = new QAction(trans("Save as template"),this);
+    saveAsTemplate = new QAction("Save as template",this);
     connect(saveAsTemplate,&QAction::triggered,this,&TemplateMenu::saveAsTemplateClicked);
     this->addAction(saveAsTemplate);
 }
@@ -65,7 +64,7 @@ void TemplateMenu::loadEntries() {
     templateList->clear();
     QStringList *items = Template::getAllTemplates();
     if (items->size()==0) {
-        QAction *none = new QAction(trans("None"),this);
+        QAction *none = new QAction("None",this);
         none->setEnabled(false);
         templateList->addAction(none);
     } else {

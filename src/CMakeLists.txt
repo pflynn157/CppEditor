@@ -17,12 +17,6 @@ set(GLOBAL_SRC
     global/slots.cxx
 )
 
-set(LANG_SRC
-    lang/lang-dialog.cxx
-    lang/lang-manager.cxx
-    lang/lang-parser.cxx
-)
-
 set(MENUBAR_SRC
     menubar/editmenu.cxx
     menubar/filemenu.cxx
@@ -74,7 +68,6 @@ set(BASE_SRC
     window.cxx
     ipc.cxx
     icons.qrc
-    lang.qrc
     rsc.qrc
     icon.cxx
     finder.cxx
@@ -84,7 +77,6 @@ set(SRC_ALL
     ${ACTIONS_SRC}
     ${GLOBAL_SRC}
     ${IPC_SRC}
-    ${LANG_SRC}
     ${MENUBAR_SRC}
     ${MENUS_SRC}
     ${PROJECT_SRC}

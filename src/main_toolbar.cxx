@@ -38,7 +38,6 @@
 #include "main_toolbar.hh"
 #include "global/slots.hh"
 #include "tabpane.hh"
-#include "lang/lang-parser.hh"
 #include "global.hh"
 #include "icon.hh"
 
@@ -88,11 +87,11 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow)
     undo->setIcon(IconManager::getIcon("edit-undo"));
     redo->setIcon(IconManager::getIcon("edit-redo"));
 
-    newFile->setToolTip(trans("New file"));
-    openFile->setToolTip(trans("Open a file"));
-    saveFile->setToolTip(trans("Save current file"));
-    saveFileAs->setToolTip(trans("Save current file as"));
-    fontSize->setToolTip(trans("Change font size"));
+    newFile->setToolTip("New file");
+    openFile->setToolTip("Open a file");
+    saveFile->setToolTip("Save current file");
+    saveFileAs->setToolTip("Save current file as");
+    fontSize->setToolTip("Change font size");
 
     connect(newFile,&QToolButton::clicked,new Slots,&Slots::newFileSlot);
     connect(openFile,&QToolButton::clicked,new Slots,&Slots::openFileSlot);
