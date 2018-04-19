@@ -12,11 +12,11 @@
         <date_selector>true</date_selector>
         <console>true</console>
     </subwindows>
-    <window css="default">
+    <window>
         <winX>700</winX>
         <winY>600</winY>
     </window>
-    <toolbar css="default">
+    <toolbar>
         <newFile>true</newFile>
         <openFile>true</openFile>
         <saveFile>true</saveFile>
@@ -29,7 +29,7 @@
         <syntaxmenu>true</syntaxmenu>
         <fontsize>true</fontsize>
     </toolbar>
-    <statusbar css="default" />
+    <statusbar/>
     <editor>
         <autoindent>true</autoindent>
         <line_color>#d9d9d9</line_color>
