@@ -32,7 +32,6 @@
 #include <QSpinBox>
 #include <QComboBox>
 
-class ToolButton;
 class FontSpinner;
 
 class MainToolBar : public QToolBar {
@@ -41,30 +40,12 @@ public:
     explicit MainToolBar(QMainWindow *parentWindow);
     ~MainToolBar();
     static QComboBox *syntaxmenu;
-    static FontSpinner *fontSize;
+    static QSpinBox *fontSize;
 private:
     QMainWindow *parent;
-    ToolButton *newFile, *openFile, *saveFile, *saveFileAs;
-    ToolButton *cut, *copy, *paste, *undo, *redo;
+    QToolButton *newFile, *openFile, *saveFile, *saveFileAs;
+    QToolButton *cut, *copy, *paste, *undo, *redo;
 private slots:
     void onFontSizeChanged();
     void onComboTextChanged(QString item);
-};
-
-class ToolButton : public QToolButton {
-    Q_OBJECT
-public:
-    explicit ToolButton(QString id);
-protected:
-    void mousePressEvent(QMouseEvent *event);
-private:
-    QString buttonId;
-private slots:
-    void hideButton();
-};
-
-class FontSpinner : public QSpinBox {
-    Q_OBJECT
-public:
-    FontSpinner();
 };

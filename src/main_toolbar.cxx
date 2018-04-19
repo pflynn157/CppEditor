@@ -27,9 +27,6 @@
 #include <QIcon>
 #include <QPixmap>
 #include <QFont>
-#include <QUrl>
-#include <QCursor>
-#include <QVariant>
 #include <QStringList>
 #include <KF5/KSyntaxHighlighting/Definition>
 #ifdef _WIN32
@@ -46,28 +43,28 @@
 #include "icon.hh"
 
 QComboBox *MainToolBar::syntaxmenu;
-FontSpinner *MainToolBar::fontSize;
+QSpinBox *MainToolBar::fontSize;
 
 using namespace CppLib;
 using namespace KSyntaxHighlighting;
 
-MainToolBar::MainToolBar(QMainWindow *parentWindow) {
+MainToolBar::MainToolBar(QMainWindow *parentWindow)
+    : newFile(new QToolButton),
+      openFile(new QToolButton),
+      saveFile(new QToolButton),
+      saveFileAs(new QToolButton),
+      cut(new QToolButton),
+      copy(new QToolButton),
+      paste(new QToolButton),
+      undo(new QToolButton),
+      redo(new QToolButton)
+{
     parent = parentWindow;
     this->setContextMenuPolicy(Qt::PreventContextMenu);
 
-    newFile = new ToolButton("newFile");
-    openFile = new ToolButton("openFile");
-    saveFile = new ToolButton("saveFile");
-    saveFileAs = new ToolButton("saveFileAs");
-    cut = new ToolButton("cut");
-    copy = new ToolButton("copy");
-    paste = new ToolButton("paste");
-    undo = new ToolButton("undo");
-    redo = new ToolButton("redo");
     syntaxmenu = new QComboBox;
-    fontSize = new FontSpinner;
+    fontSize = new QSpinBox;
 
-    syntaxmenu->setVisible(QVariant(Settings::getSetting("toolbar/syntaxmenu","true")).toBool());
     auto list = repository->definitions();
     QStringList syntaxItems;
     for (int i = 0; i<list.size(); i++) {
@@ -76,6 +73,10 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow) {
     syntaxItems.sort(Qt::CaseInsensitive);
     syntaxItems.push_front("Plain Text");
     syntaxmenu->addItems(syntaxItems);
+
+    fontSize->setMinimum(1);
+    fontSize->setMaximum(100);
+    fontSize->setValue(TabPane::currentWidget()->fontInfo().pointSize());
 
     newFile->setIcon(IconManager::getIcon("document-new"));
     openFile->setIcon(IconManager::getIcon("document-open"));
@@ -93,15 +94,15 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow) {
     saveFileAs->setToolTip(trans("Save current file as"));
     fontSize->setToolTip(trans("Change font size"));
 
-    connect(newFile,&ToolButton::clicked,new Slots,&Slots::newFileSlot);
-    connect(openFile,&ToolButton::clicked,new Slots,&Slots::openFileSlot);
-    connect(saveFile,&ToolButton::clicked,new Slots,&Slots::saveFileSlot);
-    connect(saveFileAs,&ToolButton::clicked,new Slots,&Slots::saveFileAsSlot);
-    connect(cut,&ToolButton::clicked,new Slots,&Slots::cutSlot);
-    connect(copy,&ToolButton::clicked,new Slots,&Slots::copySlot);
-    connect(paste,&ToolButton::clicked,new Slots,&Slots::pasteSlot);
-    connect(undo,&ToolButton::clicked,new Slots,&Slots::undoSlot);
-    connect(redo,&ToolButton::clicked,new Slots,&Slots::redoSlot);
+    connect(newFile,&QToolButton::clicked,new Slots,&Slots::newFileSlot);
+    connect(openFile,&QToolButton::clicked,new Slots,&Slots::openFileSlot);
+    connect(saveFile,&QToolButton::clicked,new Slots,&Slots::saveFileSlot);
+    connect(saveFileAs,&QToolButton::clicked,new Slots,&Slots::saveFileAsSlot);
+    connect(cut,&QToolButton::clicked,new Slots,&Slots::cutSlot);
+    connect(copy,&QToolButton::clicked,new Slots,&Slots::copySlot);
+    connect(paste,&QToolButton::clicked,new Slots,&Slots::pasteSlot);
+    connect(undo,&QToolButton::clicked,new Slots,&Slots::undoSlot);
+    connect(redo,&QToolButton::clicked,new Slots,&Slots::redoSlot);
     connect(syntaxmenu,SIGNAL(currentTextChanged(QString)),this,SLOT(onComboTextChanged(QString)));
     connect(fontSize,SIGNAL(valueChanged(int)),this,SLOT(onFontSizeChanged()));
 
@@ -140,44 +141,4 @@ void MainToolBar::onFontSizeChanged() {
 
 void MainToolBar::onComboTextChanged(QString item) {
     TabPane::currentWidget()->syntaxHighlight(item);
-}
-
-//ToolButton
-//This class contains a slightly modified QToolButton for our toolbar
-//The main difference lies in the ability to hide the button
-
-ToolButton::ToolButton(QString id) {
-    buttonId = id;
-    this->setVisible(QVariant(Settings::getSetting("toolbar/"+id,"true")).toBool());
-}
-
-void ToolButton::mousePressEvent(QMouseEvent *event) {
-    if (event->button()==Qt::RightButton) {
-        QMenu *popup = new QMenu;
-        QAction *hide = new QAction("Hide button",popup);
-        connect(hide,&QAction::triggered,this,&ToolButton::hideButton);
-        popup->addAction(hide);
-        popup->exec(QCursor::pos());
-    } else {
-        QToolButton::mousePressEvent(event);
-    }
-}
-
-void ToolButton::hideButton() {
-    Settings::writeSetting("toolbar/"+buttonId,"false");
-    TabPane::buttonHidden->setText("You must restart for changes to take effect.\n"
-                                   "To show the button again, change the value of <"+buttonId+">"
-                                   " under <toolbar> to \"true\" and restart.");
-    TabPane::buttonHidden->animatedShow();
-}
-
-//FontSpinner
-//This is a slightly modified QSpinner for setting the font size
-//The font size is only changed on the current tab
-
-FontSpinner::FontSpinner() {
-    this->setVisible(QVariant(Settings::getSetting("toolbar/fontsize","true")).toBool());
-    this->setMinimum(1);
-    this->setMaximum(100);
-    this->setValue(TabPane::currentWidget()->fontInfo().pointSize());
 }
