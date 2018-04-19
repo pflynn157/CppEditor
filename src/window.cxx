@@ -46,7 +46,6 @@
 #include "main_toolbar.hh"
 #include "global/file_actions.hh"
 #include "global/recent.hh"
-#include "menus/system_tray_menu.hh"
 #include "icon.hh"
 
 using namespace CppLib;
@@ -58,7 +57,6 @@ ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
 TemplateMenu *Window::templateMenu;
-QSystemTrayIcon *Window::trayIcon;
 
 Window::Window() {
     this->setWindowTitle("CppEditor");
@@ -131,14 +129,6 @@ Window::Window() {
         dateDockWidget->show();
     }
     this->addDockWidget(Qt::LeftDockWidgetArea,dateDockWidget);
-
-    trayIcon = new QSystemTrayIcon();
-    SystemTrayMenu *sysTrayMenu = new SystemTrayMenu(this);
-    trayIcon->setContextMenu(sysTrayMenu);
-
-    trayIcon->setIcon(IconManager::getIcon("accessories-text-editor"));
-    bool showTrayIcon = QVariant(Settings::getSetting("systray/display","true")).toBool();
-    trayIcon->setVisible(showTrayIcon);
 
     connect(qApp,SIGNAL(applicationStateChanged(Qt::ApplicationState)),this,SLOT(onWindowStateChanged(Qt::ApplicationState)));
 }
@@ -259,20 +249,11 @@ void Window::dispalyDateSelector() {
     }
 }
 
-void Window::displaySysTrayIcon() {
-    if (trayIcon->isVisible()) {
-        trayIcon->hide();
-    } else {
-        trayIcon->show();
-    }
-}
-
 void Window::appExit(QMainWindow *win, bool quit) {
     Settings::writeSetting("subwindows/date_selector",QVariant(dateDockWidget->isHidden()).toString());
     Settings::writeSetting("window/winX",QString::number(win->width()));
     Settings::writeSetting("window/winY",QString::number(win->height()));
     Recent::write();
-    delete trayIcon;
     if (quit) {
     	qApp->exit(0);
     }

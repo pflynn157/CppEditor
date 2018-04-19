@@ -33,7 +33,6 @@ set(MENUS_SRC
     menus/dock_widget_menu.cxx
     menus/editor_context.cxx
     menus/project_new_item_menu.cxx
-    menus/system_tray_menu.cxx
 )
 
 set(PROJECT_SRC
@@ -45,8 +44,6 @@ set(PROJECT_SRC
 set(SETTINGS_SRC
     settings/editor_page.cxx
     settings/settings_dialog.cxx
-    settings/systray_page.cxx
-    settings/systray_page.ui
 )
 
 set(TEMPLATE_SRC

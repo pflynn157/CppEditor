@@ -26,7 +26,6 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "settings_dialog.hh"
 #include "editor_page.hh"
-#include "systray_page.hh"
 
 SettingsDialog::SettingsDialog() {
     this->setWindowTitle("Settings");
@@ -41,9 +40,6 @@ SettingsDialog::SettingsDialog() {
 
     EditorPage *page1 = new EditorPage;
     tabs->addTab(page1,"Editor Settings");
-
-    SysTrayPage *page2 = new SysTrayPage;
-    tabs->addTab(page2,"System Tray Icon Settings");
 }
 
 SettingsDialog::~SettingsDialog() {

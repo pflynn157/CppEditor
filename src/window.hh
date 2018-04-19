@@ -28,7 +28,6 @@
 
 #include <QMainWindow>
 #include <QLabel>
-#include <QSystemTrayIcon>
 #include <QSplitter>
 #include <QTextEdit>
 #include <QStatusBar>
@@ -62,7 +61,6 @@ public:
     static void displayRichTextPane();
     static bool isRichTextPaneVisible();
     static void dispalyDateSelector();
-    static void displaySysTrayIcon();
     static void appExit(QMainWindow *win, bool quit);
     static TemplateMenu *templateMenu;
 protected:
@@ -83,7 +81,6 @@ private:
     WindowsMenu *windowsMenu;
 #endif
     HelpMenu *helpmenu;
-    static QSystemTrayIcon *trayIcon;
 private slots:
     void onWindowStateChanged(Qt::ApplicationState state);
 };
