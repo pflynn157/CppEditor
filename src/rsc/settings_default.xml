@@ -16,20 +16,6 @@
         <winX>700</winX>
         <winY>600</winY>
     </window>
-    <toolbar>
-        <newFile>true</newFile>
-        <openFile>true</openFile>
-        <saveFile>true</saveFile>
-        <saveFileAs>true</saveFileAs>
-        <cut>true</cut>
-        <copy>true</copy>
-        <paste>true</paste>
-        <undo>true</undo>
-        <redo>true</redo>
-        <syntaxmenu>true</syntaxmenu>
-        <fontsize>true</fontsize>
-    </toolbar>
-    <statusbar/>
     <editor>
         <autoindent>true</autoindent>
         <line_color>#d9d9d9</line_color>
