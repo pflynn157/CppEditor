@@ -33,21 +33,26 @@
 
 Finder::Finder()
     : find(new QToolButton),
+      findNext(new QToolButton),
       entry(new QLineEdit)
 {
     this->setMovable(false);
     this->setContextMenuPolicy(Qt::PreventContextMenu);
 
     find->setText("Find");
+    findNext->setText("Find Next");
 
     connect(find,&QToolButton::clicked,this,&Finder::onFindClicked);
+    connect(findNext,&QToolButton::clicked,this,&Finder::onFindNextClicked);
 
     this->addWidget(find);
+    this->addWidget(findNext);
     this->addWidget(entry);
 }
 
 Finder::~Finder() {
     delete find;
+    delete findNext;
     delete entry;
 }
 
@@ -80,9 +85,10 @@ void Finder::clear() {
     cursor.endEditBlock();
 
     TabPane::currentWidget()->setModified(false);
+    index = -1;
 }
 
-void Finder::findText() {
+void Finder::findText(bool next) {
     QString toSearch = entry->text();
     if (toSearch.isEmpty()) {
         return;
@@ -91,6 +97,7 @@ void Finder::findText() {
 
     QTextDocument *doc = TabPane::currentWidget()->document();
     bool found = false;
+    int c = 0;
 
     QTextCursor hCursor(doc);
     QTextCursor cursor(doc);
@@ -107,6 +114,18 @@ void Finder::findText() {
             found = true;
             hCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
             hCursor.mergeCharFormat(hFormat);
+            if (next) {
+                if (index==c) {
+                    hFormat.setBackground(Qt::gray);
+                    hCursor.mergeCharFormat(hFormat);
+                } else {
+                    hFormat.setBackground(Qt::yellow);
+                    hCursor.mergeCharFormat(hFormat);
+                }
+                c++;
+            } else {
+                count++;
+            }
         }
     }
 
@@ -117,5 +136,14 @@ void Finder::findText() {
 
 void Finder::onFindClicked() {
     clear();
-    findText();
+    findText(false);
+}
+
+void Finder::onFindNextClicked() {
+    if (index==count) {
+        index = -1;
+    } else {
+        index++;
+    }
+    findText(true);
 }

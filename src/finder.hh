@@ -36,11 +36,14 @@ public:
     Finder();
     ~Finder();
 private:
-    QToolButton *find;
+    QToolButton *find, *findNext;
     QLineEdit *entry;
     QString lastEntry;
+    int count = 0;
+    int index = -1;
     void clear();
-    void findText();
+    void findText(bool next);
 private slots:
     void onFindClicked();
+    void onFindNextClicked();
 };
