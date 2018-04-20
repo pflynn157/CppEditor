@@ -27,7 +27,7 @@
 #include "editmenu.hh"
 #include "../window.hh"
 #include "../icon.hh"
-#include "../finder.hh"
+#include "../window.hh"
 
 EditMenu::EditMenu() {
     this->setTitle("Edit");
@@ -64,5 +64,5 @@ EditMenu::~EditMenu() {
 }
 
 void EditMenu::onFindClicked() {
-	FinderDialog().exec();
+    Window::displayFinder();
 }

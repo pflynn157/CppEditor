@@ -55,6 +55,7 @@ QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
+Finder *Window::finder;
 TemplateMenu *Window::templateMenu;
 
 Window::Window() {
@@ -122,6 +123,9 @@ Window::Window() {
         dateDockWidget->show();
     }
     this->addDockWidget(Qt::LeftDockWidgetArea,dateDockWidget);
+
+    finder = new Finder;
+    this->addToolBar(Qt::BottomToolBarArea,finder);
 
     connect(qApp,SIGNAL(applicationStateChanged(Qt::ApplicationState)),this,SLOT(onWindowStateChanged(Qt::ApplicationState)));
 }
@@ -236,6 +240,14 @@ void Window::dispalyDateSelector() {
         dateDockWidget->show();
     } else {
         dateDockWidget->hide();
+    }
+}
+
+void Window::displayFinder() {
+    if (finder->isHidden()) {
+        finder->show();
+    } else {
+        finder->hide();
     }
 }
 

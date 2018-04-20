@@ -31,111 +31,91 @@
 #include "finder.hh"
 #include "tabpane.hh"
 
-FinderDialog::FinderDialog() 
-	: layout(new QVBoxLayout),
-	toolbar(new QToolBar),
-	find(new QPushButton),
-	findNext(new QPushButton),
-	entry(new QLineEdit),
-    output(new QTextEdit),
-    close(new QPushButton)
+Finder::Finder()
+    : find(new QToolButton),
+      entry(new QLineEdit)
 {
-    this->setWindowTitle("Find Text");
-	this->setFixedSize(650,450);
-	this->setLayout(layout);
-	
+    this->setMovable(false);
+    this->setContextMenuPolicy(Qt::PreventContextMenu);
+
     find->setText("Find");
-    findNext->setText("Find Next");
-    close->setText("Close");
-	
-	toolbar->addWidget(find);
-	toolbar->addWidget(findNext);
-	toolbar->addWidget(entry);
-	
-	output->setReadOnly(true);
-	output->setText(TabPane::currentTabText());
-	
-	layout->addWidget(toolbar);
-	layout->addWidget(output);
-    layout->addWidget(close);
 
-    connect(find,&QPushButton::clicked,this,&FinderDialog::onFindClicked);
-    connect(findNext,&QPushButton::clicked,this,&FinderDialog::onFindNextClicked);
-    connect(close,&QPushButton::clicked,this,&QDialog::close);
+    connect(find,&QToolButton::clicked,this,&Finder::onFindClicked);
 
-    count = 0;
-    current = 0;
+    this->addWidget(find);
+    this->addWidget(entry);
 }
 
-FinderDialog::~FinderDialog() {
-	delete layout;
-	delete entry;
-	delete output;
-    delete close;
+Finder::~Finder() {
+    delete find;
+    delete entry;
 }
 
-void FinderDialog::onFindClicked() {
-    findText(entry->text());
-}
+void Finder::clear() {
+    if (lastEntry.isEmpty()) {
+        return;
+    }
 
-void FinderDialog::onFindNextClicked() {
-    findNextTxt(entry->text());
-}
+    QTextDocument *doc = TabPane::currentWidget()->document();
+    bool found = false;
 
-void FinderDialog::findText(QString phrase, int no) {
-    int c = 0;
-    QTextDocument *doc = output->document();
-    QTextCursor findCursor(doc);
+    QTextCursor hCursor(doc);
     QTextCursor cursor(doc);
 
-    doc->undo();
     cursor.beginEditBlock();
 
-    QTextCharFormat format;
-    format = QTextCharFormat(findCursor.charFormat());
-    format.setBackground(Qt::yellow);
+    QTextCharFormat firstFormat(hCursor.charFormat());
+    QTextCharFormat hFormat = firstFormat;
+    hFormat.setBackground(Qt::white);
 
-    while ((!findCursor.isNull())&&(!findCursor.atEnd())) {
-        findCursor = doc->find(phrase,findCursor,QTextDocument::FindWholeWords);
-        if (!findCursor.isNull()) {
-            findCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
-            findCursor.mergeCharFormat(format);
-            c++;
-            if (no==-1) {
-                if (c==1) {
-                    QTextCharFormat f = findCursor.charFormat();
-                    f.setBackground(Qt::lightGray);
-                    findCursor.mergeCharFormat(f);
-                }
-            } else {
-                if (c==no) {
-                    QTextCharFormat f = findCursor.charFormat();
-                    f.setBackground(Qt::lightGray);
-                    findCursor.mergeCharFormat(f);
-                }
-            }
+    while (!hCursor.isNull() && !hCursor.atEnd()) {
+        hCursor = doc->find(lastEntry,hCursor,QTextDocument::FindWholeWords);
+        if (!hCursor.isNull()) {
+            found = true;
+            hCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
+            hCursor.mergeCharFormat(hFormat);
         }
     }
 
-    count = c;
-    if (no==-1) {
-        current = 1;
+    cursor.endEditBlock();
+
+    TabPane::currentWidget()->setModified(false);
+}
+
+void Finder::findText() {
+    QString toSearch = entry->text();
+    if (toSearch.isEmpty()) {
+        return;
+    }
+    lastEntry = toSearch;
+
+    QTextDocument *doc = TabPane::currentWidget()->document();
+    bool found = false;
+
+    QTextCursor hCursor(doc);
+    QTextCursor cursor(doc);
+
+    cursor.beginEditBlock();
+
+    QTextCharFormat firstFormat(hCursor.charFormat());
+    QTextCharFormat hFormat = firstFormat;
+    hFormat.setBackground(Qt::yellow);
+
+    while (!hCursor.isNull() && !hCursor.atEnd()) {
+        hCursor = doc->find(toSearch,hCursor,QTextDocument::FindWholeWords);
+        if (!hCursor.isNull()) {
+            found = true;
+            hCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
+            hCursor.mergeCharFormat(hFormat);
+        }
     }
 
     cursor.endEditBlock();
+
+    TabPane::currentWidget()->setModified(false);
 }
 
-void FinderDialog::findText(QString phrase) {
-    findText(phrase,-1);
-}
-
-void FinderDialog::findNextTxt(QString phrase) {
-    int c = current;
-    output->document()->undo();
-    c++;
-    if (c>count) {
-        c = 1;
-    }
-    findText(phrase,c);
-    current = c;
+void Finder::onFindClicked() {
+    clear();
+    findText();
 }

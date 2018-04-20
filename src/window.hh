@@ -34,6 +34,7 @@
 
 #include "windows/date_selector.hh"
 #include "project/project_pane.hh"
+#include "finder.hh"
 
 #include "menubar/filemenu.hh"
 #include "menubar/editmenu.hh"
@@ -60,6 +61,7 @@ public:
     static void displayRichTextPane();
     static bool isRichTextPaneVisible();
     static void dispalyDateSelector();
+    static void displayFinder();
     static void appExit(QMainWindow *win, bool quit);
     static TemplateMenu *templateMenu;
 protected:
@@ -70,6 +72,7 @@ private:
     static ProjectPane *projectPane;
     static QTextEdit *richTextPane;
     static DateDockWidget *dateDockWidget;
+    static Finder *finder;
     FileMenu *filemenu;
     EditMenu *editmenu;
     InsertMenu *insertmenu;

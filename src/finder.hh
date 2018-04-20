@@ -26,31 +26,21 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QDialog>
-#include <QVBoxLayout>
 #include <QToolBar>
-#include <QPushButton>
+#include <QToolButton>
 #include <QLineEdit>
-#include <QTextEdit>
-#include <QPushButton>
 
-class FinderDialog : public QDialog {
-	Q_OBJECT
+class Finder : public QToolBar {
+    Q_OBJECT
 public:
-	FinderDialog();
-	~FinderDialog();
+    Finder();
+    ~Finder();
 private:
-	QVBoxLayout *layout;
-	QToolBar *toolbar;
-	QPushButton *find, *findNext;
-	QLineEdit *entry;
-	QTextEdit *output;
-    QPushButton *close;
-    int count, current;
+    QToolButton *find;
+    QLineEdit *entry;
+    QString lastEntry;
+    void clear();
+    void findText();
 private slots:
     void onFindClicked();
-    void onFindNextClicked();
-    void findText(QString phrase, int no);
-    void findText(QString phrase);
-    void findNextTxt(QString phrase);
 };
