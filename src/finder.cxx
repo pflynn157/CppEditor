@@ -27,6 +27,7 @@
 #include <QTextDocument>
 #include <QTextCursor>
 #include <QTextCharFormat>
+#include <iostream>
 
 #include "finder.hh"
 #include "tabpane.hh"
@@ -34,26 +35,34 @@
 Finder::Finder()
     : find(new QToolButton),
       findNext(new QToolButton),
-      entry(new QLineEdit)
+      replace(new QToolButton),
+      entry(new QLineEdit),
+      replaceEntry(new QLineEdit)
 {
     this->setMovable(false);
     this->setContextMenuPolicy(Qt::PreventContextMenu);
 
     find->setText("Find");
     findNext->setText("Find Next");
+    replace->setText("Replace");
 
     connect(find,&QToolButton::clicked,this,&Finder::onFindClicked);
     connect(findNext,&QToolButton::clicked,this,&Finder::onFindNextClicked);
+    connect(replace,&QToolButton::clicked,this,&Finder::onReplaceClicked);
 
     this->addWidget(find);
     this->addWidget(findNext);
     this->addWidget(entry);
+    this->addWidget(replace);
+    this->addWidget(replaceEntry);
 }
 
 Finder::~Finder() {
     delete find;
     delete findNext;
     delete entry;
+    delete replace;
+    delete replaceEntry;
 }
 
 void Finder::clear() {
@@ -89,14 +98,14 @@ void Finder::clear() {
     count = 0;
 }
 
-void Finder::findText(bool next) {
+void Finder::findText(bool next, bool replaceText) {
     QString toSearch = entry->text();
     if (toSearch.isEmpty()) {
         return;
     }
     if (next && toSearch!=lastEntry) {
         clear();
-        findText(false);
+        findText(false,replaceText);
         index=0;
     }
     lastEntry = toSearch;
@@ -124,6 +133,16 @@ void Finder::findText(bool next) {
                 if (index==c) {
                     hFormat.setBackground(Qt::gray);
                     hCursor.mergeCharFormat(hFormat);
+
+                    if (replaceText) {
+                        hFormat.setBackground(Qt::white);
+                        hCursor.mergeCharFormat(hFormat);
+
+                        QString toReplace = replaceEntry->text();
+                        if (hCursor.hasSelection()) {
+                            hCursor.insertText(toReplace);
+                        }
+                    }
                 } else {
                     hFormat.setBackground(Qt::yellow);
                     hCursor.mergeCharFormat(hFormat);
@@ -142,7 +161,7 @@ void Finder::findText(bool next) {
 
 void Finder::onFindClicked() {
     clear();
-    findText(false);
+    findText(false,false);
 }
 
 void Finder::onFindNextClicked() {
@@ -151,5 +170,14 @@ void Finder::onFindNextClicked() {
     } else {
         index++;
     }
-    findText(true);
+    findText(true,false);
+}
+
+void Finder::onReplaceClicked() {
+    if (count==0) {
+        findText(false,false);
+    }
+    findText(true,true);
+    onFindClicked();
+    onFindNextClicked();
 }
