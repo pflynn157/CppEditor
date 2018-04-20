@@ -10,7 +10,7 @@ if not exist kdbusaddons (
 if not exist syntax-highlighting (
 	git clone https://github.com/KDE/syntax-highlighting.git)
 if not exist libsettings (
-	git clone https://github.com/patrick4664/libsettings.git)
+	git clone https://github.com/patrickf2000/libsettings.git)
 
 echo Checking for C:\Unix
 if not exist C:\Unix md C:\Unix
