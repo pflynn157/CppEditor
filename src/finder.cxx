@@ -30,13 +30,15 @@
 #include <iostream>
 
 #include "finder.hh"
+#include "icon.hh"
 
 Finder::Finder(Editor *edit)
     : find(new QToolButton),
       findNext(new QToolButton),
       replace(new QToolButton),
       entry(new QLineEdit),
-      replaceEntry(new QLineEdit)
+      replaceEntry(new QLineEdit),
+      close(new QToolButton)
 {
     editor = edit;
 
@@ -47,15 +49,23 @@ Finder::Finder(Editor *edit)
     findNext->setText("Find Next");
     replace->setText("Replace");
 
+    close->setToolTip("Close find/replace toolbar");
+    close->setIcon(IconManager::getIcon("dialog-close"));
+
+    entry->setClearButtonEnabled(true);
+    replaceEntry->setClearButtonEnabled(true);
+
     connect(find,&QToolButton::clicked,this,&Finder::onFindClicked);
     connect(findNext,&QToolButton::clicked,this,&Finder::onFindNextClicked);
     connect(replace,&QToolButton::clicked,this,&Finder::onReplaceClicked);
+    connect(close,&QToolButton::clicked,this,&Finder::onCloseClicked);
 
     this->addWidget(find);
     this->addWidget(findNext);
     this->addWidget(entry);
     this->addWidget(replace);
     this->addWidget(replaceEntry);
+    this->addWidget(close);
 }
 
 Finder::~Finder() {
@@ -64,6 +74,7 @@ Finder::~Finder() {
     delete entry;
     delete replace;
     delete replaceEntry;
+    delete close;
 }
 
 void Finder::clear() {
@@ -187,4 +198,9 @@ void Finder::onReplaceClicked() {
     findText(true,true);
     onFindClicked();
     onFindNextClicked();
+}
+
+void Finder::onCloseClicked() {
+    clear();
+    this->hide();
 }

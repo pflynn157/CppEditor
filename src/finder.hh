@@ -43,7 +43,7 @@ public:
     void findText(bool next, bool replaceText);
 private:
     Editor *editor;
-    QToolButton *find, *findNext, *replace;
+    QToolButton *find, *findNext, *replace, *close;
     QLineEdit *entry, *replaceEntry;
     QString lastEntry;
     int count = 0;
@@ -52,4 +52,5 @@ private slots:
     void onFindClicked();
     void onFindNextClicked();
     void onReplaceClicked();
+    void onCloseClicked();
 };
