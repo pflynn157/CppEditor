@@ -71,6 +71,8 @@ void Finder::clear() {
         return;
     }
 
+    bool mod = editor->isModified();
+
     QTextDocument *doc = editor->document();
     bool found = false;
 
@@ -94,7 +96,9 @@ void Finder::clear() {
 
     cursor.endEditBlock();
 
-    editor->setModified(false);
+    if (!mod) {
+        editor->setModified(false);
+    }
     index = -1;
     count = 0;
 }
@@ -157,7 +161,9 @@ void Finder::findText(bool next, bool replaceText) {
 
     cursor.endEditBlock();
 
-    editor->setModified(false);
+    if (!replaceText) {
+        editor->setModified(false);
+    }
 }
 
 void Finder::onFindClicked() {
