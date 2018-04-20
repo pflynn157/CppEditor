@@ -26,6 +26,8 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QFrame>
+#include <QVBoxLayout>
 #include <QTextEdit>
 #include <QKeyEvent>
 #include <QMenu>
@@ -36,8 +38,11 @@
 
 using namespace KSyntaxHighlighting;
 
-class Editor : public QTextEdit {
+class TextEdit;
+
+class Editor : public QFrame {
     Q_OBJECT
+    friend class TextEdit;
 public:
     static bool autoindent;
     static QString colorID;
@@ -56,11 +61,23 @@ public:
     bool hasFoundText();
     void setSavedContent(QString content);
     QString saveContent();
+    void insertPlainText(QString text);
+    QString toPlainText();
+    void setReadOnly(bool readOnly);
+    QTextDocument *document();
+public slots:
+    void cut();
+    void copy();
+    void paste();
+    void selectAll();
+    void undo();
+    void redo();
 protected:
-    void keyPressEvent(QKeyEvent *event);
     void contextMenuEvent(QContextMenuEvent *);
     void insertFromMimeData(const QMimeData *source);
 private:
+    QVBoxLayout *layout;
+    TextEdit *editor;
     QString filePath;
     SyntaxHighlighter *highlight;
     bool modified = false;
@@ -69,4 +86,14 @@ private:
 private slots:
     void onModified();
     void highlightCurrentLine();
+};
+
+class TextEdit : public QTextEdit {
+    Q_OBJECT
+public:
+    explicit TextEdit(Editor *p);
+protected:
+    void keyPressEvent(QKeyEvent *event);
+private:
+    Editor *parent;
 };

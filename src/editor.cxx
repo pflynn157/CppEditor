@@ -56,20 +56,27 @@ void Editor::updateSettings() {
     Editor::colorID = Settings::getSetting("editor/line_color","#d9d9d9");
 }
 
-Editor::Editor(QString path) {
+Editor::Editor(QString path)
+    : layout(new QVBoxLayout),
+      editor(new TextEdit(this))
+{
+    layout->setContentsMargins(0,0,0,0);
+    this->setLayout(layout);
+    layout->addWidget(editor);
+
     filePath = path;
 
-    connect(this,&QTextEdit::textChanged,this,&Editor::onModified);
-    connect(this,&QTextEdit::cursorPositionChanged,this,&Editor::highlightCurrentLine);
+    connect(editor,&QTextEdit::textChanged,this,&Editor::onModified);
+    connect(editor,&QTextEdit::cursorPositionChanged,this,&Editor::highlightCurrentLine);
 
     QTextDocument *doc = new QTextDocument();
-    this->setDocument(doc);
+    editor->setDocument(doc);
 
     highlight = new SyntaxHighlighter(doc);
     highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
 
-    int width = (QFontMetrics(this->currentCharFormat().font()).averageCharWidth())*2;
-    this->setTabStopWidth(width);
+    int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*2;
+    editor->setTabStopWidth(width);
 }
 
 bool Editor::isUntitled() {
@@ -102,7 +109,7 @@ void Editor::setModified(bool mod) {
     Window::setStatusBarModified(mod);
 
     if (mod==false) {
-        setSavedContent(this->toPlainText());
+        setSavedContent(editor->toPlainText());
     }
 }
 
@@ -112,7 +119,7 @@ void Editor::setEditorText(QString text) {
     this->syntaxHighlight(name);
     MainToolBar::syntaxmenu->setCurrentText(name);
 
-    this->setPlainText(text);
+    editor->setPlainText(text);
 }
 
 void Editor::syntaxHighlight(QString id) {
@@ -143,10 +150,91 @@ QString Editor::saveContent() {
     return lastSavedContent;
 }
 
-void Editor::keyPressEvent(QKeyEvent *event) {
-    if (autoindent) {
+void Editor::insertPlainText(QString text) {
+    editor->insertPlainText(text);
+}
+
+QString Editor::toPlainText() {
+    return editor->toPlainText();
+}
+
+void Editor::setReadOnly(bool readOnly) {
+    editor->setReadOnly(readOnly);
+}
+
+QTextDocument *Editor::document() {
+    return editor->document();
+}
+
+void Editor::cut() {
+    editor->cut();
+}
+
+void Editor::copy() {
+    editor->copy();
+}
+
+void Editor::paste() {
+    editor->paste();
+}
+
+void Editor::selectAll() {
+    editor->selectAll();
+}
+
+void Editor::redo() {
+    editor->redo();
+}
+
+void Editor::undo() {
+    editor->undo();
+}
+
+void Editor::contextMenuEvent(QContextMenuEvent *) {
+    EditorContextMenu *menu = new EditorContextMenu;
+    menu->exec(QCursor::pos());
+    menu->show();
+}
+
+void Editor::insertFromMimeData(const QMimeData *source) {
+    editor->insertPlainText(source->text());
+}
+
+void Editor::onModified() {
+    if (editor->document()->isModified()) {
+        if (!foundText) {
+            modified = true;
+            Window::setStatusBarModified(true);
+        }
+        if (Window::isRichTextPaneVisible()) {
+            Window::setRichTextPane(editor->toPlainText());
+        }
+    }
+}
+
+void Editor::highlightCurrentLine() {
+    QTextEdit::ExtraSelection select;
+    select.format.setBackground(QColor(colorID));
+    select.format.setProperty(QTextFormat::FullWidthSelection, true);
+    select.cursor = editor->textCursor();
+
+    QList<QTextEdit::ExtraSelection> list;
+    list.append(select);
+    editor->setExtraSelections(list);
+
+    Window::setStatusBarLineCount(editor->textCursor().blockNumber()+1);
+}
+
+//TextEdit class
+TextEdit::TextEdit(Editor *p) {
+    parent = p;
+}
+
+void TextEdit::keyPressEvent(QKeyEvent *event) {
+    if (parent->autoindent) {
         if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
-            QString lastLine = this->document()->findBlockByLineNumber(this->textCursor().blockNumber()).text();
+            QString lastLine = parent->editor->document()->findBlockByLineNumber(
+                        parent->editor->textCursor().blockNumber()).text();
             int tabCount = 0;
             for (int i = 0; i<lastLine.length(); i++) {
                 if (lastLine.at(i)!='\t') {
@@ -157,7 +245,7 @@ void Editor::keyPressEvent(QKeyEvent *event) {
             if (tabCount>0) {
                 QTextEdit::keyPressEvent(event);
                 for (int i = 0; i<tabCount; i++) {
-                    this->insertPlainText("\t");
+                    parent->editor->insertPlainText("\t");
                 }
             } else {
                 QTextEdit::keyPressEvent(event);
@@ -168,39 +256,4 @@ void Editor::keyPressEvent(QKeyEvent *event) {
     } else {
         QTextEdit::keyPressEvent(event);
     }
-}
-
-void Editor::contextMenuEvent(QContextMenuEvent *) {
-    EditorContextMenu *menu = new EditorContextMenu;
-    menu->exec(QCursor::pos());
-    menu->show();
-}
-
-void Editor::insertFromMimeData(const QMimeData *source) {
-    this->insertPlainText(source->text());
-}
-
-void Editor::onModified() {
-    if (this->document()->isModified()) {
-        if (!foundText) {
-            modified = true;
-            Window::setStatusBarModified(true);
-        }
-        if (Window::isRichTextPaneVisible()) {
-            Window::setRichTextPane(this->toPlainText());
-        }
-    }
-}
-
-void Editor::highlightCurrentLine() {
-    QTextEdit::ExtraSelection select;
-    select.format.setBackground(QColor(colorID));
-    select.format.setProperty(QTextFormat::FullWidthSelection, true);
-    select.cursor = this->textCursor();
-
-    QList<QTextEdit::ExtraSelection> list;
-    list.append(select);
-    this->setExtraSelections(list);
-
-    Window::setStatusBarLineCount(this->textCursor().blockNumber()+1);
 }
