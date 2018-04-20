@@ -11,13 +11,24 @@ find_package(Qt5 REQUIRED COMPONENTS
     Gui
 )
 
-find_package(KF5SyntaxHighlighting REQUIRED)
-find_package(KF5DBusAddons REQUIRED)
-
-find_library(libsettings REQUIRED)
+if (WIN32)
+    find_library(libsettings REQUIRED HINTS C:/Unix/bin)
+    find_package(KF5SyntaxHighlighting REQUIRED HINTS C:/Unix/bin)
+    find_package(KF5DBusAddons REQUIRED HINTS C:/Unix/bin)
+    link_directories(C:/Unix/bin)
+else()
+    find_package(KF5SyntaxHighlighting REQUIRED)
+    find_package(KF5DBusAddons REQUIRED)
+    find_library(libsettings REQUIRED)
+endif()
 
 add_compile_options(-std=c++11)
 include_directories("${CMAKE_BINARY_DIR}/src")
+
+if (WIN32)
+    include_directories(C:/Unix/include)
+    include_directories(C:/Unix/include/cpplib)
+endif()
 
 add_subdirectory(src)
 
