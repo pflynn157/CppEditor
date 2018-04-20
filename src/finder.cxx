@@ -86,12 +86,18 @@ void Finder::clear() {
 
     TabPane::currentWidget()->setModified(false);
     index = -1;
+    count = 0;
 }
 
 void Finder::findText(bool next) {
     QString toSearch = entry->text();
     if (toSearch.isEmpty()) {
         return;
+    }
+    if (next && toSearch!=lastEntry) {
+        clear();
+        findText(false);
+        index=0;
     }
     lastEntry = toSearch;
 
@@ -140,8 +146,8 @@ void Finder::onFindClicked() {
 }
 
 void Finder::onFindNextClicked() {
-    if (index==count) {
-        index = -1;
+    if (index==count-1) {
+        index = 0;
     } else {
         index++;
     }
