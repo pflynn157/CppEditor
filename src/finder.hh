@@ -30,14 +30,19 @@
 #include <QToolButton>
 #include <QLineEdit>
 
+#include "editor.hh"
+
+class Editor;
+
 class Finder : public QToolBar {
     Q_OBJECT
 public:
-    Finder();
+    Finder(Editor *edit);
     ~Finder();
     void clear();
     void findText(bool next, bool replaceText);
 private:
+    Editor *editor;
     QToolButton *find, *findNext, *replace;
     QLineEdit *entry, *replaceEntry;
     QString lastEntry;

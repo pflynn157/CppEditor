@@ -36,8 +36,11 @@
 #include <QMimeData>
 #include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
+#include "finder.hh"
+
 using namespace KSyntaxHighlighting;
 
+class Finder;
 class TextEdit;
 
 class Editor : public QFrame {
@@ -65,6 +68,7 @@ public:
     QString toPlainText();
     void setReadOnly(bool readOnly);
     QTextDocument *document();
+    void displayFinder();
 public slots:
     void cut();
     void copy();
@@ -78,6 +82,7 @@ protected:
 private:
     QVBoxLayout *layout;
     TextEdit *editor;
+    Finder *finder;
     QString filePath;
     SyntaxHighlighter *highlight;
     bool modified = false;

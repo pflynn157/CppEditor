@@ -30,15 +30,16 @@
 #include <iostream>
 
 #include "finder.hh"
-#include "tabpane.hh"
 
-Finder::Finder()
+Finder::Finder(Editor *edit)
     : find(new QToolButton),
       findNext(new QToolButton),
       replace(new QToolButton),
       entry(new QLineEdit),
       replaceEntry(new QLineEdit)
 {
+    editor = edit;
+
     this->setMovable(false);
     this->setContextMenuPolicy(Qt::PreventContextMenu);
 
@@ -70,7 +71,7 @@ void Finder::clear() {
         return;
     }
 
-    QTextDocument *doc = TabPane::currentWidget()->document();
+    QTextDocument *doc = editor->document();
     bool found = false;
 
     QTextCursor hCursor(doc);
@@ -93,7 +94,7 @@ void Finder::clear() {
 
     cursor.endEditBlock();
 
-    TabPane::currentWidget()->setModified(false);
+    editor->setModified(false);
     index = -1;
     count = 0;
 }
@@ -110,7 +111,7 @@ void Finder::findText(bool next, bool replaceText) {
     }
     lastEntry = toSearch;
 
-    QTextDocument *doc = TabPane::currentWidget()->document();
+    QTextDocument *doc = editor->document();
     bool found = false;
     int c = 0;
 
@@ -156,7 +157,7 @@ void Finder::findText(bool next, bool replaceText) {
 
     cursor.endEditBlock();
 
-    TabPane::currentWidget()->setModified(false);
+    editor->setModified(false);
 }
 
 void Finder::onFindClicked() {

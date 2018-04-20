@@ -141,11 +141,6 @@ void TabPane::onTabChanged() {
     Window::setStatusBarPath(currentWidget()->path());
     Window::setStatusBarModified(currentWidget()->isModified());
 
-    Window::finder->clear();
-    if (Window::finder->isVisible()) {
-        Window::finder->findText(false,false);
-    }
-
     MainToolBar::syntaxmenu->setCurrentText(currentWidget()->currentID());
     MainToolBar::fontSize->setValue(currentWidget()->font().pointSize());
 

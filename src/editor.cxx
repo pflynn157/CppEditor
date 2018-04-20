@@ -58,11 +58,13 @@ void Editor::updateSettings() {
 
 Editor::Editor(QString path)
     : layout(new QVBoxLayout),
-      editor(new TextEdit(this))
+      editor(new TextEdit(this)),
+      finder(new Finder(this))
 {
     layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
     layout->addWidget(editor);
+    layout->addWidget(finder,0,Qt::AlignBottom);
 
     filePath = path;
 
@@ -77,6 +79,8 @@ Editor::Editor(QString path)
 
     int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*2;
     editor->setTabStopWidth(width);
+
+    finder->hide();
 }
 
 bool Editor::isUntitled() {
@@ -164,6 +168,15 @@ void Editor::setReadOnly(bool readOnly) {
 
 QTextDocument *Editor::document() {
     return editor->document();
+}
+
+void Editor::displayFinder() {
+    if (finder->isVisible()) {
+        finder->clear();
+        finder->hide();
+    } else {
+        finder->show();
+    }
 }
 
 void Editor::cut() {
