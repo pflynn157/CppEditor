@@ -64,6 +64,7 @@ public:
     static void displayFinder();
     static void appExit(QMainWindow *win, bool quit);
     static TemplateMenu *templateMenu;
+    static Finder *finder;
 protected:
 	void closeEvent(QCloseEvent *event);
 private:
@@ -72,7 +73,6 @@ private:
     static ProjectPane *projectPane;
     static QTextEdit *richTextPane;
     static DateDockWidget *dateDockWidget;
-    static Finder *finder;
     FileMenu *filemenu;
     EditMenu *editmenu;
     InsertMenu *insertmenu;

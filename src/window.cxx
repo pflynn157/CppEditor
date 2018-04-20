@@ -248,6 +248,7 @@ void Window::displayFinder() {
     if (finder->isHidden()) {
         finder->show();
     } else {
+        finder->clear();
         finder->hide();
     }
 }

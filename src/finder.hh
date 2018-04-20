@@ -35,14 +35,14 @@ class Finder : public QToolBar {
 public:
     Finder();
     ~Finder();
+    void clear();
+    void findText(bool next, bool replaceText);
 private:
     QToolButton *find, *findNext, *replace;
     QLineEdit *entry, *replaceEntry;
     QString lastEntry;
     int count = 0;
     int index = -1;
-    void clear();
-    void findText(bool next, bool replaceText);
 private slots:
     void onFindClicked();
     void onFindNextClicked();
