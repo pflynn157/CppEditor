@@ -38,7 +38,7 @@ EditMenu::EditMenu() {
     selectAll = new SelectAllAction(this);
     undo = new UndoAction(this);
     redo = new RedoAction(this);
-    find = new QAction(IconManager::getIcon("edit-find"),"Find Text",this);
+    find = new QAction(IconManager::getIcon("edit-find"),"Find/Replace Text",this);
 
     connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
 

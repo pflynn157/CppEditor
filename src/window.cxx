@@ -125,6 +125,7 @@ Window::Window() {
     this->addDockWidget(Qt::LeftDockWidgetArea,dateDockWidget);
 
     finder = new Finder;
+    finder->hide();
     this->addToolBar(Qt::BottomToolBarArea,finder);
 
     connect(qApp,SIGNAL(applicationStateChanged(Qt::ApplicationState)),this,SLOT(onWindowStateChanged(Qt::ApplicationState)));
