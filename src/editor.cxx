@@ -83,6 +83,10 @@ Editor::Editor(QString path)
     finder->hide();
 }
 
+TextEdit *Editor::editorWidget() {
+    return editor;
+}
+
 bool Editor::isUntitled() {
     if (filePath=="untitled") {
         return true;
@@ -154,22 +158,6 @@ QString Editor::saveContent() {
     return lastSavedContent;
 }
 
-void Editor::insertPlainText(QString text) {
-    editor->insertPlainText(text);
-}
-
-QString Editor::toPlainText() {
-    return editor->toPlainText();
-}
-
-void Editor::setReadOnly(bool readOnly) {
-    editor->setReadOnly(readOnly);
-}
-
-QTextDocument *Editor::document() {
-    return editor->document();
-}
-
 void Editor::displayFinder() {
     if (finder->isVisible()) {
         finder->clear();
@@ -177,30 +165,6 @@ void Editor::displayFinder() {
     } else {
         finder->show();
     }
-}
-
-void Editor::cut() {
-    editor->cut();
-}
-
-void Editor::copy() {
-    editor->copy();
-}
-
-void Editor::paste() {
-    editor->paste();
-}
-
-void Editor::selectAll() {
-    editor->selectAll();
-}
-
-void Editor::redo() {
-    editor->redo();
-}
-
-void Editor::undo() {
-    editor->undo();
 }
 
 void Editor::contextMenuEvent(QContextMenuEvent *) {

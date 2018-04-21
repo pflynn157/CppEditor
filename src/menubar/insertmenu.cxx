@@ -61,7 +61,7 @@ void InsertMenu::onDatePickerClicked() {
 
 void InsertMenu::onLoremIpsumClicked() {
     QString text = FileActions::fileContents(":/rsc/lorem_ipsum.txt");
-    Editor *edit = TabPane::currentWidget();
+    TextEdit *edit = TabPane::currentEditor();
     edit->insertPlainText(text);
 }
 
@@ -69,7 +69,7 @@ void InsertMenu::onColorDialogClicked() {
     QColorDialog dialog;
     if (dialog.exec()) {
         QColor color = dialog.selectedColor();
-        Editor *edit = TabPane::currentWidget();
+        TextEdit *edit = TabPane::currentEditor();
         edit->insertPlainText(color.name());
     }
 }

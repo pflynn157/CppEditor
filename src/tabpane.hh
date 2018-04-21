@@ -46,7 +46,9 @@ public:
     static void addNewUntitledTab();
 
     static Editor *currentWidget();
+    static TextEdit *currentEditor();
     static Editor *widgetAt(int index);
+    static TextEdit *editorAt(int index);
 
     static void setCurrentTabPath(QString path);
     static void setCurrentTabText(QString text);

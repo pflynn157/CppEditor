@@ -94,8 +94,16 @@ Editor *TabPane::currentWidget() {
     return static_cast<Editor *>(tabs->currentWidget());
 }
 
+TextEdit *TabPane::currentEditor() {
+    return currentWidget()->editorWidget();
+}
+
 Editor *TabPane::widgetAt(int index) {
     return static_cast<Editor *>(tabs->widget(index));
+}
+
+TextEdit *TabPane::editorAt(int index) {
+    return widgetAt(index)->editorWidget();
 }
 
 void TabPane::setCurrentTabPath(QString path) {
@@ -109,7 +117,7 @@ void TabPane::setCurrentTabText(QString text) {
 }
 
 QString TabPane::currentTabText() {
-    return currentWidget()->toPlainText();
+    return currentEditor()->toPlainText();
 }
 
 void TabPane::setCurrentTabTitle(QString title) {

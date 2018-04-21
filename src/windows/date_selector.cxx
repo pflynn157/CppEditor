@@ -63,6 +63,6 @@ void DateDockWidget::onDateClicked(QDate date) {
 void DateDockWidget::onSubmitClicked() {
     QDate date = dateDisplay->date();
     QString date_str = date.toString();
-    TabPane::currentWidget()->insertPlainText(date_str);
+    TabPane::currentEditor()->insertPlainText(date_str);
 }
 

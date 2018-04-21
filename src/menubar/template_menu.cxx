@@ -41,7 +41,7 @@ TemplateAction::TemplateAction(QString path, QMenu *parent) : QAction(path,paren
 }
 
 void TemplateAction::onClick() {
-    TabPane::currentWidget()->insertPlainText(FileActions::fileContents(Template::templatePath()+name));
+    TabPane::currentEditor()->insertPlainText(FileActions::fileContents(Template::templatePath()+name));
 }
 
 TemplateMenu::TemplateMenu() {

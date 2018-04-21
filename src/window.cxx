@@ -274,7 +274,7 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
         QString currentContent = FileActions::fileContents(path);
         QString oldContent = TabPane::currentWidget()->saveContent();
         if (currentContent!=oldContent) {
-            TabPane::currentWidget()->setReadOnly(true);
+            TabPane::currentEditor()->setReadOnly(true);
             QMessageBox msg;
             msg.setWindowTitle("File Changed");
             msg.setText("This file has been changed outside of the editor.\n"
@@ -282,7 +282,7 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
             msg.setIcon(QMessageBox::Question);
             msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
             int ret = msg.exec();
-            TabPane::currentWidget()->setReadOnly(false);
+            TabPane::currentEditor()->setReadOnly(false);
             if (ret==QMessageBox::Yes) {
                 QString content = FileActions::fileContents(path);
                 TabPane::setCurrentTabText(content);

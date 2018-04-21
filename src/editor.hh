@@ -51,6 +51,7 @@ public:
     static QString colorID;
     static void updateSettings();
     explicit Editor(QString path);
+    TextEdit *editorWidget();
     bool isUntitled();
     void setUntitled(bool untitled);
     QString path();
@@ -64,18 +65,7 @@ public:
     bool hasFoundText();
     void setSavedContent(QString content);
     QString saveContent();
-    void insertPlainText(QString text);
-    QString toPlainText();
-    void setReadOnly(bool readOnly);
-    QTextDocument *document();
     void displayFinder();
-public slots:
-    void cut();
-    void copy();
-    void paste();
-    void selectAll();
-    void undo();
-    void redo();
 protected:
     void contextMenuEvent(QContextMenuEvent *);
     void insertFromMimeData(const QMimeData *source);

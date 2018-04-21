@@ -84,7 +84,7 @@ void Finder::clear() {
 
     bool mod = editor->isModified();
 
-    QTextDocument *doc = editor->document();
+    QTextDocument *doc = editor->editorWidget()->document();
     bool found = false;
 
     QTextCursor hCursor(doc);
@@ -126,7 +126,7 @@ void Finder::findText(bool next, bool replaceText) {
     }
     lastEntry = toSearch;
 
-    QTextDocument *doc = editor->document();
+    QTextDocument *doc = editor->editorWidget()->document();
     bool found = false;
     int c = 0;
 

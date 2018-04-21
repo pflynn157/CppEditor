@@ -54,25 +54,25 @@ void Slots::quitSlot(QMainWindow *window) {
 }
 
 void Slots::cutSlot() {
-    TabPane::currentWidget()->cut();
+    TabPane::currentEditor()->cut();
 }
 
 void Slots::copySlot() {
-    TabPane::currentWidget()->copy();
+    TabPane::currentEditor()->copy();
 }
 
 void Slots::pasteSlot() {
-    TabPane::currentWidget()->paste();
+    TabPane::currentEditor()->paste();
 }
 
 void Slots::selectAllSlot() {
-    TabPane::currentWidget()->selectAll();
+    TabPane::currentEditor()->selectAll();
 }
 
 void Slots::undoSlot() {
-    TabPane::currentWidget()->undo();
+    TabPane::currentEditor()->undo();
 }
 
 void Slots::redoSlot() {
-    TabPane::currentWidget()->redo();
+    TabPane::currentEditor()->redo();
 }
