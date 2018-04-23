@@ -60,9 +60,8 @@ void InsertMenu::onDatePickerClicked() {
 }
 
 void InsertMenu::onLoremIpsumClicked() {
-    QString text = FileActions::fileContents(":/rsc/lorem_ipsum.txt");
-    TextEdit *edit = TabPane::currentEditor();
-    edit->insertPlainText(text);
+    LoremIpsumDialog dialog;
+    dialog.exec();
 }
 
 void InsertMenu::onColorDialogClicked() {
@@ -72,4 +71,51 @@ void InsertMenu::onColorDialogClicked() {
         TextEdit *edit = TabPane::currentEditor();
         edit->insertPlainText(color.name());
     }
+}
+
+//The LoremIpsum dialog
+LoremIpsumDialog::LoremIpsumDialog()
+    : centerWidget(new QFrame),
+      centerLayout(new QVBoxLayout),
+      label(new QLabel),
+      edit(new QTextEdit),
+      buttons(new QDialogButtonBox)
+{
+    this->setWindowTitle("Insert Lorem Ipsum Text");
+    this->resize(500,400);
+    this->setLayout(centerLayout);
+
+    label->setText("Choose the text to be inserted:");
+
+    QString text = FileActions::fileContents(":/rsc/lorem_ipsum.txt");
+    edit->setText(text);
+
+    buttons->addButton(QDialogButtonBox::Cancel);
+    buttons->addButton(QDialogButtonBox::Ok);
+
+    connect(buttons,&QDialogButtonBox::accepted,this,&LoremIpsumDialog::onOkClicked);
+    connect(buttons,&QDialogButtonBox::rejected,this,&LoremIpsumDialog::onCancelClicked);
+
+    centerLayout->addWidget(label,0,Qt::AlignTop);
+    centerLayout->addWidget(edit);
+    centerLayout->addWidget(buttons);
+}
+
+LoremIpsumDialog::~LoremIpsumDialog() {
+    delete centerWidget;
+    delete centerLayout;
+    delete label;
+    delete edit;
+    delete buttons;
+}
+
+void LoremIpsumDialog::onOkClicked() {
+    QString text = edit->toPlainText();
+    TextEdit *editor = TabPane::currentEditor();
+    editor->insertPlainText(text);
+    this->close();
+}
+
+void LoremIpsumDialog::onCancelClicked() {
+    this->close();
 }
