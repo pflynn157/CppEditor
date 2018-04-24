@@ -39,15 +39,8 @@ EditMenu::EditMenu() {
     undo = new UndoAction(this);
     redo = new RedoAction(this);
     find = new QAction(IconManager::getIcon("edit-find"),"Find/Replace Text",this);
-    italic = new QAction("Italic Text",this);
-
-    italic->setCheckable(true);
 
     connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
-    connect(italic,&QAction::triggered,this,&EditMenu::onItalicClicked);
-
-    format = new QMenu("Format");
-    format->addAction(italic);
 
     this->addAction(cut);
     this->addAction(copy);
@@ -58,7 +51,6 @@ EditMenu::EditMenu() {
     this->addAction(redo);
     this->addSeparator();
     this->addAction(find);
-    this->addMenu(format);
 }
 
 EditMenu::~EditMenu() {
@@ -69,14 +61,8 @@ EditMenu::~EditMenu() {
     delete undo;
     delete redo;
     delete find;
-    delete format;
-    delete italic;
 }
 
 void EditMenu::onFindClicked() {
     TabPane::currentWidget()->displayFinder();
-}
-
-void EditMenu::onItalicClicked() {
-    TabPane::currentEditor()->setFontItalic(italic->isChecked());
 }
