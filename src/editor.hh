@@ -36,6 +36,7 @@
 #include <QMimeData>
 #include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
+#include "format_toolbar.hh"
 #include "finder.hh"
 
 using namespace KSyntaxHighlighting;
@@ -65,6 +66,7 @@ public:
     bool hasFoundText();
     void setSavedContent(QString content);
     QString saveContent();
+    void displayFormatToolbar();
     void displayFinder();
     bool isRtf();
 protected:
@@ -72,6 +74,7 @@ protected:
     void insertFromMimeData(const QMimeData *source);
 private:
     QVBoxLayout *layout;
+    FormatToolbar *formatToolbar;
     TextEdit *editor;
     Finder *finder;
     QString filePath;

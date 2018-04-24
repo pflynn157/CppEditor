@@ -59,10 +59,12 @@ void Editor::updateSettings() {
 Editor::Editor(QString path)
     : layout(new QVBoxLayout),
       editor(new TextEdit(this)),
+      formatToolbar(new FormatToolbar),
       finder(new Finder(this))
 {
     layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
+    layout->addWidget(formatToolbar,0,Qt::AlignTop);
     layout->addWidget(editor);
     layout->addWidget(finder,0,Qt::AlignBottom);
 
@@ -80,6 +82,7 @@ Editor::Editor(QString path)
     int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*2;
     editor->setTabStopWidth(width);
 
+    formatToolbar->hide();
     finder->hide();
 }
 
@@ -156,6 +159,14 @@ void Editor::setSavedContent(QString content) {
 
 QString Editor::saveContent() {
     return lastSavedContent;
+}
+
+void Editor::displayFormatToolbar() {
+    if (formatToolbar->isVisible()) {
+        formatToolbar->hide();
+    } else {
+        formatToolbar->show();
+    }
 }
 
 void Editor::displayFinder() {
