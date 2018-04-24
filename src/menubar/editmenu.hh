@@ -49,6 +49,9 @@ private:
     UndoAction *undo;
     RedoAction *redo;
     QAction *find;
+    QMenu *format;
+    QAction *italic;
 private:
     void onFindClicked();
+    void onItalicClicked();
 };
