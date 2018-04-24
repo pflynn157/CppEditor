@@ -33,6 +33,9 @@ FormatToolbar::FormatToolbar()
       italic(new QToolButton),
       underline(new QToolButton)
 {
+    this->setMovable(false);
+    this->setContextMenuPolicy(Qt::PreventContextMenu);
+
     bold->setIcon(IconManager::getIcon("format-text-bold"));
     italic->setIcon(IconManager::getIcon("format-text-italic"));
     underline->setIcon(IconManager::getIcon("format-text-underline"));
