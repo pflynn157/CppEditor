@@ -72,7 +72,12 @@ void FileActions::processOpenFile(QString file) {
     } else {
         TabPane::addNewTab(file);
     }
-    TabPane::setCurrentTabText(fileContents(file));
+    QString text = fileContents(file);
+    if (file.endsWith(".rtf")) {
+        TabPane::currentEditor()->setHtml(text);
+    } else {
+        TabPane::setCurrentTabText(text);
+    }
     TabPane::currentWidget()->setModified(false);
 }
 
@@ -85,7 +90,11 @@ void FileActions::saveFile(QString path) {
 
     if (file.open(QFile::WriteOnly)) {
         QTextStream writer(&file);
-        writer << TabPane::currentTabText();
+        if (path.endsWith(".rtf")) {
+            writer << TabPane::currentEditor()->toHtml();
+        } else {
+            writer << TabPane::currentTabText();
+        }
     }
 
     TabPane::currentWidget()->setModified(false);
