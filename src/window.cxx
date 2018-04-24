@@ -43,6 +43,7 @@
 #include "window.hh"
 #include "tabpane.hh"
 #include "main_toolbar.hh"
+#include "format_toolbar.hh"
 #include "global/file_actions.hh"
 #include "global/recent.hh"
 #include "icon.hh"
@@ -113,6 +114,9 @@ Window::Window() {
     toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
     toolbar->setFloatable(false);
     this->addToolBar(Qt::TopToolBarArea, toolbar);
+
+    FormatToolbar *formatToolbar = new FormatToolbar;
+    this->addToolBar(Qt::TopToolBarArea,formatToolbar);
 
     dateDockWidget = new DateDockWidget;
     dateDockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);

@@ -67,6 +67,7 @@ set(BASE_SRC
     rsc.qrc
     icon.cxx
     finder.cxx
+    format_toolbar.cxx
 )
 
 set(SRC_ALL
