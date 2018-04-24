@@ -167,6 +167,13 @@ void Editor::displayFinder() {
     }
 }
 
+bool Editor::isRtf() {
+    if (filePath.endsWith(".rtf")) {
+        return true;
+    }
+    return false;
+}
+
 void Editor::contextMenuEvent(QContextMenuEvent *) {
     EditorContextMenu *menu = new EditorContextMenu;
     menu->exec(QCursor::pos());

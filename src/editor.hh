@@ -66,6 +66,7 @@ public:
     void setSavedContent(QString content);
     QString saveContent();
     void displayFinder();
+    bool isRtf();
 protected:
     void contextMenuEvent(QContextMenuEvent *);
     void insertFromMimeData(const QMimeData *source);

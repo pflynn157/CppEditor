@@ -27,6 +27,7 @@
 #include <QFileInfo>
 #include <QFont>
 #include <QMessageBox>
+#include <iostream>
 
 #include "tabpane.hh"
 #include "editor.hh"
@@ -151,6 +152,12 @@ void TabPane::onTabChanged() {
 
     MainToolBar::syntaxmenu->setCurrentText(currentWidget()->currentID());
     MainToolBar::fontSize->setValue(currentWidget()->font().pointSize());
+
+    if (currentWidget()->isRtf()) {
+        std::cout << "Rich text" << std::endl;
+    } else {
+        std::cout << "Not rich text" << std::endl;
+    }
 
     window->setTitle(currentWidget()->path());
 }
