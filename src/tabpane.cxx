@@ -27,7 +27,6 @@
 #include <QFileInfo>
 #include <QFont>
 #include <QMessageBox>
-#include <iostream>
 
 #include "tabpane.hh"
 #include "editor.hh"
@@ -64,7 +63,7 @@ TabPane::TabPane(Window *parent) {
     tabs->setTabsClosable(true);
     tabs->setMovable(true);
     tabs->setTabBarAutoHide(true);
-    tabs->addTab(new Editor("untitled"),"untitled");
+    addNewUntitledTab();
 
     Window::setStatusBarPath(currentWidget()->path());
     Window::setStatusBarModified(currentWidget()->isModified());
@@ -86,7 +85,9 @@ void TabPane::addNewTab(QString path) {
 
 void TabPane::addNewUntitledTab() {
     int count = tabs->count();
-    tabs->addTab(new Editor("untitled"),"untitled");
+    Editor *edit = new Editor("untitled");
+    edit->displayFormatToolbar(true);
+    tabs->addTab(edit,"untitled");
     tabs->setCurrentIndex(count);
     window->setTitle("untitled");
 }
@@ -152,12 +153,6 @@ void TabPane::onTabChanged() {
 
     MainToolBar::syntaxmenu->setCurrentText(currentWidget()->currentID());
     MainToolBar::fontSize->setValue(currentWidget()->font().pointSize());
-
-    if (currentWidget()->isRtf() || currentWidget()->isUntitled()) {
-        Window::formatToolbar->show();
-    } else {
-        Window::formatToolbar->hide();
-    }
 
     window->setTitle(currentWidget()->path());
 }

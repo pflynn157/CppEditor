@@ -66,7 +66,7 @@ public:
     bool hasFoundText();
     void setSavedContent(QString content);
     QString saveContent();
-    void displayFormatToolbar();
+    void displayFormatToolbar(bool dsp);
     void displayFinder();
     bool isRtf();
 protected:

@@ -161,12 +161,8 @@ QString Editor::saveContent() {
     return lastSavedContent;
 }
 
-void Editor::displayFormatToolbar() {
-    if (formatToolbar->isVisible()) {
-        formatToolbar->hide();
-    } else {
-        formatToolbar->show();
-    }
+void Editor::displayFormatToolbar(bool dsp) {
+    formatToolbar->setVisible(dsp);
 }
 
 void Editor::displayFinder() {

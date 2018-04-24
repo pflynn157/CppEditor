@@ -69,15 +69,15 @@ void FileActions::processOpenFile(QString file) {
     if ((TabPane::currentWidget()->isUntitled())&&(TabPane::currentWidget()->isModified()==false)) {
         TabPane::setCurrentTabPath(file);
         TabPane::setCurrentTabTitle(QFileInfo(file).fileName());
-        Window::formatToolbar->hide();
     } else {
         TabPane::addNewTab(file);
     }
     QString text = fileContents(file);
     if (file.endsWith(".rtf")) {
-        Window::formatToolbar->show();
+        TabPane::currentWidget()->displayFormatToolbar(true);
         TabPane::currentEditor()->setHtml(text);
     } else {
+        TabPane::currentWidget()->displayFormatToolbar(false);
         TabPane::setCurrentTabText(text);
     }
     TabPane::currentWidget()->setModified(false);
@@ -129,6 +129,12 @@ void FileActions::saveFileAs() {
         TabPane::setCurrentTabPath(selected);
         TabPane::setCurrentTabTitle(QFileInfo(selected).fileName());
         Window::setStatusBarPath(selected);
+
+        if (selected.endsWith(".rtf")) {
+            TabPane::currentWidget()->displayFormatToolbar(true);
+        } else {
+            TabPane::currentWidget()->displayFormatToolbar(false);
+        }
 
         QFile(selected).open(QFile::ReadWrite);
         saveFile(selected);

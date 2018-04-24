@@ -55,7 +55,6 @@ QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
-FormatToolbar *Window::formatToolbar;
 TemplateMenu *Window::templateMenu;
 
 Window::Window() {
@@ -114,9 +113,6 @@ Window::Window() {
     toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
     toolbar->setFloatable(false);
     this->addToolBar(Qt::TopToolBarArea, toolbar);
-
-    formatToolbar = new FormatToolbar;
-    this->addToolBar(Qt::TopToolBarArea,formatToolbar);
 
     dateDockWidget = new DateDockWidget;
     dateDockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
