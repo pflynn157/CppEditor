@@ -43,7 +43,6 @@
 #include "window.hh"
 #include "tabpane.hh"
 #include "main_toolbar.hh"
-#include "format_toolbar.hh"
 #include "global/file_actions.hh"
 #include "global/recent.hh"
 #include "icon.hh"
@@ -56,6 +55,7 @@ QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
+FormatToolbar *Window::formatToolbar;
 TemplateMenu *Window::templateMenu;
 
 Window::Window() {
@@ -115,7 +115,7 @@ Window::Window() {
     toolbar->setFloatable(false);
     this->addToolBar(Qt::TopToolBarArea, toolbar);
 
-    FormatToolbar *formatToolbar = new FormatToolbar;
+    formatToolbar = new FormatToolbar;
     this->addToolBar(Qt::TopToolBarArea,formatToolbar);
 
     dateDockWidget = new DateDockWidget;

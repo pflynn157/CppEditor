@@ -69,11 +69,13 @@ void FileActions::processOpenFile(QString file) {
     if ((TabPane::currentWidget()->isUntitled())&&(TabPane::currentWidget()->isModified()==false)) {
         TabPane::setCurrentTabPath(file);
         TabPane::setCurrentTabTitle(QFileInfo(file).fileName());
+        Window::formatToolbar->hide();
     } else {
         TabPane::addNewTab(file);
     }
     QString text = fileContents(file);
     if (file.endsWith(".rtf")) {
+        Window::formatToolbar->show();
         TabPane::currentEditor()->setHtml(text);
     } else {
         TabPane::setCurrentTabText(text);

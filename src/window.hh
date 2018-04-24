@@ -34,6 +34,7 @@
 
 #include "windows/date_selector.hh"
 #include "project/project_pane.hh"
+#include "format_toolbar.hh"
 
 #include "menubar/filemenu.hh"
 #include "menubar/editmenu.hh"
@@ -62,6 +63,7 @@ public:
     static void dispalyDateSelector();
     static void appExit(QMainWindow *win, bool quit);
     static TemplateMenu *templateMenu;
+    static FormatToolbar *formatToolbar;
 protected:
 	void closeEvent(QCloseEvent *event);
 private:

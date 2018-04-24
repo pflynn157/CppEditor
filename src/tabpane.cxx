@@ -153,10 +153,10 @@ void TabPane::onTabChanged() {
     MainToolBar::syntaxmenu->setCurrentText(currentWidget()->currentID());
     MainToolBar::fontSize->setValue(currentWidget()->font().pointSize());
 
-    if (currentWidget()->isRtf()) {
-        std::cout << "Rich text" << std::endl;
+    if (currentWidget()->isRtf() || currentWidget()->isUntitled()) {
+        Window::formatToolbar->show();
     } else {
-        std::cout << "Not rich text" << std::endl;
+        Window::formatToolbar->hide();
     }
 
     window->setTitle(currentWidget()->path());
