@@ -285,7 +285,6 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
             TabPane::currentEditor()->setReadOnly(false);
             if (ret==QMessageBox::Yes) {
                 QString content = FileActions::fileContents(path);
-                std::cout << content.toStdString() << std::endl;
                 if (path.endsWith(".rtf")) {
                     TabPane::currentEditor()->setHtml(content);
                 } else {
