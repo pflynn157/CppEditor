@@ -20,5 +20,8 @@
         <file>icons/document-edit.png</file>
         <file>icons/accessories-text-editor.png</file>
         <file>icons/dialog-close.png</file>
+        <file>icons/format-text-bold.png</file>
+        <file>icons/format-text-italic.png</file>
+        <file>icons/format-text-underline.png</file>
     </qresource>
 </RCC>
