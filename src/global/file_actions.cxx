@@ -59,7 +59,19 @@ void FileActions::openFile() {
 
         QStringList selected = dialog.selectedFiles();
         for (int i = 0; i<selected.size(); i++) {
-            processOpenFile(selected.at(i));
+            int count = TabPane::tabs->count();
+            bool found = false;
+            for (int j = 0; j<count; j++) {
+                QString currentPath = TabPane::widgetAt(j)->path();
+                if (currentPath==selected.at(i)) {
+                    TabPane::tabs->setCurrentIndex(j);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                processOpenFile(selected.at(i));
+            }
         }
     }
 }
