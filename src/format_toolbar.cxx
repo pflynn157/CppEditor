@@ -45,6 +45,10 @@ FormatToolbar::FormatToolbar()
     italic->setCheckable(true);
     underline->setCheckable(true);
 
+    bold->setShortcut(Qt::CTRL+Qt::Key_B);
+    italic->setShortcut(Qt::CTRL+Qt::Key_I);
+    underline->setShortcut(Qt::CTRL+Qt::Key_U);
+
     connect(bold,&QToolButton::clicked,this,&FormatToolbar::onBoldClicked);
     connect(italic,&QToolButton::clicked,this,&FormatToolbar::onItalicClicked);
     connect(underline,&QToolButton::clicked,this,&FormatToolbar::onUnderlineClicked);
