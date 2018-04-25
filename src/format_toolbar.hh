@@ -28,16 +28,32 @@
 
 #include <QToolBar>
 #include <QToolButton>
+#include <QMouseEvent>
+#include <QMenu>
+#include <QAction>
+
+class FormatToolbarMenu;
 
 class FormatToolbar : public QToolBar {
     Q_OBJECT
 public:
     FormatToolbar();
     ~FormatToolbar();
+protected:
+    void mousePressEvent(QMouseEvent *event);
 private:
     QToolButton *bold, *italic, *underline;
 private slots:
     void onBoldClicked();
     void onItalicClicked();
     void onUnderlineClicked();
+};
+
+class FormatToolbarMenu : public QMenu {
+    Q_OBJECT
+public:
+    explicit FormatToolbarMenu(FormatToolbar *parent);
+    ~FormatToolbarMenu();
+private:
+    QAction *close;
 };

@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QCursor>
+
 #include "format_toolbar.hh"
 #include "icon.hh"
 #include "tabpane.hh"
@@ -64,6 +66,15 @@ FormatToolbar::~FormatToolbar() {
     delete underline;
 }
 
+void FormatToolbar::mousePressEvent(QMouseEvent *event) {
+    if (event->button()==Qt::RightButton) {
+        FormatToolbarMenu menu(this);
+        menu.exec(QCursor::pos());
+    } else {
+        QToolBar::mousePressEvent(event);
+    }
+}
+
 void FormatToolbar::onBoldClicked() {
     if (bold->isChecked()) {
         TabPane::currentEditor()->setFontWeight(QFont::Bold);
@@ -78,4 +89,16 @@ void FormatToolbar::onItalicClicked() {
 
 void FormatToolbar::onUnderlineClicked() {
     TabPane::currentEditor()->setFontUnderline(underline->isChecked());
+}
+
+//FormatToolbarMenu
+//The toolbar's context menu
+FormatToolbarMenu::FormatToolbarMenu(FormatToolbar *parent) {
+    close = new QAction("Close",this);
+    connect(close,&QAction::triggered,parent,&FormatToolbar::hide);
+    this->addAction(close);
+}
+
+FormatToolbarMenu::~FormatToolbarMenu() {
+    delete close;
 }
