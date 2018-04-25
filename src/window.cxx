@@ -273,7 +273,7 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
         QString path = TabPane::currentWidget()->path();
         QString currentContent = FileActions::fileContents(path);
         QString oldContent = TabPane::currentWidget()->saveContent();
-        if (currentContent!=oldContent) {
+        if (currentContent.trimmed()!=oldContent.trimmed()) {
             TabPane::currentEditor()->setReadOnly(true);
             QMessageBox msg;
             msg.setWindowTitle("File Changed");
@@ -285,7 +285,12 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
             TabPane::currentEditor()->setReadOnly(false);
             if (ret==QMessageBox::Yes) {
                 QString content = FileActions::fileContents(path);
-                TabPane::setCurrentTabText(content);
+                std::cout << content.toStdString() << std::endl;
+                if (path.endsWith(".rtf")) {
+                    TabPane::currentEditor()->setHtml(content);
+                } else {
+                    TabPane::setCurrentTabText(content);
+                }
                 TabPane::currentWidget()->setModified(false);
             } else {
                 return;

@@ -35,6 +35,7 @@ FormatToolbar::FormatToolbar()
 {
     this->setMovable(false);
     this->setContextMenuPolicy(Qt::PreventContextMenu);
+    this->setStyleSheet("padding:0px");
 
     bold->setIcon(IconManager::getIcon("format-text-bold"));
     italic->setIcon(IconManager::getIcon("format-text-italic"));

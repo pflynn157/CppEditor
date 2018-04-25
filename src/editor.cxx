@@ -120,7 +120,11 @@ void Editor::setModified(bool mod) {
     Window::setStatusBarModified(mod);
 
     if (mod==false) {
-        setSavedContent(editor->toPlainText());
+        if (filePath.endsWith(".rtf")) {
+            setSavedContent(editor->toHtml());
+        } else {
+            setSavedContent(editor->toPlainText());
+        }
     }
 }
 
