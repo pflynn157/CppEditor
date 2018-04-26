@@ -39,8 +39,12 @@ EditMenu::EditMenu() {
     undo = new UndoAction(this);
     redo = new RedoAction(this);
     find = new QAction(IconManager::getIcon("edit-find"),"Find/Replace Text",this);
+    checkSpell = new QAction("Check Spelling",this);
+
+    checkSpell->setCheckable(true);
 
     connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
+    connect(checkSpell,&QAction::triggered,this,&EditMenu::onCheckSpellClicked);
 
     this->addAction(cut);
     this->addAction(copy);
@@ -51,6 +55,7 @@ EditMenu::EditMenu() {
     this->addAction(redo);
     this->addSeparator();
     this->addAction(find);
+    this->addAction(checkSpell);
 }
 
 EditMenu::~EditMenu() {
@@ -61,8 +66,13 @@ EditMenu::~EditMenu() {
     delete undo;
     delete redo;
     delete find;
+    delete checkSpell;
 }
 
 void EditMenu::onFindClicked() {
     TabPane::currentWidget()->displayFinder();
+}
+
+void EditMenu::onCheckSpellClicked() {
+    TabPane::currentWidget()->shouldSpellCheck(checkSpell->isChecked());
 }

@@ -33,6 +33,7 @@
 #include <iostream>
 #include <KF5/KSyntaxHighlighting/Definition>
 #include <KF5/KSyntaxHighlighting/Theme>
+#include <KF5/SonnetUi/Sonnet/Highlighter>
 #ifdef _WIN32
 #include <settings.hh>
 #else
@@ -75,6 +76,9 @@ Editor::Editor(QString path)
 
     QTextDocument *doc = new QTextDocument();
     editor->setDocument(doc);
+
+    spellcheck = new Sonnet::SpellCheckDecorator(editor);
+    spellcheck->highlighter()->setActive(false);
 
     highlight = new SyntaxHighlighter(doc);
     highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
@@ -183,6 +187,13 @@ bool Editor::isRtf() {
         return true;
     }
     return false;
+}
+
+void Editor::shouldSpellCheck(bool check) {
+    spellcheck->highlighter()->setActive(check);
+    if (!check) {
+        this->syntaxHighlight(this->currentID());
+    }
 }
 
 void Editor::contextMenuEvent(QContextMenuEvent *) {
