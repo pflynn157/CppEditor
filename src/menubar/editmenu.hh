@@ -48,8 +48,7 @@ private:
     SelectAllAction *selectAll;
     UndoAction *undo;
     RedoAction *redo;
-    QAction *find, *checkSpell;
+    QAction *find;
 private:
     void onFindClicked();
-    void onCheckSpellClicked();
 };

@@ -35,7 +35,6 @@
 #include <QTextCharFormat>
 #include <QMimeData>
 #include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
-#include <KF5/SonnetUi/Sonnet/SpellCheckDecorator>
 
 #include "format_toolbar.hh"
 #include "finder.hh"
@@ -70,7 +69,6 @@ public:
     void displayFormatToolbar(bool dsp);
     void displayFinder();
     bool isRtf();
-    void shouldSpellCheck(bool check);
 protected:
     void contextMenuEvent(QContextMenuEvent *);
     void insertFromMimeData(const QMimeData *source);
@@ -84,7 +82,6 @@ private:
     bool modified = false;
     bool foundText = false;
     QString lastSavedContent = "";
-    Sonnet::SpellCheckDecorator *spellcheck;
 private slots:
     void onModified();
     void highlightCurrentLine();
