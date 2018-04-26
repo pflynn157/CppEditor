@@ -24,6 +24,8 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QPropertyAnimation>
+
 #include "cpp_message_widget.hh"
 #include "global/file_actions.hh"
 
@@ -43,6 +45,8 @@ CppMessageWidget::CppMessageWidget(QString text) {
     layout->addWidget(close,0,Qt::AlignRight);
 
     this->setStyleSheet(FileActions::fileContents(":/rsc/message_widget.css"));
+
+    h = this->height();
 }
 
 CppMessageWidget::~CppMessageWidget() {
@@ -51,10 +55,13 @@ CppMessageWidget::~CppMessageWidget() {
     delete close;
 }
 
-//Make this actually animate at some point
-//Its here for compatibility reasons
 void CppMessageWidget::animatedShow() {
     this->show();
+    QPropertyAnimation *animation = new QPropertyAnimation(this,"maximumHeight");
+    animation->setDuration(2000);
+    animation->setStartValue(0);
+    animation->setEndValue(h);
+    animation->start();
 }
 
 void CppMessageWidget::setCloseButtonVisible(bool show) {

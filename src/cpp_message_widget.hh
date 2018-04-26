@@ -44,6 +44,7 @@ private:
     QHBoxLayout *layout;
     QLabel *label;
     QToolButton *close;
+    int h = 100;
 private slots:
     void onCloseClicked();
 };
