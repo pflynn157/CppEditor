@@ -40,9 +40,16 @@ SettingsDialog::SettingsDialog() {
 
     EditorPage *page1 = new EditorPage;
     tabs->addTab(page1,"Editor Settings");
+
+    buttons = new QDialogButtonBox;
+    buttons->addButton(QDialogButtonBox::Ok);
+    layout->addWidget(buttons);
+
+    connect(buttons,&QDialogButtonBox::accepted,this,&SettingsDialog::close);
 }
 
 SettingsDialog::~SettingsDialog() {
     delete layout;
     delete tabs;
+    delete buttons;
 }

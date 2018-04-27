@@ -29,6 +29,7 @@
 #include <QDialog>
 #include <QVBoxLayout>
 #include <QTabWidget>
+#include <QDialogButtonBox>
 
 class SettingsDialog : public QDialog {
     Q_OBJECT
@@ -38,4 +39,5 @@ public:
 private:
     QVBoxLayout *layout;
     QTabWidget *tabs;
+    QDialogButtonBox *buttons;
 };
