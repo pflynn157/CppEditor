@@ -2,25 +2,23 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CppEditor"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.5"
 #define MyAppPublisher "Patrick Flynn"
 #define MyAppExeName "CppEditor.exe"
-#define Home GetEnv('USERPROFILE')
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{91DDEED3-2809-4A58-A5C9-4DE365466810}
+AppId={{7E937F16-9AEB-449D-BFE0-F8023D998155}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
-DefaultGroupName={#MyAppName}
-AllowNoIcons=yes
-LicenseFile={#HOME}\Projects\CppEditor\COPYING
-OutputDir={#HOME}\Projects\CppEditor\winbin
+DisableProgramGroupPage=yes
+LicenseFile=C:\Users\patrick\Projects_public\CppEditor\COPYING
+OutputDir=C:\Users\patrick\Projects_public\CppEditor\build
 OutputBaseFilename=CppEditor_setup
 Compression=lzma
 SolidCompression=yes
@@ -34,25 +32,32 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "{#HOME}\Projects\CppEditor\winbin\CppEditor.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5DBus.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libsettings.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libKF5DBusAddons.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\libKF5SyntaxHighlighting.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#HOME}\Projects\CppEditor\winbin\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\CppEditor.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libKF5DBusAddons.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libKF5SyntaxHighlighting.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libsettings.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5DBus.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\styles\*"; DestDir: "{app}\styles"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\patrick\Projects_public\CppEditor\build\winbin\translations\*"; DestDir: "{app}\translations"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
-Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
