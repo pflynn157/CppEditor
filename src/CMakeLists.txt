@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(CppEditor)
+cmake_policy(SET CMP0100 NEW)
 
 set(ACTIONS_SRC
     actions/action.cxx
@@ -101,5 +102,5 @@ if (UNIX)
     if (APPLE)
         else()
             install(TARGETS CppEditor DESTINATION /usr/local/bin)
-	endif()
+    endif()
 endif()
