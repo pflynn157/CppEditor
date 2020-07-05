@@ -19,11 +19,11 @@ if (WIN32)
 else()
     find_package(KF5SyntaxHighlighting REQUIRED)
     find_package(KF5DBusAddons REQUIRED)
-    find_library(libsettings REQUIRED)
 endif()
 
 add_compile_options(-std=c++11)
 include_directories("${CMAKE_BINARY_DIR}/src")
+include_directories(src)
 
 if (WIN32)
     include_directories(C:/Unix/include)

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -27,7 +27,9 @@
 #pragma once
 
 #include <KF5/KSyntaxHighlighting/Repository>
+#include <QSettings>
 
 using namespace KSyntaxHighlighting;
 
 extern Repository *repository;
+extern QSettings settings;

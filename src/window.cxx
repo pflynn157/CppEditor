@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -34,20 +34,14 @@
 #include <QFileInfo>
 #include <QFile>
 #include <iostream>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
 
-#include "window.hh"
-#include "tabpane.hh"
-#include "main_toolbar.hh"
-#include "global/file_actions.hh"
-#include "global/recent.hh"
-#include "icon.hh"
-
-using namespace CppLib;
+#include <window.hh>
+#include <tabpane.hh>
+#include <main_toolbar.hh>
+#include <icon.hh>
+#include <global.hh>
+#include <global/file_actions.hh>
+#include <global/recent.hh>
 
 QStatusBar *Window::statusbar;
 QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;
@@ -60,9 +54,7 @@ TemplateMenu *Window::templateMenu;
 Window::Window() {
     this->setWindowTitle("CppEditor");
     this->setWindowIcon(IconManager::getIcon("accessories-text-editor"));
-    int winX = Settings::getSetting("window/winX","700").toInt();
-    int winY = Settings::getSetting("window/winY","600").toInt();
-    this->resize(winX,winY);
+    this->resize(700,500);
 
     filemenu = new FileMenu(this);
     editmenu = new EditMenu;
@@ -116,7 +108,7 @@ Window::Window() {
 
     dateDockWidget = new DateDockWidget;
     dateDockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-    if (QVariant(Settings::getSetting("subwindows/date_selector","true")).toBool()) {
+    if (settings.value("subwindows/date_selector","true").toBool()) {
         dateDockWidget->hide();
     } else {
         dateDockWidget->show();
@@ -240,9 +232,7 @@ void Window::dispalyDateSelector() {
 }
 
 void Window::appExit(QMainWindow *win, bool quit) {
-    Settings::writeSetting("subwindows/date_selector",QVariant(dateDockWidget->isHidden()).toString());
-    Settings::writeSetting("window/winX",QString::number(win->width()));
-    Settings::writeSetting("window/winY",QString::number(win->height()));
+    settings.setValue("subwindows/date_selector",QVariant(dateDockWidget->isHidden()).toString());
     Recent::write();
     if (quit) {
     	qApp->exit(0);

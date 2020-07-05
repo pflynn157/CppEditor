@@ -1,4 +1,4 @@
-// Copyright 2018 Patrick Flynn
+// Copyright 2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -25,18 +25,17 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QVariant>
-#include <cpplib/settings.hh>
+#include <QSettings>
 
-#include "icon.hh"
-
-using namespace CppLib;
+#include <icon.hh>
+#include <global.hh>
 
 bool IconManager::useSys = true;
 
 //We use this function so we only have to read settings once
 //This is called from the main function
 void IconManager::init() {
-    useSys = QVariant(Settings::getSetting("sysicons","true")).toBool();
+    useSys = settings.value("sysicons","true").toBool();
 }
 
 QIcon IconManager::getIcon(QString name) {

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -26,41 +26,28 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE..
 #include <QIcon>
 #include <QPixmap>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
 
-#include "settingsmenu.hh"
-#include "../tabpane.hh"
-#include "../global/file_actions.hh"
-#include "../tabpane.hh"
-#include "../editor.hh"
-#include "../window.hh"
-#include "../settings/settings_dialog.hh"
+#include <menubar/settingsmenu.hh>
+#include <global/file_actions.hh>
+#include <settings/settings_dialog.hh>
+#include <tabpane.hh>
+#include <editor.hh>
+#include <window.hh>
+#include <tabpane.hh>
 
-using namespace CppLib;
 
 SettingsMenu::SettingsMenu() {
     this->setTitle("Settings");
 
     openSettingsDialog = new QAction("Open Settings Dialog",this);
-    openSettingsFile = new QAction("Open settings file",this);
 
     connect(openSettingsDialog,&QAction::triggered,this,&SettingsMenu::onOpenSettingsDialogClicked);
-    connect(openSettingsFile,&QAction::triggered,this,&SettingsMenu::onOpenSettingsFileClicked);
 
     this->addAction(openSettingsDialog);
-
-    if (Settings::settingsPath!=nullptr) {
-        this->addAction(openSettingsFile);
-    }
 }
 
 SettingsMenu::~SettingsMenu() {
     delete openSettingsDialog;
-    delete openSettingsFile;
 }
 
 void SettingsMenu::onOpenSettingsDialogClicked() {
@@ -68,6 +55,3 @@ void SettingsMenu::onOpenSettingsDialogClicked() {
     dialog.exec();
 }
 
-void SettingsMenu::onOpenSettingsFileClicked() {
-    FileActions::processOpenFile(Settings::settingsPath);
-}

@@ -95,7 +95,6 @@ target_link_libraries(CppEditor
     Qt5::Widgets
     KF5::SyntaxHighlighting
     KF5::DBusAddons
-    settings
 )
 
 if (UNIX)

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -36,8 +36,6 @@ public:
     ~SettingsMenu();
 private:
     QAction *openSettingsDialog;
-    QAction *openSettingsFile;
 private slots:
     void onOpenSettingsDialogClicked();
-    void onOpenSettingsFileClicked();
 };

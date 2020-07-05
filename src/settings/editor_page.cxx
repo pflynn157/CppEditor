@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -32,17 +32,12 @@
 #include <QFontDialog>
 #include <QColor>
 #include <QColorDialog>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
+#include <QSettings>
 
-#include "editor_page.hh"
-#include "../tabpane.hh"
-#include "../editor.hh"
-
-using namespace CppLib;
+#include <tabpane.hh>
+#include <editor.hh>
+#include <global.hh>
+#include <settings/editor_page.hh>
 
 EditorPage::EditorPage() {
     layout = new QVBoxLayout;
@@ -79,7 +74,7 @@ EditorPage::EditorPage() {
 
     currentColor = new QLineEdit;
     currentColor->setReadOnly(true);
-    currentColor->setStyleSheet("background-color: "+Settings::getSetting("editor/ine_color","#d9d9d9")+";");
+    currentColor->setStyleSheet("background-color: "+settings.value("editor/ine_color","#d9d9d9").toString()+";");
     currentColor->setFixedWidth(50);
     lineColorLayout->addWidget(currentColor);
 
@@ -94,7 +89,7 @@ EditorPage::EditorPage() {
     subLayout->addWidget(aiWidget);
 
     QCheckBox *aiCheckBox = new QCheckBox("Auto indent");
-    aiCheckBox->setChecked(QVariant(Settings::getSetting("editor/autoindent","true")).toBool());
+    aiCheckBox->setChecked(settings.value("editor/autoindent","true").toBool());
     connect(aiCheckBox,SIGNAL(clicked(bool)),this,SLOT(onAutoIndentClicked(bool)));
     aiLayout->addWidget(aiCheckBox);
 }
@@ -116,15 +111,15 @@ void EditorPage::onChooseFontClicked() {
 void EditorPage::onChooseLineHighlighterClicked() {
     QColor color = QColorDialog::getColor(QColor("#d9d9d9"));
     currentColor->setStyleSheet("background-color: "+color.name()+";");
-    Settings::writeSetting("editor/line_color",color.name());
+    settings.setValue("editor/line_color",color.name());
     Editor::updateSettings();
 }
 
 void EditorPage::onAutoIndentClicked(bool ai) {
     if (ai) {
-        Settings::writeSetting("editor/autoindent","true");
+        settings.setValue("editor/autoindent","true");
     } else {
-        Settings::writeSetting("editor/autoindent","false");
+        settings.setValue("editor/autoindent","false");
     }
     Editor::updateSettings();
 }

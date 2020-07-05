@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -29,10 +29,8 @@
 #include <cstdlib>
 #include <string>
 #include <iostream>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
+
+#ifndef WIN32
 #include <unistd.h>
 #endif
 
@@ -47,14 +45,9 @@
 #include "ipc.hh"
 
 Repository *repository;
-
-using namespace CppLib;
+QSettings settings("CppEditor", "CppEditor");
 
 int main(int argc, char *argv[]) {
-    Settings::registerApp("CppEditor");
-    Settings::setDefaultSettingsFile(":/rsc/settings_default.xml");
-    Settings::initPaths();
-
     QApplication app(argc,argv);
     QCoreApplication::setApplicationName("CppEditor");
     QCoreApplication::setOrganizationName("CppEditor");
@@ -85,3 +78,4 @@ int main(int argc, char *argv[]) {
 #endif
     return app.exec();
 }
+

@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -33,27 +33,21 @@
 #include <iostream>
 #include <KF5/KSyntaxHighlighting/Definition>
 #include <KF5/KSyntaxHighlighting/Theme>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
 
-#include "editor.hh"
-#include "global.hh"
-#include "window.hh"
-#include "main_toolbar.hh"
-#include "menus/editor_context.hh"
+#include <editor.hh>
+#include <global.hh>
+#include <window.hh>
+#include <main_toolbar.hh>
+#include <menus/editor_context.hh>
 
-using namespace CppLib;
 using namespace KSyntaxHighlighting;
 
 bool Editor::autoindent = true;
 QString Editor::colorID = "#d9d9d9";
 
 void Editor::updateSettings() {
-    Editor::autoindent = QVariant(Settings::getSetting("editor/autoindent","true")).toBool();
-    Editor::colorID = Settings::getSetting("editor/line_color","#d9d9d9");
+    Editor::autoindent = settings.value("editor/autoindent","true").toBool();
+    Editor::colorID = settings.value("editor/line_color","#d9d9d9").toString();
 }
 
 Editor::Editor(QString path)

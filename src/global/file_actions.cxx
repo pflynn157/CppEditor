@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -30,19 +30,12 @@
 #include <QDir>
 #include <QTextStream>
 #include <QFileInfo>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
 
-#include "file_actions.hh"
-#include "recent.hh"
-#include "../tabpane.hh"
-#include "../window.hh"
-#include "../main_toolbar.hh"
-
-using namespace CppLib;
+#include <global/file_actions.hh>
+#include <global/recent.hh>
+#include <tabpane.hh>
+#include <window.hh>
+#include <main_toolbar.hh>
 
 void FileActions::newFile() {
     TabPane::addNewUntitledTab();
@@ -112,10 +105,6 @@ void FileActions::saveFile(QString path) {
     }
 
     TabPane::currentWidget()->setModified(false);
-
-    if (TabPane::currentWidget()->path()==Settings::settingsPath) {
-        TabPane::settingsSaved->animatedShow();
-    }
 }
 
 void FileActions::saveFile() {
@@ -167,3 +156,4 @@ QString FileActions::fileContents(QString path) {
 
     return content;
 }
+
