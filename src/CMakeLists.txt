@@ -3,13 +3,7 @@ project(CppEditor)
 cmake_policy(SET CMP0100 NEW)
 
 set(ACTIONS_SRC
-    actions/action.cxx
-    actions/copyAction.cxx
-    actions/cutAction.cxx
-    actions/pasteAction.cxx
-    actions/redoAction.cxx
-    actions/selectAllAction.cxx
-    actions/undoAction.cxx
+    actions/actions.cxx
 )
 
 set(GLOBAL_SRC
