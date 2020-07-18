@@ -44,6 +44,9 @@ private:
     UndoAction *undo;
     RedoAction *redo;
     QAction *find;
+    QAction *settings;
 private:
     void onFindClicked();
+    void onSettingsClicked();
 };
+

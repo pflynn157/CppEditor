@@ -85,7 +85,6 @@ void TabPane::addNewTab(QString path) {
 void TabPane::addNewUntitledTab() {
     int count = tabs->count();
     Editor *edit = new Editor("untitled");
-    edit->displayFormatToolbar(true);
     tabs->addTab(edit,"untitled");
     tabs->setCurrentIndex(count);
     window->setTitle("untitled");

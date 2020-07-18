@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -56,8 +56,7 @@ void HelpMenu::onAboutClicked() {
     QMessageBox msg;
     msg.setWindowTitle("About CppEditor");
     msg.setText("CppEditor\n"
-                "An advanced, cross-platform text editor written in C++ using the Qt libraries.\n\n"
-                "Written by Patrick <patrick_dev2000@outlook.com>\n");
+                "A simple, cross-platform text editor written in C++ using the Qt libraries.\n");
     msg.setDetailedText("License:\n"+FileActions::fileContents(":/rsc/license.txt"));
     msg.setStandardButtons(QMessageBox::Ok);
 #ifdef _WIN32
@@ -67,3 +66,4 @@ void HelpMenu::onAboutClicked() {
 #endif
     msg.exec();
 }
+

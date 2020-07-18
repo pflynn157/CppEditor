@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -24,10 +24,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include "editmenu.hh"
-#include "../window.hh"
-#include "../icon.hh"
-#include "../tabpane.hh"
+#include <window.hh>
+#include <icon.hh>
+#include <tabpane.hh>
+#include <menubar/editmenu.hh>
+#include <settings/settings_dialog.hh>
 
 EditMenu::EditMenu() {
     this->setTitle("Edit");
@@ -39,8 +40,10 @@ EditMenu::EditMenu() {
     undo = new UndoAction(this);
     redo = new RedoAction(this);
     find = new QAction(IconManager::getIcon("edit-find"),"Find/Replace Text",this);
+    settings = new QAction("Settings", this);
 
-    connect(find,&QAction::triggered,this,&EditMenu::onFindClicked);
+    connect(find, &QAction::triggered, this, &EditMenu::onFindClicked);
+    connect(settings, &QAction::triggered, this, &EditMenu::onSettingsClicked);
 
     this->addAction(cut);
     this->addAction(copy);
@@ -51,6 +54,8 @@ EditMenu::EditMenu() {
     this->addAction(redo);
     this->addSeparator();
     this->addAction(find);
+    this->addSeparator();
+    this->addAction(settings);
 }
 
 EditMenu::~EditMenu() {
@@ -61,8 +66,15 @@ EditMenu::~EditMenu() {
     delete undo;
     delete redo;
     delete find;
+    delete settings;
 }
 
 void EditMenu::onFindClicked() {
     TabPane::currentWidget()->displayFinder();
 }
+
+void EditMenu::onSettingsClicked() {
+    SettingsDialog dialog;
+    dialog.exec();
+}
+

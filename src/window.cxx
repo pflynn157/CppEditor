@@ -33,7 +33,6 @@
 #include <QMenuBar>
 #include <QFileInfo>
 #include <QFile>
-#include <iostream>
 
 #include <window.hh>
 #include <tabpane.hh>
@@ -47,21 +46,17 @@ QStatusBar *Window::statusbar;
 QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;
 QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
-QTextEdit *Window::richTextPane;
 DateDockWidget *Window::dateDockWidget;
-TemplateMenu *Window::templateMenu;
 
 Window::Window() {
     this->setWindowTitle("CppEditor");
     this->setWindowIcon(IconManager::getIcon("accessories-text-editor"));
-    this->resize(700,500);
+    this->resize(800,600);
 
     filemenu = new FileMenu(this);
     editmenu = new EditMenu;
     insertmenu = new InsertMenu(this);
     viewmenu = new ViewMenu(this);
-    settingsmenu = new SettingsMenu;
-    templateMenu = new TemplateMenu;
     helpmenu = new HelpMenu;
 
     this->menuBar()->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -69,8 +64,6 @@ Window::Window() {
     this->menuBar()->addMenu(editmenu);
     this->menuBar()->addMenu(insertmenu);
     this->menuBar()->addMenu(viewmenu);
-    this->menuBar()->addMenu(settingsmenu);
-    this->menuBar()->addMenu(templateMenu);
     this->menuBar()->addMenu(helpmenu);
 
     statusbar = new QStatusBar();
@@ -95,12 +88,6 @@ Window::Window() {
     centralSplitter->addWidget(projectPane);
     centralSplitter->addWidget(tabs);
 
-    richTextPane = new QTextEdit;
-    richTextPane->setAcceptRichText(true);
-    richTextPane->setReadOnly(true);
-    richTextPane->setVisible(false);
-    centralSplitter->addWidget(richTextPane);
-
     MainToolBar *toolbar = new MainToolBar(this);
     toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
     toolbar->setFloatable(false);
@@ -122,12 +109,10 @@ Window::~Window() {
     delete statusbar;
     delete centralSplitter;
     delete dateDockWidget;
-    delete templateMenu;
     delete filemenu;
     delete editmenu;
     delete insertmenu;
     delete viewmenu;
-    delete settingsmenu;
     delete helpmenu;
 }
 
@@ -207,22 +192,6 @@ void Window::displayProjectPane() {
     }
 }
 
-void Window::setRichTextPane(QString text) {
-    richTextPane->setHtml(text);
-}
-
-void Window::displayRichTextPane() {
-    if (richTextPane->isVisible()) {
-        richTextPane->setVisible(false);
-    } else {
-        richTextPane->setVisible(true);
-    }
-}
-
-bool Window::isRichTextPaneVisible() {
-    return richTextPane->isVisible();
-}
-
 void Window::dispalyDateSelector() {
     if (dateDockWidget->isHidden()) {
         dateDockWidget->show();
@@ -288,3 +257,4 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
     } break;
     }
 }
+

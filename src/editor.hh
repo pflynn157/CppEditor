@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -36,7 +36,6 @@
 #include <QMimeData>
 #include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
-#include "format_toolbar.hh"
 #include "finder.hh"
 
 using namespace KSyntaxHighlighting;
@@ -66,15 +65,12 @@ public:
     bool hasFoundText();
     void setSavedContent(QString content);
     QString saveContent();
-    void displayFormatToolbar(bool dsp);
     void displayFinder();
-    bool isRtf();
 protected:
     void contextMenuEvent(QContextMenuEvent *);
     void insertFromMimeData(const QMimeData *source);
 private:
     QVBoxLayout *layout;
-    FormatToolbar *formatToolbar;
     TextEdit *editor;
     Finder *finder;
     QString filePath;

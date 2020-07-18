@@ -18,8 +18,6 @@ set(MENUBAR_SRC
     menubar/helpmenu.cxx
     menubar/insertmenu.cxx
     menubar/recent_widgets.cxx
-    menubar/settingsmenu.cxx
-    menubar/template_menu.cxx
     menubar/viewmenu.cxx
 )
 
@@ -40,10 +38,6 @@ set(SETTINGS_SRC
     settings/settings_dialog.cxx
 )
 
-set(TEMPLATE_SRC
-    template/template.cxx
-)
-
 set(WINDOWS_SRC
     windows/date_selector.cxx
     windows/subwindow.cxx
@@ -62,7 +56,6 @@ set(BASE_SRC
     rsc.qrc
     icon.cxx
     finder.cxx
-    format_toolbar.cxx
 )
 
 set(SRC_ALL
@@ -73,7 +66,6 @@ set(SRC_ALL
     ${MENUS_SRC}
     ${PROJECT_SRC}
     ${SETTINGS_SRC}
-    ${TEMPLATE_SRC}
     ${WINDOWS_SRC}
     ${BASE_SRC}
 )

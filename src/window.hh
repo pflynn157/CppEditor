@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -39,8 +39,6 @@
 #include "menubar/editmenu.hh"
 #include "menubar/insertmenu.hh"
 #include "menubar/viewmenu.hh"
-#include "menubar/template_menu.hh"
-#include "menubar/settingsmenu.hh"
 #include "menubar/helpmenu.hh"
 
 class Window : public QMainWindow {
@@ -56,26 +54,21 @@ public:
     static void setStatusBarLineCount(int count);
     static bool checkSave();
     static void displayProjectPane();
-    static void setRichTextPane(QString text);
-    static void displayRichTextPane();
-    static bool isRichTextPaneVisible();
     static void dispalyDateSelector();
     static void appExit(QMainWindow *win, bool quit);
-    static TemplateMenu *templateMenu;
 protected:
 	void closeEvent(QCloseEvent *event);
 private:
     static QLabel *modLabel, *pathLabel, *lineCountLabel;
     static QSplitter *centralSplitter;
     static ProjectPane *projectPane;
-    static QTextEdit *richTextPane;
     static DateDockWidget *dateDockWidget;
     FileMenu *filemenu;
     EditMenu *editmenu;
     InsertMenu *insertmenu;
     ViewMenu *viewmenu;
-    SettingsMenu *settingsmenu;
     HelpMenu *helpmenu;
 private slots:
     void onWindowStateChanged(Qt::ApplicationState state);
 };
+

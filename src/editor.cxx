@@ -30,7 +30,6 @@
 #include <QFont>
 #include <QTextCursor>
 #include <QVariant>
-#include <iostream>
 #include <KF5/KSyntaxHighlighting/Definition>
 #include <KF5/KSyntaxHighlighting/Theme>
 
@@ -53,12 +52,10 @@ void Editor::updateSettings() {
 Editor::Editor(QString path)
     : layout(new QVBoxLayout),
       editor(new TextEdit(this)),
-      formatToolbar(new FormatToolbar),
       finder(new Finder(this))
 {
     layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
-    layout->addWidget(formatToolbar,0,Qt::AlignTop);
     layout->addWidget(editor);
     layout->addWidget(finder,0,Qt::AlignBottom);
 
@@ -76,7 +73,6 @@ Editor::Editor(QString path)
     int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*2;
     editor->setTabStopWidth(width);
 
-    formatToolbar->hide();
     finder->hide();
 }
 
@@ -159,10 +155,6 @@ QString Editor::saveContent() {
     return lastSavedContent;
 }
 
-void Editor::displayFormatToolbar(bool dsp) {
-    formatToolbar->setVisible(dsp);
-}
-
 void Editor::displayFinder() {
     if (finder->isVisible()) {
         finder->clear();
@@ -170,13 +162,6 @@ void Editor::displayFinder() {
     } else {
         finder->show();
     }
-}
-
-bool Editor::isRtf() {
-    if (filePath.endsWith(".rtf")) {
-        return true;
-    }
-    return false;
 }
 
 void Editor::contextMenuEvent(QContextMenuEvent *) {
@@ -194,9 +179,6 @@ void Editor::onModified() {
         if (!foundText) {
             modified = true;
             Window::setStatusBarModified(true);
-        }
-        if (Window::isRichTextPaneVisible()) {
-            Window::setRichTextPane(editor->toPlainText());
         }
     }
 }

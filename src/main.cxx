@@ -40,7 +40,6 @@
 #include "editor.hh"
 #include "global/file_actions.hh"
 #include "global/recent.hh"
-#include "template/template.hh"
 #include "icon.hh"
 #include "ipc.hh"
 
@@ -59,7 +58,6 @@ int main(int argc, char *argv[]) {
 
     repository = new Repository;
     Recent::initRecentItems();
-    Template::initTemplates();
     Editor::updateSettings();
     IconManager::init();
 

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -38,9 +38,8 @@ public:
 private:
     QMainWindow *parentWindow;
     bool wasMax = false;
-    QAction *projectPane, *richTextPane, *fullscreen;
+    QAction *projectPane, *fullscreen;
 private slots:
     void onFullscreenClicked();
     void onProjectPaneClicked();
-    void onRichTextPaneClicked();
 };

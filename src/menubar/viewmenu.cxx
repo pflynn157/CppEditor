@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -34,10 +34,6 @@ ViewMenu::ViewMenu(QMainWindow *parent) {
 
     fullscreen = new QAction("Fullscreen",this);
     projectPane = new QAction("Display Project Panel",this);
-    richTextPane = new QAction("Display Rich Text Previewer",this);
-
-    richTextPane->setCheckable(true);
-    richTextPane->setChecked(false);
 
     projectPane->setCheckable(true);
     projectPane->setChecked(false);
@@ -46,11 +42,9 @@ ViewMenu::ViewMenu(QMainWindow *parent) {
 
     connect(fullscreen,&QAction::triggered,this,&ViewMenu::onFullscreenClicked);
     connect(projectPane,&QAction::triggered,this,&ViewMenu::onProjectPaneClicked);
-    connect(richTextPane,&QAction::triggered,this,&ViewMenu::onRichTextPaneClicked);
 
     this->addAction(fullscreen);
     this->addAction(projectPane);
-    this->addAction(richTextPane);
 }
 
 ViewMenu::~ViewMenu() {
@@ -79,6 +73,3 @@ void ViewMenu::onProjectPaneClicked() {
     Window::displayProjectPane();
 }
 
-void ViewMenu::onRichTextPaneClicked() {
-    Window::displayRichTextPane();
-}
