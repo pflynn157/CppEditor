@@ -9,7 +9,6 @@ cd winbin
 
 windeployqt --release --compiler-runtime CppEditor.exe
 
-copy C:\Unix\bin\libsettings.dll .\
 copy C:\Unix\bin\libKF5DBusAddons.dll .\
 copy C:\Unix\bin\libKF5SyntaxHighlighting.dll .\
 

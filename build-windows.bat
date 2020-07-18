@@ -9,8 +9,6 @@ if not exist kdbusaddons (
 	git clone https://github.com/KDE/kdbusaddons.git)
 if not exist syntax-highlighting (
 	git clone https://github.com/KDE/syntax-highlighting.git)
-if not exist libsettings (
-	git clone https://github.com/patrickf2000/libsettings.git)
 
 echo Checking for C:\Unix
 if not exist C:\Unix md C:\Unix
@@ -57,28 +55,13 @@ cd ../..
 echo Done
 ::Done building KDE Syntax-Highlighting
 
-::Build libsettings
-echo Building libsettings
-cd libsettings
-if not exist build md build
-cd build
-
-cmake -G "MinGW Makefiles" ..
-mingw32-make
-cd ..
-call win-install.bat
-
-cd ../..
-echo Done
-::Done building libsettings
-
 ::Build CppEditor
 echo Building CppEditor
 cd CppEditor
 if not exist build md build
 cd build
 
-cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Unix/share/ECM -DCMAKE_INSTALL_PREFIX=C:/Unix -DCMAKE_CXX_FLAGS="-IC:/Unix/include -IC:/Unix/include/cpplib -LC:/Unix/lib" ..
+cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=C:/Unix/share/ECM -DCMAKE_INSTALL_PREFIX=C:/Unix -DCMAKE_CXX_FLAGS="-IC:/Unix/include -LC:/Unix/lib" ..
 mingw32-make
 
 cd ../..
