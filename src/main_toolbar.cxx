@@ -29,11 +29,6 @@
 #include <QFont>
 #include <QStringList>
 #include <KF5/KSyntaxHighlighting/Definition>
-#ifdef _WIN32
-#include <settings.hh>
-#else
-#include <cpplib/settings.hh>
-#endif
 
 #include "main_toolbar.hh"
 #include "global/slots.hh"
@@ -44,7 +39,6 @@
 QComboBox *MainToolBar::syntaxmenu;
 QSpinBox *MainToolBar::fontSize;
 
-using namespace CppLib;
 using namespace KSyntaxHighlighting;
 
 MainToolBar::MainToolBar(QMainWindow *parentWindow)
