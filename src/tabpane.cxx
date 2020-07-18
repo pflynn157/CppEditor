@@ -32,6 +32,7 @@
 #include "editor.hh"
 #include "window.hh"
 #include "main_toolbar.hh"
+#include "global.hh"
 
 CppMessageWidget *TabPane::rootStatus, *TabPane::settingsSaved, *TabPane::buttonHidden;
 QTabWidget *TabPane::tabs;
@@ -80,6 +81,10 @@ void TabPane::addNewTab(QString path) {
     tabs->addTab(new Editor(path),QFileInfo(path).fileName());
     tabs->setCurrentIndex(count);
     window->setTitle(path);
+
+    QString fontStr = settings.value("editor/font").toString();
+    currentWidget()->setFont(QFont(fontStr, 11));
+    currentWidget()->updateTabWidth();
 }
 
 void TabPane::addNewUntitledTab() {
@@ -88,6 +93,10 @@ void TabPane::addNewUntitledTab() {
     tabs->addTab(edit,"untitled");
     tabs->setCurrentIndex(count);
     window->setTitle("untitled");
+
+    QString fontStr = settings.value("editor/font").toString();
+    currentWidget()->setFont(QFont(fontStr, 11));
+    currentWidget()->updateTabWidth();
 }
 
 Editor *TabPane::currentWidget() {

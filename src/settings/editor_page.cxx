@@ -104,7 +104,9 @@ void EditorPage::onChooseFontClicked() {
     QFontDialog dialog;
     dialog.setCurrentFont(TabPane::currentWidget()->font());
     if (dialog.exec()) {
-        TabPane::currentWidget()->setFont(dialog.selectedFont());
+        QFont font = dialog.selectedFont();
+        TabPane::currentWidget()->setFont(font);
+        settings.setValue("editor/font", font.family());
     }
 }
 

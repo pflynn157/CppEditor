@@ -31,6 +31,7 @@
 #include <QSplitter>
 #include <QTextEdit>
 #include <QStatusBar>
+#include <QCheckBox>
 
 #include "windows/date_selector.hh"
 #include "project/project_pane.hh"
@@ -56,6 +57,8 @@ public:
     static void displayProjectPane();
     static void dispalyDateSelector();
     static void appExit(QMainWindow *win, bool quit);
+    
+    static QCheckBox *useTabs;
 protected:
 	void closeEvent(QCloseEvent *event);
 private:

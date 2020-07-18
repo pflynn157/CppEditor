@@ -33,6 +33,7 @@
 #include <QMenuBar>
 #include <QFileInfo>
 #include <QFile>
+#include <QCheckBox>
 
 #include <window.hh>
 #include <tabpane.hh>
@@ -44,6 +45,7 @@
 
 QStatusBar *Window::statusbar;
 QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;
+QCheckBox *Window::useTabs;
 QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 DateDockWidget *Window::dateDockWidget;
@@ -52,7 +54,8 @@ Window::Window() {
     this->setWindowTitle("CppEditor");
     this->setWindowIcon(IconManager::getIcon("accessories-text-editor"));
     this->resize(800,600);
-
+    this->showMaximized();
+    
     filemenu = new FileMenu(this);
     editmenu = new EditMenu;
     insertmenu = new InsertMenu(this);
@@ -72,10 +75,12 @@ Window::Window() {
 
     modLabel = new QLabel();
     pathLabel = new QLabel();
+    useTabs = new QCheckBox("Use Tabs");
     lineCountLabel = new QLabel("Current Line: 1");
 
     statusbar->addWidget(pathLabel);
     statusbar->addWidget(modLabel);
+    statusbar->addPermanentWidget(useTabs);
     statusbar->addPermanentWidget(lineCountLabel);
 
     centralSplitter = new QSplitter();

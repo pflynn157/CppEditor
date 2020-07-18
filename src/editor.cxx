@@ -70,14 +70,18 @@ Editor::Editor(QString path)
     highlight = new SyntaxHighlighter(doc);
     highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
 
-    int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*2;
-    editor->setTabStopWidth(width);
+    updateTabWidth();
 
     finder->hide();
 }
 
 TextEdit *Editor::editorWidget() {
     return editor;
+}
+
+void Editor::updateTabWidth() {
+    int width = (QFontMetrics(editor->currentCharFormat().font()).averageCharWidth())*4;
+    editor->setTabStopDistance(width);
 }
 
 bool Editor::isUntitled() {
@@ -202,21 +206,53 @@ TextEdit::TextEdit(Editor *p) {
 }
 
 void TextEdit::keyPressEvent(QKeyEvent *event) {
+	if (event->key() == Qt::Key_Tab) {
+		if (!Window::useTabs->isChecked()) {
+			parent->editor->insertPlainText("    ");
+		} else {
+			parent->editor->insertPlainText("\t");
+		}
+		
+		return;
+	}
+
     if (parent->autoindent) {
         if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
             QString lastLine = parent->editor->document()->findBlockByLineNumber(
                         parent->editor->textCursor().blockNumber()).text();
             int tabCount = 0;
+            int spaceCount = 0;
             for (int i = 0; i<lastLine.length(); i++) {
-                if (lastLine.at(i)!='\t') {
+                QChar c = lastLine.at(i);
+                
+                if (c == '\t' ) {
+                    if (Window::useTabs->isChecked()) {
+                       ++tabCount;
+                    } else {
+                       spaceCount += 4;
+                    }
+                } else if (c == ' ') {
+                    ++spaceCount;
+                } else {
                     break;
                 }
-                tabCount++;
             }
-            if (tabCount>0) {
+            if (tabCount>0 || spaceCount>0) {
                 QTextEdit::keyPressEvent(event);
-                for (int i = 0; i<tabCount; i++) {
-                    parent->editor->insertPlainText("\t");
+                
+                if (Window::useTabs->isChecked()) {
+                    for (int i = 0; i<tabCount; i++) {
+                        parent->editor->insertPlainText("\t");
+                    }
+																				
+					for (int i = 0; i<spaceCount; i++) {
+						parent->editor->insertPlainText(" ");
+					}
+                } else {
+                	int count = spaceCount + (tabCount * 4);
+                    for (int i = 0; i<count; i++) {
+                        parent->editor->insertPlainText(" ");
+                    }
                 }
             } else {
                 QTextEdit::keyPressEvent(event);

@@ -52,6 +52,7 @@ public:
     static void updateSettings();
     explicit Editor(QString path);
     TextEdit *editorWidget();
+    void updateTabWidth();
     bool isUntitled();
     void setUntitled(bool untitled);
     QString path();
