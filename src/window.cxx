@@ -89,7 +89,7 @@ Window::Window() {
     TabPane *tabs = new TabPane(this);
     
     projectPane = new ProjectPane;
-    projectPane->setFixedWidth(300);
+    projectPane->setFixedWidth(250);
     projectPane->hide();
 
     centralSplitter->addWidget(projectPane);
