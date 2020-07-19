@@ -87,7 +87,9 @@ Window::Window() {
     this->setCentralWidget(centralSplitter);
 
     TabPane *tabs = new TabPane(this);
+    
     projectPane = new ProjectPane;
+    projectPane->setFixedWidth(300);
     projectPane->hide();
 
     centralSplitter->addWidget(projectPane);
@@ -193,6 +195,7 @@ void Window::displayProjectPane() {
     if (projectPane->isVisible()) {
         projectPane->hide();
     } else {
+        projectPane->loadTree();
         projectPane->show();
     }
 }

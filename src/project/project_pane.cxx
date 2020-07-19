@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -27,9 +27,9 @@
 #include <QIcon>
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QDir>
 
 #include "project_pane.hh"
-#include "project_parser.hh"
 
 ProjectPane::ProjectPane() {
     layout = new QVBoxLayout;
@@ -42,58 +42,35 @@ ProjectPane::ProjectPane() {
     projectTree = new ProjectTree;
     layout->addWidget(projectTree);
 
-    openProject = new QToolButton;
-    newItem = new QToolButton;
-    editProject = new QToolButton;
+    goUp = new QToolButton;
+    goUp->setIcon(QIcon::fromTheme("go-up"));
 
-    newItem->setPopupMode(QToolButton::InstantPopup);
-    editProject->setEnabled(false);
+    connect(goUp, &QToolButton::clicked, this, &ProjectPane::onGoUpClicked);
 
-    openProject->setIcon(QIcon::fromTheme("document-open",QPixmap(":/icons/document-open.png")));
-    newItem->setIcon(QIcon::fromTheme("document-new",QPixmap(":/icons/document-new.png")));
-    editProject->setIcon(QIcon::fromTheme("document-edit",QPixmap(":/icons/document-edit.png")));
-
-    connect(openProject,&QToolButton::clicked,this,&ProjectPane::onOpenProjectClicked);
-    connect(editProject,&QToolButton::clicked,this,&ProjectPane::onEditProjectClicked);
-
-    newItemMenu = new ProjectNewItemMenu(projectTree);
-    newItem->setMenu(newItemMenu);
-
-    toolbar->addWidget(openProject);
-    toolbar->addWidget(newItem);
-    toolbar->addWidget(editProject);
+    toolbar->addWidget(goUp);
 }
 
 ProjectPane::~ProjectPane() {
     delete layout;
 }
 
+void ProjectPane::loadTree() {
+    QString currentPath = projectTree->getFilePath();
+
+    if (currentPath == "") {
+        currentPath = QDir::currentPath();
+    }
+
+    projectTree->setFilePath(currentPath);
+}
+
 void ProjectPane::mousePressEvent(QMouseEvent *event) {
-
 }
 
-void ProjectPane::onOpenProjectClicked() {
-    QFileDialog dialog;
-    dialog.setWindowTitle("Open Project");
-    dialog.setAcceptMode(QFileDialog::AcceptOpen);
-    if (dialog.exec()) {
-        if (dialog.selectedFiles().size()==0) {
-            return;
-        }
-        ProjectParser::PopulateTree(dialog.selectedFiles().at(0),projectTree);
-        newItemMenu->setFile(dialog.selectedFiles().at(0));
-        editProject->setEnabled(true);
-    }
+void ProjectPane::onGoUpClicked() {
+    QString currentPath = projectTree->getFilePath();
+    QDir dir(currentPath);
+    if (dir.cdUp()) currentPath = dir.absolutePath();
+    projectTree->setFilePath(currentPath);
 }
 
-void ProjectPane::onEditProjectClicked() {
-    QInputDialog dialog;
-    dialog.setLabelText("Enter your project title:");
-    dialog.setTextValue("Untitled Project");
-    dialog.setWindowTitle("Rename Project");
-    bool ok = dialog.exec();
-    if ((ok)&&(!dialog.textValue().isEmpty())) {
-        QString val = dialog.textValue();
-        ProjectParser::SetTitle(val,projectTree);
-    }
-}

@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFileInfo>
+#include <QDir>
 
 #include "project_tree.hh"
 #include "../window.hh"
@@ -39,18 +40,46 @@ void ProjectTree::setFilePath(QString path) {
     if (!filePath.endsWith("/")) {
         filePath+="/";
     }
+    
+    loadTreeData(filePath, nullptr);
 }
 
 QString ProjectTree::getFilePath() {
     return filePath;
 }
 
-void ProjectTree::setCompletePath(QString path) {
-    completePath = path;
-}
+void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
+    this->clear();
 
-QString ProjectTree::getCompletePath() {
-    return completePath;
+    QStringList entries = QDir(path).entryList();
+    QList<QTreeWidgetItem *> items;
+    
+    if (!path.endsWith("/")) {
+        path+="/";
+    }
+    
+    for (int i = 0; i<entries.size(); i++) {
+        if ((entries.at(i)==".")||(entries.at(i)=="..")) {
+            continue;
+        }
+        
+        QTreeWidgetItem *item = new QTreeWidgetItem;
+        item->setText(0,QFileInfo(entries.at(i)).fileName());
+        
+        if (QFileInfo(path+entries.at(i)).isDir()) {
+            item->setIcon(0,QIcon::fromTheme("inode-directory",QPixmap(":/icons/inode-directory.png")));
+            loadTreeData(path+entries.at(i),item);
+        } else {
+            item->setIcon(0,QIcon::fromTheme("text-x-generic",QPixmap(":/icons/text-x-generic.png")));
+        }
+        
+        if (parent == nullptr)
+            items.push_back(item);
+        else
+            parent->addChild(item);
+    }
+    
+    this->insertTopLevelItems(0,items);
 }
 
 void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
@@ -62,7 +91,10 @@ void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
         path = item->text(col);
     }
     path = filePath+path;
-    if (!QFileInfo(path).isDir()) {
+
+    if (QFileInfo(path).isDir()) {
+        setFilePath(path);
+    } else {
         Window::addFile(path);
     }
 }

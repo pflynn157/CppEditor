@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -35,10 +35,9 @@ public:
     ProjectTree();
     void setFilePath(QString path);
     QString getFilePath();
-    void setCompletePath(QString path);
-    QString getCompletePath();
 private:
-    QString filePath, completePath;
+    void loadTreeData(QString path, QTreeWidgetItem *parent);
+    QString filePath;
 private slots:
     void onItemDoubleClicked(QTreeWidgetItem *item, int col);
 };

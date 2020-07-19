@@ -24,12 +24,10 @@ set(MENUBAR_SRC
 set(MENUS_SRC
     menus/dock_widget_menu.cxx
     menus/editor_context.cxx
-    menus/project_new_item_menu.cxx
 )
 
 set(PROJECT_SRC
     project/project_pane.cxx
-    project/project_parser.cxx
     project/project_tree.cxx
 )
 

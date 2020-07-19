@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -33,22 +33,20 @@
 #include <QMouseEvent>
 
 #include "project_tree.hh"
-#include "../menus/project_new_item_menu.hh"
 
 class ProjectPane : public QFrame {
     Q_OBJECT
 public:
     ProjectPane();
     ~ProjectPane();
+    void loadTree();
 protected:
     void mousePressEvent(QMouseEvent *event);
 private:
     QVBoxLayout *layout;
     QToolBar *toolbar;
-    QToolButton *openProject, *newItem, *editProject;
+    QToolButton *goUp;
     ProjectTree *projectTree;
-    ProjectNewItemMenu *newItemMenu;
 private slots:
-    void onOpenProjectClicked();
-    void onEditProjectClicked();
+    void onGoUpClicked();
 };
