@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QKeySequence>
+#include <QProcess>
 
 #include "filemenu.hh"
 #include "../global/slots.hh"
@@ -36,6 +37,7 @@ FileMenu::FileMenu(QMainWindow *window) {
     this->setTitle("File");
     win = window;
 
+    newWin = new QAction("New Window", this);
     newFile = new QAction("New",this);
     openFile = new QAction("Open",this);
     recentMenu = new RecentMenu;
@@ -55,12 +57,14 @@ FileMenu::FileMenu(QMainWindow *window) {
     saveFileAs->setShortcut(QKeySequence(Qt::SHIFT+Qt::CTRL+Qt::Key_S));
     quit->setShortcut(QKeySequence(Qt::CTRL+Qt::Key_Q));
 
+    connect(newWin, &QAction::triggered, this, &FileMenu::onNewWindowClicked);
     connect(newFile,&QAction::triggered,new Slots,&Slots::newFileSlot);
     connect(openFile,&QAction::triggered,new Slots,&Slots::openFileSlot);
     connect(saveFile,&QAction::triggered,new Slots,&Slots::saveFileSlot);
     connect(saveFileAs,&QAction::triggered,new Slots,&Slots::saveFileAsSlot);
     connect(quit,&QAction::triggered,this,&FileMenu::onQuitClicked);
 
+    this->addAction(newWin);
     this->addAction(newFile);
     this->addAction(openFile);
     this->addMenu(recentMenu);
@@ -70,12 +74,17 @@ FileMenu::FileMenu(QMainWindow *window) {
 }
 
 FileMenu::~FileMenu() {
+    delete newWin;
     delete newFile;
     delete openFile;
     delete saveFile;
     delete saveFileAs;
     delete quit;
     delete recentMenu;
+}
+
+void FileMenu::onNewWindowClicked() {
+    QProcess::startDetached("CppEditor", QStringList() << "--single");
 }
 
 void FileMenu::onQuitClicked() {

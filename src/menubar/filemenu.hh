@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -39,8 +39,9 @@ public:
     ~FileMenu();
     static RecentMenu *recentMenu;
 private:
-    QAction *newFile, *openFile, *saveFile, *saveFileAs, *quit;
+    QAction *newWin, *newFile, *openFile, *saveFile, *saveFileAs, *quit;
     QMainWindow *win;
 private slots:
+    void onNewWindowClicked();
     void onQuitClicked();
 };

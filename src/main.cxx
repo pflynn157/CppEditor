@@ -50,10 +50,22 @@ int main(int argc, char *argv[]) {
     QApplication app(argc,argv);
     QCoreApplication::setApplicationName("CppEditor");
     QCoreApplication::setOrganizationName("CppEditor");
+    
+    int arg_start = 1;
+    bool single = false;
+    
+    for (int i = 1; i<argc; i++) {
+        if (std::string(argv[i]) == "--single") {
+            ++arg_start;
+            single = true;
+        }
+    }
 
-    IPC *ipc = new IPC;
-    if (ipc->isRegistered()) {
-        std::cout << "[DBUS] CppEditor has been registered." << std::endl;
+    if (!single) {
+        IPC *ipc = new IPC;
+        if (ipc->isRegistered()) {
+            std::cout << "[DBUS] CppEditor has been registered." << std::endl;
+        }
     }
 
     repository = new Repository;
@@ -64,7 +76,7 @@ int main(int argc, char *argv[]) {
     Window window;
     window.show();
 
-    for (int i = 1; i<argc; i++) {
+    for (int i = arg_start; i<argc; i++) {
         Window::addFile(argv[i]);
     }
 #ifndef HAIKU_OS
