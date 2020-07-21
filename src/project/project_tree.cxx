@@ -83,14 +83,15 @@ void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
 }
 
 void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
-    QString path = "";
     QTreeWidgetItem *parent = item->parent();
-    if (parent!=nullptr) {
-        path = parent->text(col)+"/"+item->text(col);
-    } else {
-        path = item->text(col);
+    QString path = "";
+    
+    while (parent != nullptr) {
+        path = parent->text(col) + "/" + path;
+        parent = parent->parent();
     }
-    path = filePath+path;
+    path += item->text(col);
+    path = filePath + path;
 
     if (QFileInfo(path).isDir()) {
         setFilePath(path);
