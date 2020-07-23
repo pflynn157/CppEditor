@@ -1,4 +1,4 @@
-// Copyright 2018 Patrick Flynn
+// Copyright 2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -30,10 +30,15 @@
 #include <QStringList>
 #include <QString>
 
+#include <window.hh>
+
 class IPC : public KDBusService {
     Q_OBJECT
 public:
     IPC();
+    void setWindow(Window *window);
 private slots:
     void onActivate(QStringList args, QString wd);
+private:
+    Window *win;
 };

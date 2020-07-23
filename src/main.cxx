@@ -26,6 +26,8 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QApplication>
 #include <QFile>
+#include <QFileInfo>
+
 #include <cstdlib>
 #include <string>
 #include <iostream>
@@ -61,23 +63,25 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (!single) {
-        IPC *ipc = new IPC;
-        if (ipc->isRegistered()) {
-            std::cout << "[DBUS] CppEditor has been registered." << std::endl;
-        }
-    }
-
     repository = new Repository;
     Recent::initRecentItems();
     Editor::updateSettings();
     IconManager::init();
 
-    Window window;
-    window.show();
+    Window *window = new Window;
+    window->show();
+    
+    if (!single) {
+        IPC *ipc = new IPC;
+        ipc->setWindow(window);
+        if (ipc->isRegistered()) {
+            std::cout << "[DBUS] CppEditor has been registered." << std::endl;
+        }
+    }
 
     for (int i = arg_start; i<argc; i++) {
-        Window::addFile(argv[i]);
+        QString fullPath = QFileInfo(argv[i]).absoluteFilePath();
+        Window::addFile(fullPath);
     }
 #ifndef HAIKU_OS
 #ifndef _WIN32

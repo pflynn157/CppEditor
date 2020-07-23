@@ -1,4 +1,4 @@
-// Copyright 2018 Patrick Flynn
+// Copyright 2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDir>
+#include <QFileInfo>
 
 #include "ipc.hh"
 #include "window.hh"
@@ -33,12 +34,20 @@ IPC::IPC() : KDBusService(KDBusService::Unique | KDBusService::NoExitOnFailure) 
     connect(this,SIGNAL(activateRequested(QStringList,QString)),this,SLOT(onActivate(QStringList,QString)));
 }
 
+void IPC::setWindow(Window *window) {
+    win = window;
+}
+
 void IPC::onActivate(QStringList args, QString wd) {
     if (args.size()<1) {
         return;
     }
     for (int i = 1; i<args.size(); i++) {
-        QDir().cd(wd);
-        Window::addFile(args.at(i));
+        //QDir().cd(wd);
+        
+        QString path = wd + "/" + args.at(i);
+        Window::addFile(path);
     }
+    
+    win->raise();
 }
