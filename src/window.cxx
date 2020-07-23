@@ -129,12 +129,27 @@ void Window::setTitle(QString title) {
 }
 
 void Window::addFile(QString path) {
-    if ((TabPane::currentWidget()->isUntitled())&&(TabPane::currentWidget()->isModified()==false)) {
-        TabPane::setCurrentTabPath(path);
-        TabPane::setCurrentTabTitle(QFileInfo(path).fileName());
-    } else {
-        TabPane::addNewTab(path);
+    int count = TabPane::tabs->count();
+    bool found = false;
+    
+    for (int i = 0; i<count; i++) {
+        QString currentPath = TabPane::widgetAt(i)->path();
+        if (currentPath==path) {
+            TabPane::tabs->setCurrentIndex(i);
+            found = true;
+            break;
+        }
     }
+    
+    if (!found) {
+        if ((TabPane::currentWidget()->isUntitled())&&(TabPane::currentWidget()->isModified()==false)) {
+            TabPane::setCurrentTabPath(path);
+            TabPane::setCurrentTabTitle(QFileInfo(path).fileName());
+        } else {
+            TabPane::addNewTab(path);
+        }    
+    }
+
     TabPane::setCurrentTabText(FileActions::fileContents(path));
     TabPane::currentWidget()->setModified(false);
 }
