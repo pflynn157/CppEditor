@@ -45,8 +45,10 @@ protected:
 private:
     QVBoxLayout *layout;
     QToolBar *toolbar;
-    QToolButton *goUp;
+    QToolButton *goUp, *newFile, *newFolder;
     ProjectTree *projectTree;
 private slots:
     void onGoUpClicked();
+    void onNewFileClicked();
+    void onNewFolderClicked();
 };

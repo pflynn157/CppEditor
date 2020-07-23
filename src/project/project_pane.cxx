@@ -28,6 +28,7 @@
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QDir>
+#include <QFile>
 
 #include "project_pane.hh"
 
@@ -43,11 +44,20 @@ ProjectPane::ProjectPane() {
     layout->addWidget(projectTree);
 
     goUp = new QToolButton;
+    newFile = new QToolButton;
+    newFolder = new QToolButton;
+    
     goUp->setIcon(QIcon::fromTheme("go-up"));
+    newFile->setIcon(QIcon::fromTheme("document-new"));
+    newFolder->setIcon(QIcon::fromTheme("folder-new"));
 
     connect(goUp, &QToolButton::clicked, this, &ProjectPane::onGoUpClicked);
+    connect(newFile, &QToolButton::clicked, this, &ProjectPane::onNewFileClicked);
+    connect(newFolder, &QToolButton::clicked, this, &ProjectPane::onNewFolderClicked);
 
     toolbar->addWidget(goUp);
+    toolbar->addWidget(newFile);
+    toolbar->addWidget(newFolder);
 }
 
 ProjectPane::~ProjectPane() {
@@ -73,4 +83,39 @@ void ProjectPane::onGoUpClicked() {
     if (dir.cdUp()) currentPath = dir.absolutePath();
     projectTree->setFilePath(currentPath);
 }
+
+void ProjectPane::onNewFileClicked() {
+    QString name = QInputDialog::getText(nullptr, "New File", "Enter file name:");
+    
+    QString currentPath = projectTree->getSelectedPath();
+    
+    if (!QFileInfo(currentPath).isDir()) {
+        currentPath = projectTree->getFilePath();
+    }
+    
+    currentPath += "/" + name;
+    
+    QFile file(currentPath);
+    if (file.open(QFile::WriteOnly)) {
+        file.close();
+    }
+    
+    loadTree();
+}
+
+void ProjectPane::onNewFolderClicked() {
+    QString name = QInputDialog::getText(nullptr, "New Folder", "Enter folder name:");
+
+    QString currentPath = projectTree->getSelectedPath();
+    
+    if (!QFileInfo(currentPath).isDir()) {
+        currentPath = projectTree->getFilePath();
+    }
+    
+    currentPath += "/" + name;
+    
+    QDir().mkpath(currentPath);
+    loadTree();
+}
+
 

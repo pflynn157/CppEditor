@@ -48,6 +48,28 @@ QString ProjectTree::getFilePath() {
     return filePath;
 }
 
+QString ProjectTree::getSelectedPath() {
+
+    auto items = this->selectedItems();
+    
+    if (items.size() == 0) {
+        return filePath;
+    }
+    
+    QTreeWidgetItem *item = items[0];
+    QTreeWidgetItem *parent = item->parent();
+    QString path = "";
+    
+    while (parent != nullptr) {
+        path = parent->text(0) + "/" + path;
+        parent = parent->parent();
+    }
+    path += item->text(0);
+    path = filePath + path;
+    
+    return path;
+}
+
 void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
     this->clear();
 

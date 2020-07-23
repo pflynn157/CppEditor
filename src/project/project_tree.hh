@@ -35,6 +35,7 @@ public:
     ProjectTree();
     void setFilePath(QString path);
     QString getFilePath();
+    QString getSelectedPath();
 private:
     void loadTreeData(QString path, QTreeWidgetItem *parent);
     QString filePath;
