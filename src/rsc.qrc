@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>rsc/settings_default.xml</file>
         <file>rsc/lorem_ipsum.txt</file>
         <file>rsc/message_widget.css</file>
         <file>rsc/license.txt</file>

@@ -29,7 +29,7 @@
 #include <QMenu>
 #include <QAction>
 
-#include <actions/actions.hh>
+#include <actions.hh>
 
 class EditMenu : public QMenu {
     Q_OBJECT

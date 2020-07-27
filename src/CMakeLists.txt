@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.0.0)
 project(CppEditor)
 cmake_policy(SET CMP0100 NEW)
 
-set(ACTIONS_SRC
-    actions/actions.cxx
-)
-
 set(GLOBAL_SRC
     global/file_actions.cxx
     global/recent.cxx
@@ -42,12 +38,12 @@ set(WINDOWS_SRC
 )
 
 set(BASE_SRC
+    actions.cxx
     cpp_message_widget.cxx
     editor.cxx
     main.cxx
     main_toolbar.cxx
     tabpane.cxx
-    tinyxml2.cpp
     window.cxx
     ipc.cxx
     icons.qrc
