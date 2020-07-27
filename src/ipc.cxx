@@ -43,10 +43,12 @@ void IPC::onActivate(QStringList args, QString wd) {
         return;
     }
     for (int i = 1; i<args.size(); i++) {
-        //QDir().cd(wd);
-        
-        QString path = wd + "/" + args.at(i);
-        Window::addFile(path);
+        if (args.at(i).contains("/")) {
+            Window::addFile(args.at(i));
+        } else {        
+            QString path = wd + "/" + args.at(i);
+            Window::addFile(path);
+        }
     }
     
     win->raise();
