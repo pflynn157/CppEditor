@@ -46,18 +46,22 @@ ProjectPane::ProjectPane() {
     goUp = new QToolButton;
     newFile = new QToolButton;
     newFolder = new QToolButton;
+    refresh = new QToolButton;
     
     goUp->setIcon(QIcon::fromTheme("go-up"));
     newFile->setIcon(QIcon::fromTheme("document-new"));
     newFolder->setIcon(QIcon::fromTheme("folder-new"));
+    refresh->setIcon(QIcon::fromTheme("view-refresh"));
 
     connect(goUp, &QToolButton::clicked, this, &ProjectPane::onGoUpClicked);
     connect(newFile, &QToolButton::clicked, this, &ProjectPane::onNewFileClicked);
     connect(newFolder, &QToolButton::clicked, this, &ProjectPane::onNewFolderClicked);
+    connect(refresh, &QToolButton::clicked, this, &ProjectPane::onRefreshClicked);
 
     toolbar->addWidget(goUp);
     toolbar->addWidget(newFile);
     toolbar->addWidget(newFolder);
+    toolbar->addWidget(refresh);
 }
 
 ProjectPane::~ProjectPane() {
@@ -118,4 +122,6 @@ void ProjectPane::onNewFolderClicked() {
     loadTree();
 }
 
-
+void ProjectPane::onRefreshClicked() {
+    loadTree();
+}

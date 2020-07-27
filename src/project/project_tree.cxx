@@ -26,6 +26,11 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QFileInfo>
 #include <QDir>
+#include <QFile>
+#include <QInputDialog>
+#include <QMenu>
+#include <QAction>
+#include <QCursor>
 
 #include "project_tree.hh"
 #include "../window.hh"
@@ -70,6 +75,19 @@ QString ProjectTree::getSelectedPath() {
     return path;
 }
 
+void ProjectTree::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::RightButton) {
+        QMenu menu;
+        QAction *rename = new QAction("Rename", this);
+        connect(rename, &QAction::triggered, this, &ProjectTree::onRenameClicked);
+    
+        menu.addAction(rename);
+        menu.exec(QCursor::pos());
+    } else {
+        QTreeWidget::mousePressEvent(event);
+    }
+}
+
 void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
     this->clear();
 
@@ -104,6 +122,26 @@ void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
     this->insertTopLevelItems(0,items);
 }
 
+QString ProjectTree::currentSelected() {
+    auto items = this->selectedItems();
+    if (items.size() == 0)
+        return "";
+    
+    int col = this->currentColumn();
+    QTreeWidgetItem *item = items.at(0);
+    QTreeWidgetItem *parent = item->parent();
+    QString path = "";
+    
+    while (parent != nullptr) {
+        path = parent->text(col) + "/" + path;
+        parent = parent->parent();
+    }
+    path += item->text(col);
+    path = filePath + path;
+    
+    return path;
+}
+
 void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
     QTreeWidgetItem *parent = item->parent();
     QString path = "";
@@ -121,3 +159,21 @@ void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
         Window::addFile(path);
     }
 }
+
+void ProjectTree::onRenameClicked() {
+    QString path = currentSelected();
+    if (path == "")
+        return;
+        
+    QString name = QInputDialog::getText(nullptr, "Rename File", "Enter file name:");
+    QString newPath = QFileInfo(path).absolutePath() + "/" + name;
+    
+    if (QFileInfo(path).isDir()) {
+        QDir().rename(path, newPath);
+    } else {
+        QFile::rename(path, newPath);
+    }
+    
+    loadTreeData(filePath, nullptr);
+}
+

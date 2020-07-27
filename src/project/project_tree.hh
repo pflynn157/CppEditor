@@ -28,6 +28,7 @@
 
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QMouseEvent>
 
 class ProjectTree : public QTreeWidget {
     Q_OBJECT
@@ -36,9 +37,13 @@ public:
     void setFilePath(QString path);
     QString getFilePath();
     QString getSelectedPath();
+protected:
+    void mousePressEvent(QMouseEvent *event);
 private:
     void loadTreeData(QString path, QTreeWidgetItem *parent);
+    QString currentSelected();
     QString filePath;
 private slots:
     void onItemDoubleClicked(QTreeWidgetItem *item, int col);
+    void onRenameClicked();
 };
