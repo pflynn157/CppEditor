@@ -215,11 +215,31 @@ void TextEdit::insertFromMimeData(const QMimeData *source) {
 
 void TextEdit::keyPressEvent(QKeyEvent *event) {
 	if (event->key() == Qt::Key_Tab) {
-		if (!Window::useTabs->isChecked()) {
-			parent->editor->insertPlainText("    ");
-		} else {
-			parent->editor->insertPlainText("\t");
-		}
+        auto cursor = this->textCursor();
+        auto selected = cursor.selectedText();
+        
+        if (selected.contains("\u2029")) {
+            QString tab = "    ";
+            if (Window::useTabs->isChecked())
+                tab = "\t";
+                
+            QString newSelection = "";
+            newSelection = tab;
+            
+            for (QChar c : selected) {
+                newSelection += c;
+            
+                if (c == "\u2029")
+                    newSelection += tab;
+            }
+            
+            parent->editor->insertPlainText(newSelection);
+        } else {
+		    if (!Window::useTabs->isChecked())
+			    parent->editor->insertPlainText("    ");
+            else
+			    parent->editor->insertPlainText("\t");
+        }
 		
 		return;
 	}
