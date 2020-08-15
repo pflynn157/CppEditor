@@ -27,19 +27,22 @@
 #pragma once
 
 #include <QMenu>
-#include <QMainWindow>
 #include <QAction>
+
+//#include <window.hh>
+class Window;
 
 class ViewMenu : public QMenu {
     Q_OBJECT
 public:
-    explicit ViewMenu(QMainWindow *parent);
+    explicit ViewMenu(Window *parent);
     ~ViewMenu();
 private:
-    QMainWindow *parentWindow;
+    Window *parentWindow;
     bool wasMax = false;
-    QAction *projectPane, *fullscreen;
+    QAction *projectPane, *setWinTitle, *fullscreen;
 private slots:
     void onFullscreenClicked();
+    void onSetWinTitleClicked();
     void onProjectPaneClicked();
 };

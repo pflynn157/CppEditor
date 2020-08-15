@@ -123,9 +123,16 @@ Window::~Window() {
     delete helpmenu;
 }
 
-void Window::setTitle(QString title) {
-    QString t = title + " [CppEditor]";
-    this->setWindowTitle(t);
+void Window::setTitle(QString title, bool custom) {
+    if (custom) {
+        this->setWindowTitle(title);
+        customTitle = true;
+    }
+
+    if (!customTitle) {
+        QString t = title + " [CppEditor]";
+        this->setWindowTitle(t);
+    }
 }
 
 void Window::addFile(QString path) {

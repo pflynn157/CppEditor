@@ -47,7 +47,7 @@ class Window : public QMainWindow {
 public:
     Window();
     ~Window();
-    void setTitle(QString title);
+    void setTitle(QString title, bool custom = false);
     static void addFile(QString path);
     static QStatusBar *statusbar;
     static void setStatusBarModified(bool modified);
@@ -66,11 +66,14 @@ private:
     static QSplitter *centralSplitter;
     static ProjectPane *projectPane;
     static DateDockWidget *dateDockWidget;
+
     FileMenu *filemenu;
     EditMenu *editmenu;
     InsertMenu *insertmenu;
     ViewMenu *viewmenu;
     HelpMenu *helpmenu;
+
+    bool customTitle = false;
 private slots:
     void onWindowStateChanged(Qt::ApplicationState state);
 };

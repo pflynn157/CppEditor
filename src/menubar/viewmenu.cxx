@@ -24,15 +24,18 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#include <QInputDialog>
+
 #include "viewmenu.hh"
 #include "../window.hh"
 #include "../icon.hh"
 
-ViewMenu::ViewMenu(QMainWindow *parent) {
+ViewMenu::ViewMenu(Window *parent) {
     parentWindow = parent;
     this->setTitle("View");
 
     fullscreen = new QAction("Fullscreen",this);
+    setWinTitle = new QAction("Set Window Title", this);
     projectPane = new QAction("Display Project Panel",this);
 
     projectPane->setCheckable(true);
@@ -40,15 +43,18 @@ ViewMenu::ViewMenu(QMainWindow *parent) {
 
     fullscreen->setIcon(IconManager::getIcon("view-fullscreen"));
 
-    connect(fullscreen,&QAction::triggered,this,&ViewMenu::onFullscreenClicked);
-    connect(projectPane,&QAction::triggered,this,&ViewMenu::onProjectPaneClicked);
+    connect(fullscreen, &QAction::triggered, this, &ViewMenu::onFullscreenClicked);
+    connect(setWinTitle, &QAction::triggered, this, &ViewMenu::onSetWinTitleClicked);
+    connect(projectPane, &QAction::triggered, this, &ViewMenu::onProjectPaneClicked);
 
     this->addAction(fullscreen);
+    this->addAction(setWinTitle);
     this->addAction(projectPane);
 }
 
 ViewMenu::~ViewMenu() {
     delete fullscreen;
+    delete setWinTitle;
     delete projectPane;
 }
 
@@ -66,6 +72,14 @@ void ViewMenu::onFullscreenClicked() {
             wasMax = false;
         }
         parentWindow->showFullScreen();
+    }
+}
+
+void ViewMenu::onSetWinTitleClicked() {
+    QString title = QInputDialog::getText(parentWindow, "Change Window Title", "Enter new title:");
+
+    if (title != "") {
+        parentWindow->setTitle(title, true);
     }
 }
 
