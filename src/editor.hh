@@ -69,7 +69,6 @@ public:
     void displayFinder();
 protected:
     void contextMenuEvent(QContextMenuEvent *);
-    void insertFromMimeData(const QMimeData *source);
 private:
     QVBoxLayout *layout;
     TextEdit *editor;
@@ -89,6 +88,8 @@ class TextEdit : public QTextEdit {
 public:
     explicit TextEdit(Editor *p);
 protected:
+    bool canInsertFromMimeData(const QMimeData *source);
+    void insertFromMimeData(const QMimeData *source);
     void keyPressEvent(QKeyEvent *event);
 private:
     Editor *parent;

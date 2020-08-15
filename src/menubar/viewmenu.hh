@@ -29,7 +29,6 @@
 #include <QMenu>
 #include <QAction>
 
-//#include <window.hh>
 class Window;
 
 class ViewMenu : public QMenu {

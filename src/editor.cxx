@@ -174,10 +174,6 @@ void Editor::contextMenuEvent(QContextMenuEvent *) {
     menu->show();
 }
 
-void Editor::insertFromMimeData(const QMimeData *source) {
-    editor->insertPlainText(source->text());
-}
-
 void Editor::onModified() {
     if (editor->document()->isModified()) {
         if (!foundText) {
@@ -203,6 +199,18 @@ void Editor::highlightCurrentLine() {
 //TextEdit class
 TextEdit::TextEdit(Editor *p) {
     parent = p;
+}
+
+bool TextEdit::canInsertFromMimeData(const QMimeData *source) {
+    if (source->hasHtml() || source->hasText()) {
+        return true;
+    }
+    
+    return false;
+}
+
+void TextEdit::insertFromMimeData(const QMimeData *source) {
+    this->insertPlainText(source->text());
 }
 
 void TextEdit::keyPressEvent(QKeyEvent *event) {
