@@ -37,7 +37,10 @@
 
 ProjectTree::ProjectTree() {
     this->setHeaderLabel("Project");
-    connect(this,SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),this,SLOT(onItemDoubleClicked(QTreeWidgetItem*,int)));
+    
+    connect(this, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), this, SLOT(onItemDoubleClicked(QTreeWidgetItem*,int)));
+    connect(this, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(onItemExpanded(QTreeWidgetItem*)));
+    connect(this, SIGNAL(itemCollapsed(QTreeWidgetItem*)), this, SLOT(onItemCollapsed(QTreeWidgetItem*)));
 }
 
 void ProjectTree::setFilePath(QString path) {
@@ -46,7 +49,7 @@ void ProjectTree::setFilePath(QString path) {
         filePath+="/";
     }
     
-    loadTreeData(filePath, nullptr);
+    loadTreeData(filePath);
 }
 
 QString ProjectTree::getFilePath() {
@@ -88,11 +91,18 @@ void ProjectTree::mousePressEvent(QMouseEvent *event) {
     }
 }
 
-void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
+void ProjectTree::loadTreeData(QString path) {
     this->clear();
+    
+    auto toExpand = loadTree(path, nullptr);
+    for (auto current : toExpand)
+        current->setExpanded(true);
+}
 
+QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *parent) {
     QStringList entries = QDir(path).entryList();
     QList<QTreeWidgetItem *> items;
+    QList<QTreeWidgetItem *> toExpand;
     
     if (!path.endsWith("/")) {
         path+="/";
@@ -106,9 +116,15 @@ void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
         QTreeWidgetItem *item = new QTreeWidgetItem;
         item->setText(0,QFileInfo(entries.at(i)).fileName());
         
-        if (QFileInfo(path+entries.at(i)).isDir()) {
+        QString itemPath = path + entries.at(i);
+        
+        if (QFileInfo(itemPath).isDir()) {
             item->setIcon(0,QIcon::fromTheme("inode-directory",QPixmap(":/icons/inode-directory.png")));
-            loadTreeData(path+entries.at(i),item);
+            toExpand.append(loadTree(itemPath,item));
+            
+            if (expandedPaths.contains(itemPath)) {
+                toExpand.append(item);
+            }
         } else {
             item->setIcon(0,QIcon::fromTheme("text-x-generic",QPixmap(":/icons/text-x-generic.png")));
         }
@@ -120,15 +136,11 @@ void ProjectTree::loadTreeData(QString path, QTreeWidgetItem *parent) {
     }
     
     this->insertTopLevelItems(0,items);
+    
+    return toExpand;
 }
 
-QString ProjectTree::currentSelected() {
-    auto items = this->selectedItems();
-    if (items.size() == 0)
-        return "";
-    
-    int col = this->currentColumn();
-    QTreeWidgetItem *item = items.at(0);
+QString ProjectTree::getItemPath(QTreeWidgetItem *item, int col) {
     QTreeWidgetItem *parent = item->parent();
     QString path = "";
     
@@ -142,22 +154,35 @@ QString ProjectTree::currentSelected() {
     return path;
 }
 
-void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
-    QTreeWidgetItem *parent = item->parent();
-    QString path = "";
+QString ProjectTree::currentSelected() {
+    auto items = this->selectedItems();
+    if (items.size() == 0)
+        return "";
     
-    while (parent != nullptr) {
-        path = parent->text(col) + "/" + path;
-        parent = parent->parent();
-    }
-    path += item->text(col);
-    path = filePath + path;
+    int col = this->currentColumn();
+    QTreeWidgetItem *item = items.at(0);
+    
+    return getItemPath(item, col);
+}
+
+void ProjectTree::onItemDoubleClicked(QTreeWidgetItem *item, int col) {
+    QString path = getItemPath(item, col);
 
     if (QFileInfo(path).isDir()) {
         setFilePath(path);
     } else {
         Window::addFile(path);
     }
+}
+
+void ProjectTree::onItemExpanded(QTreeWidgetItem *item) {
+    QString path = getItemPath(item, 0);
+    expandedPaths.append(path);
+}
+
+void ProjectTree::onItemCollapsed(QTreeWidgetItem *item) {
+    QString path = getItemPath(item, 0);
+    expandedPaths.removeOne(path);
 }
 
 void ProjectTree::onRenameClicked() {
@@ -174,6 +199,6 @@ void ProjectTree::onRenameClicked() {
         QFile::rename(path, newPath);
     }
     
-    loadTreeData(filePath, nullptr);
+    loadTreeData(filePath);
 }
 
