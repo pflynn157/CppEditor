@@ -26,12 +26,15 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QDir>
 #include <QFileInfo>
+#include <QProcess>
+#include <kwindowsystem.h>
 
 #include "ipc.hh"
 #include "window.hh"
 
 IPC::IPC() : KDBusService(KDBusService::Unique | KDBusService::NoExitOnFailure) {
     connect(this,SIGNAL(activateRequested(QStringList,QString)),this,SLOT(onActivate(QStringList,QString)));
+    wksp = KWindowSystem::currentDesktop();
 }
 
 void IPC::setWindow(Window *window) {
@@ -42,13 +45,26 @@ void IPC::onActivate(QStringList args, QString wd) {
     if (args.size()<1) {
         return;
     }
+    
+    QStringList items;
     for (int i = 1; i<args.size(); i++) {
         if (args.at(i).contains("/")) {
-            Window::addFile(args.at(i));
+            items.push_back(args.at(i));
         } else {        
             QString path = wd + "/" + args.at(i);
-            Window::addFile(path);
+            items.push_back(path);
         }
+    }
+    
+    int desktop2 = KWindowSystem::currentDesktop();
+    if (desktop2 != wksp) {
+        items.push_front("--single");
+        QProcess::startDetached("CppEditor", items);
+        return;
+    }
+    
+    for (int i = 0; i<items.size(); i++) {
+        Window::addFile(items.at(i));
     }
     
     win->raise();

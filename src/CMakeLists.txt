@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(CppEditor)
-cmake_policy(SET CMP0100 NEW)
+#cmake_policy(SET CMP0100 NEW)
 
 set(GLOBAL_SRC
     global/file_actions.cxx
@@ -75,6 +75,7 @@ target_link_libraries(CppEditor
     Qt5::Widgets
     KF5::SyntaxHighlighting
     KF5::DBusAddons
+    KF5::WindowSystem
 )
 
 if (UNIX)

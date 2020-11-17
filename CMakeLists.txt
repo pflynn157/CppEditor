@@ -19,6 +19,7 @@ if (WIN32)
 else()
     find_package(KF5SyntaxHighlighting REQUIRED)
     find_package(KF5DBusAddons REQUIRED)
+    find_package(KF5WindowSystem REQUIRED)
 endif()
 
 add_compile_options(-std=c++11)

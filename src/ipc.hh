@@ -41,4 +41,5 @@ private slots:
     void onActivate(QStringList args, QString wd);
 private:
     Window *win;
+    int wksp = 0;
 };
