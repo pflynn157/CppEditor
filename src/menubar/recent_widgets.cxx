@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -28,9 +28,9 @@
 #include <QFile>
 #include <QString>
 
-#include "recent_widgets.hh"
-#include "../window.hh"
-#include "../global/recent.hh"
+#include "recent_widgets.hpp"
+#include "../window.hpp"
+#include "../global/recent.hpp"
 
 RecentAction::RecentAction(QString title, QMenu *parent) : QAction(title,parent) {
     path = title;

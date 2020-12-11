@@ -30,7 +30,7 @@
 #include <QDir>
 #include <QFile>
 
-#include "project_pane.hh"
+#include "project_pane.hpp"
 
 ProjectPane::ProjectPane() {
     layout = new QVBoxLayout;

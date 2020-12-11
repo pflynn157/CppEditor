@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -30,11 +30,11 @@
 #include <QStringList>
 #include <KF5/KSyntaxHighlighting/Definition>
 
-#include "main_toolbar.hh"
-#include "global/slots.hh"
-#include "tabpane.hh"
-#include "global.hh"
-#include "icon.hh"
+#include "main_toolbar.hpp"
+#include "global/slots.hpp"
+#include "tabpane.hpp"
+#include "global.hpp"
+#include "icon.hpp"
 
 QComboBox *MainToolBar::syntaxmenu;
 QSpinBox *MainToolBar::fontSize;

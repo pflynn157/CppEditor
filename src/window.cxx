@@ -35,13 +35,13 @@
 #include <QFile>
 #include <QCheckBox>
 
-#include <window.hh>
-#include <tabpane.hh>
-#include <main_toolbar.hh>
-#include <icon.hh>
-#include <global.hh>
-#include <global/file_actions.hh>
-#include <global/recent.hh>
+#include <window.hpp>
+#include <tabpane.hpp>
+#include <main_toolbar.hpp>
+#include <icon.hpp>
+#include <global.hpp>
+#include <global/file_actions.hpp>
+#include <global/recent.hpp>
 
 QStatusBar *Window::statusbar;
 QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;

@@ -30,7 +30,7 @@
 #include <QStringList>
 #include <QString>
 
-#include <window.hh>
+#include <window.hpp>
 
 class IPC : public KDBusService {
     Q_OBJECT

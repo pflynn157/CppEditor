@@ -26,9 +26,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QInputDialog>
 
-#include "viewmenu.hh"
-#include "../window.hh"
-#include "../icon.hh"
+#include "viewmenu.hpp"
+#include "../window.hpp"
+#include "../icon.hpp"
 
 ViewMenu::ViewMenu(Window *parent) {
     parentWindow = parent;

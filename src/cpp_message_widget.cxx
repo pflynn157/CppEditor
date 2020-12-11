@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -26,8 +26,8 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QPropertyAnimation>
 
-#include "cpp_message_widget.hh"
-#include "global/file_actions.hh"
+#include "cpp_message_widget.hpp"
+#include "global/file_actions.hpp"
 
 CppMessageWidget::CppMessageWidget() : CppMessageWidget("") { }
 

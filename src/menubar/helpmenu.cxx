@@ -28,9 +28,9 @@
 #include <QMessageBox>
 #include <iostream>
 
-#include "helpmenu.hh"
-#include "../global/file_actions.hh"
-#include "../icon.hh"
+#include "helpmenu.hpp"
+#include "../global/file_actions.hpp"
+#include "../icon.hpp"
 
 HelpMenu::HelpMenu() {
     this->setTitle("Help");

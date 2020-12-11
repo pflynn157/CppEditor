@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -28,8 +28,8 @@
 #include <QDir>
 #include <QTextStream>
 
-#include "recent.hh"
-#include "../menubar/filemenu.hh"
+#include "recent.hpp"
+#include "../menubar/filemenu.hpp"
 
 QStringList *Recent::items;
 QString Recent::filePath;

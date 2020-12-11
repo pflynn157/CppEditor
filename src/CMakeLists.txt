@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(CppEditor)
-#cmake_policy(SET CMP0100 NEW)
 
 set(GLOBAL_SRC
     global/file_actions.cxx

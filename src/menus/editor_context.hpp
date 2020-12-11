@@ -1,4 +1,4 @@
-// Copyright 2017-2018, 2020 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -29,24 +29,18 @@
 #include <QMenu>
 #include <QAction>
 
-#include <actions.hh>
+#include <actions.hpp>
 
-class EditMenu : public QMenu {
+class EditorContextMenu : public QMenu {
     Q_OBJECT
 public:
-    EditMenu();
-    ~EditMenu();
+    EditorContextMenu();
+    ~EditorContextMenu();
 private:
     CutAction *cut;
     CopyAction *copy;
     PasteAction *paste;
     SelectAllAction *selectAll;
-    UndoAction *undo;
     RedoAction *redo;
-    QAction *find;
-    QAction *settings;
-private:
-    void onFindClicked();
-    void onSettingsClicked();
+    UndoAction *undo;
 };
-

@@ -29,8 +29,8 @@
 #include <QTextCharFormat>
 #include <iostream>
 
-#include "finder.hh"
-#include "icon.hh"
+#include "finder.hpp"
+#include "icon.hpp"
 
 Finder::Finder(Editor *edit)
     : find(new QToolButton),

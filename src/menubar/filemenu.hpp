@@ -26,30 +26,22 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QFrame>
-#include <QVBoxLayout>
-#include <QToolBar>
-#include <QToolButton>
-#include <QMouseEvent>
+#include <QMenu>
+#include <QAction>
+#include <QMainWindow>
 
-#include "project_tree.hh"
+#include "recent_widgets.hpp"
 
-class ProjectPane : public QFrame {
+class FileMenu : public QMenu {
     Q_OBJECT
 public:
-    ProjectPane();
-    ~ProjectPane();
-    void loadTree();
-protected:
-    void mousePressEvent(QMouseEvent *event);
+    FileMenu(QMainWindow *window);
+    ~FileMenu();
+    static RecentMenu *recentMenu;
 private:
-    QVBoxLayout *layout;
-    QToolBar *toolbar;
-    QToolButton *goUp, *newFile, *newFolder, *refresh;
-    ProjectTree *projectTree;
+    QAction *newWin, *newFile, *openFile, *saveFile, *saveFileAs, *quit;
+    QMainWindow *win;
 private slots:
-    void onGoUpClicked();
-    void onNewFileClicked();
-    void onNewFolderClicked();
-    void onRefreshClicked();
+    void onNewWindowClicked();
+    void onQuitClicked();
 };

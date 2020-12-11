@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -26,10 +26,10 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QApplication>
 
-#include "slots.hh"
-#include "file_actions.hh"
-#include "../window.hh"
-#include "../tabpane.hh"
+#include "slots.hpp"
+#include "file_actions.hpp"
+#include "../window.hpp"
+#include "../tabpane.hpp"
 
 void Slots::newFileSlot() {
     FileActions::newFile();

@@ -1,4 +1,4 @@
-// Copyright 2018 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -26,31 +26,30 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
+#include <QFrame>
+#include <QVBoxLayout>
 #include <QToolBar>
 #include <QToolButton>
-#include <QLineEdit>
+#include <QMouseEvent>
 
-#include "editor.hh"
+#include "project_tree.hpp"
 
-class Editor;
-
-class Finder : public QToolBar {
+class ProjectPane : public QFrame {
     Q_OBJECT
 public:
-    Finder(Editor *edit);
-    ~Finder();
-    void clear();
-    void findText(bool next, bool replaceText);
+    ProjectPane();
+    ~ProjectPane();
+    void loadTree();
+protected:
+    void mousePressEvent(QMouseEvent *event);
 private:
-    Editor *editor;
-    QToolButton *find, *findNext, *replace, *close;
-    QLineEdit *entry, *replaceEntry;
-    QString lastEntry;
-    int count = 0;
-    int index = -1;
+    QVBoxLayout *layout;
+    QToolBar *toolbar;
+    QToolButton *goUp, *newFile, *newFolder, *refresh;
+    ProjectTree *projectTree;
 private slots:
-    void onFindClicked();
-    void onFindNextClicked();
-    void onReplaceClicked();
-    void onCloseClicked();
+    void onGoUpClicked();
+    void onNewFileClicked();
+    void onNewFolderClicked();
+    void onRefreshClicked();
 };

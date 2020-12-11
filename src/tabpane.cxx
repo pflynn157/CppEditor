@@ -28,11 +28,11 @@
 #include <QFont>
 #include <QMessageBox>
 
-#include "tabpane.hh"
-#include "editor.hh"
-#include "window.hh"
-#include "main_toolbar.hh"
-#include "global.hh"
+#include "tabpane.hpp"
+#include "editor.hpp"
+#include "window.hpp"
+#include "main_toolbar.hpp"
+#include "global.hpp"
 
 CppMessageWidget *TabPane::rootStatus, *TabPane::settingsSaved, *TabPane::buttonHidden;
 QTabWidget *TabPane::tabs;

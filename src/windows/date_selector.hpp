@@ -25,23 +25,28 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
+#include <QFrame>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QCalendarWidget>
+#include <QDateEdit>
+#include <QPushButton>
+#include <QDate>
 
-#include <QMenu>
-#include <QAction>
-#include <QMainWindow>
+#include "subwindow.hpp"
 
-#include "recent_widgets.hh"
-
-class FileMenu : public QMenu {
+class DateDockWidget : public SubWindow {
     Q_OBJECT
 public:
-    FileMenu(QMainWindow *window);
-    ~FileMenu();
-    static RecentMenu *recentMenu;
+    DateDockWidget();
 private:
-    QAction *newWin, *newFile, *openFile, *saveFile, *saveFileAs, *quit;
-    QMainWindow *win;
+    QFrame *mainWidget, *bottomWidget;
+    QVBoxLayout *mainLayout;
+    QCalendarWidget *calendar;
+    QHBoxLayout *bottomLayout;
+    QDateEdit *dateDisplay;
+    QPushButton *submit;
 private slots:
-    void onNewWindowClicked();
-    void onQuitClicked();
+    void onDateClicked(QDate date);
+    void onSubmitClicked();
 };

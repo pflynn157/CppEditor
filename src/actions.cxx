@@ -26,9 +26,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QKeySequence>
 
-#include <actions.hh>
-#include <icon.hh>
-#include <global/slots.hh>
+#include <actions.hpp>
+#include <icon.hpp>
+#include <global/slots.hpp>
 
 Action::Action(QString name, QString iconName, QObject *parent) : QAction(name,parent) {
     this->setIcon(IconManager::getIcon(iconName));

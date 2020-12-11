@@ -31,11 +31,11 @@
 #include <QTextStream>
 #include <QFileInfo>
 
-#include <global/file_actions.hh>
-#include <global/recent.hh>
-#include <tabpane.hh>
-#include <window.hh>
-#include <main_toolbar.hh>
+#include <global/file_actions.hpp>
+#include <global/recent.hpp>
+#include <tabpane.hpp>
+#include <window.hpp>
+#include <main_toolbar.hpp>
 
 void FileActions::newFile() {
     TabPane::addNewUntitledTab();

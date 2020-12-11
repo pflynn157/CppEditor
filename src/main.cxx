@@ -36,14 +36,14 @@
 #include <unistd.h>
 #endif
 
-#include "global.hh"
-#include "window.hh"
-#include "tabpane.hh"
-#include "editor.hh"
-#include "global/file_actions.hh"
-#include "global/recent.hh"
-#include "icon.hh"
-#include "ipc.hh"
+#include "global.hpp"
+#include "window.hpp"
+#include "tabpane.hpp"
+#include "editor.hpp"
+#include "global/file_actions.hpp"
+#include "global/recent.hpp"
+#include "icon.hpp"
+#include "ipc.hpp"
 
 Repository *repository;
 QSettings settings("CppEditor", "CppEditor");

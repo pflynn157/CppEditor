@@ -1,4 +1,4 @@
-// Copyright 2017 Patrick Flynn
+// Copyright 2017, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -25,28 +25,40 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
+
 #include <QFrame>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QCalendarWidget>
-#include <QDateEdit>
-#include <QPushButton>
-#include <QDate>
+#include <QTabWidget>
 
-#include "subwindow.hh"
+#include "cpp_message_widget.hpp"
+#include "editor.hpp"
+#include "window.hpp"
 
-class DateDockWidget : public SubWindow {
+class TabPane : public QFrame {
     Q_OBJECT
 public:
-    DateDockWidget();
+    TabPane(Window *parent);
+    ~TabPane();
+    static QTabWidget *tabs;
+    static CppMessageWidget *rootStatus, *settingsSaved, *buttonHidden;
+
+    static void addNewTab(QString path);
+    static void addNewUntitledTab();
+
+    static Editor *currentWidget();
+    static TextEdit *currentEditor();
+    static Editor *widgetAt(int index);
+    static TextEdit *editorAt(int index);
+
+    static void setCurrentTabPath(QString path);
+    static void setCurrentTabText(QString text);
+    static QString currentTabText();
+
+    static void setCurrentTabTitle(QString title);
 private:
-    QFrame *mainWidget, *bottomWidget;
-    QVBoxLayout *mainLayout;
-    QCalendarWidget *calendar;
-    QHBoxLayout *bottomLayout;
-    QDateEdit *dateDisplay;
-    QPushButton *submit;
+    static Window *window;
+    QVBoxLayout *layout;
 private slots:
-    void onDateClicked(QDate date);
-    void onSubmitClicked();
+    void onTabClosed(int index);
+    void onTabChanged();
 };

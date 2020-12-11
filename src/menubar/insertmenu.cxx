@@ -26,11 +26,11 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <QColorDialog>
 
-#include "insertmenu.hh"
-#include "../window.hh"
-#include "../global/file_actions.hh"
-#include "../tabpane.hh"
-#include "../editor.hh"
+#include "insertmenu.hpp"
+#include "../window.hpp"
+#include "../global/file_actions.hpp"
+#include "../tabpane.hpp"
+#include "../editor.hpp"
 
 InsertMenu::InsertMenu(QMainWindow *parent) {
     window = parent;

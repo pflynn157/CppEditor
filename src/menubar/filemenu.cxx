@@ -27,9 +27,9 @@
 #include <QKeySequence>
 #include <QProcess>
 
-#include "filemenu.hh"
-#include "../global/slots.hh"
-#include "../icon.hh"
+#include "filemenu.hpp"
+#include "../global/slots.hpp"
+#include "../icon.hpp"
 
 RecentMenu *FileMenu::recentMenu;
 

@@ -29,8 +29,8 @@
 #include <QProcess>
 #include <kwindowsystem.h>
 
-#include "ipc.hh"
-#include "window.hh"
+#include "ipc.hpp"
+#include "window.hpp"
 
 IPC::IPC() : KDBusService(KDBusService::Unique | KDBusService::NoExitOnFailure) {
     connect(this,SIGNAL(activateRequested(QStringList,QString)),this,SLOT(onActivate(QStringList,QString)));

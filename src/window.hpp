@@ -26,71 +26,55 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QFrame>
-#include <QVBoxLayout>
+#include <QMainWindow>
+#include <QLabel>
+#include <QSplitter>
 #include <QTextEdit>
-#include <QKeyEvent>
-#include <QMenu>
-#include <QContextMenuEvent>
-#include <QTextCharFormat>
-#include <QMimeData>
-#include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
+#include <QStatusBar>
+#include <QCheckBox>
 
-#include "finder.hh"
+#include "windows/date_selector.hpp"
+#include "project/project_pane.hpp"
 
-using namespace KSyntaxHighlighting;
+#include "menubar/filemenu.hpp"
+#include "menubar/editmenu.hpp"
+#include "menubar/insertmenu.hpp"
+#include "menubar/viewmenu.hpp"
+#include "menubar/helpmenu.hpp"
 
-class Finder;
-class TextEdit;
-
-class Editor : public QFrame {
+class Window : public QMainWindow {
     Q_OBJECT
-    friend class TextEdit;
 public:
-    static bool autoindent;
-    static QString colorID;
-    static void updateSettings();
-    explicit Editor(QString path);
-    TextEdit *editorWidget();
-    void updateTabWidth();
-    bool isUntitled();
-    void setUntitled(bool untitled);
-    QString path();
-    void setPath(QString path);
-    bool isModified();
-    void setModified(bool mod);
-    void setEditorText(QString text);
-    void syntaxHighlight(QString id);
-    QString currentID();
-    void setHasFoundText(bool found);
-    bool hasFoundText();
-    void setSavedContent(QString content);
-    QString saveContent();
-    void displayFinder();
+    Window();
+    ~Window();
+    void setTitle(QString title, bool custom = false);
+    static void addFile(QString path);
+    static QStatusBar *statusbar;
+    static void setStatusBarModified(bool modified);
+    static void setStatusBarPath(QString path);
+    static void setStatusBarLineCount(int count);
+    static bool checkSave();
+    static void displayProjectPane();
+    static void dispalyDateSelector();
+    static void appExit(QMainWindow *win, bool quit);
+    
+    static QCheckBox *useTabs;
 protected:
-    void contextMenuEvent(QContextMenuEvent *);
+	void closeEvent(QCloseEvent *event);
 private:
-    QVBoxLayout *layout;
-    TextEdit *editor;
-    Finder *finder;
-    QString filePath;
-    SyntaxHighlighter *highlight;
-    bool modified = false;
-    bool foundText = false;
-    QString lastSavedContent = "";
+    static QLabel *modLabel, *pathLabel, *lineCountLabel;
+    static QSplitter *centralSplitter;
+    static ProjectPane *projectPane;
+    static DateDockWidget *dateDockWidget;
+
+    FileMenu *filemenu;
+    EditMenu *editmenu;
+    InsertMenu *insertmenu;
+    ViewMenu *viewmenu;
+    HelpMenu *helpmenu;
+
+    bool customTitle = false;
 private slots:
-    void onModified();
-    void highlightCurrentLine();
+    void onWindowStateChanged(Qt::ApplicationState state);
 };
 
-class TextEdit : public QTextEdit {
-    Q_OBJECT
-public:
-    explicit TextEdit(Editor *p);
-protected:
-    bool canInsertFromMimeData(const QMimeData *source);
-    void insertFromMimeData(const QMimeData *source);
-    void keyPressEvent(QKeyEvent *event);
-private:
-    Editor *parent;
-};

@@ -1,4 +1,4 @@
-// Copyright 2017-2018, 2020 Patrick Flynn
+// Copyright 2018 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -26,55 +26,31 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-#include <QMainWindow>
-#include <QLabel>
-#include <QSplitter>
-#include <QTextEdit>
-#include <QStatusBar>
-#include <QCheckBox>
+#include <QToolBar>
+#include <QToolButton>
+#include <QLineEdit>
 
-#include "windows/date_selector.hh"
-#include "project/project_pane.hh"
+#include "editor.hpp"
 
-#include "menubar/filemenu.hh"
-#include "menubar/editmenu.hh"
-#include "menubar/insertmenu.hh"
-#include "menubar/viewmenu.hh"
-#include "menubar/helpmenu.hh"
+class Editor;
 
-class Window : public QMainWindow {
+class Finder : public QToolBar {
     Q_OBJECT
 public:
-    Window();
-    ~Window();
-    void setTitle(QString title, bool custom = false);
-    static void addFile(QString path);
-    static QStatusBar *statusbar;
-    static void setStatusBarModified(bool modified);
-    static void setStatusBarPath(QString path);
-    static void setStatusBarLineCount(int count);
-    static bool checkSave();
-    static void displayProjectPane();
-    static void dispalyDateSelector();
-    static void appExit(QMainWindow *win, bool quit);
-    
-    static QCheckBox *useTabs;
-protected:
-	void closeEvent(QCloseEvent *event);
+    Finder(Editor *edit);
+    ~Finder();
+    void clear();
+    void findText(bool next, bool replaceText);
 private:
-    static QLabel *modLabel, *pathLabel, *lineCountLabel;
-    static QSplitter *centralSplitter;
-    static ProjectPane *projectPane;
-    static DateDockWidget *dateDockWidget;
-
-    FileMenu *filemenu;
-    EditMenu *editmenu;
-    InsertMenu *insertmenu;
-    ViewMenu *viewmenu;
-    HelpMenu *helpmenu;
-
-    bool customTitle = false;
+    Editor *editor;
+    QToolButton *find, *findNext, *replace, *close;
+    QLineEdit *entry, *replaceEntry;
+    QString lastEntry;
+    int count = 0;
+    int index = -1;
 private slots:
-    void onWindowStateChanged(Qt::ApplicationState state);
+    void onFindClicked();
+    void onFindNextClicked();
+    void onReplaceClicked();
+    void onCloseClicked();
 };
-

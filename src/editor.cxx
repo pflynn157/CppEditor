@@ -33,11 +33,11 @@
 #include <KF5/KSyntaxHighlighting/Definition>
 #include <KF5/KSyntaxHighlighting/Theme>
 
-#include <editor.hh>
-#include <global.hh>
-#include <window.hh>
-#include <main_toolbar.hh>
-#include <menus/editor_context.hh>
+#include <editor.hpp>
+#include <global.hpp>
+#include <window.hpp>
+#include <main_toolbar.hpp>
+#include <menus/editor_context.hpp>
 
 using namespace KSyntaxHighlighting;
 

@@ -32,8 +32,8 @@
 #include <QAction>
 #include <QCursor>
 
-#include "project_tree.hh"
-#include "../window.hh"
+#include "project_tree.hpp"
+#include "../window.hpp"
 
 ProjectTree::ProjectTree() {
     this->setHeaderLabel("Project");

@@ -27,8 +27,8 @@
 #include <QVariant>
 #include <QSettings>
 
-#include <icon.hh>
-#include <global.hh>
+#include <icon.hpp>
+#include <global.hpp>
 
 bool IconManager::useSys = true;
 

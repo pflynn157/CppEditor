@@ -24,11 +24,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <window.hh>
-#include <icon.hh>
-#include <tabpane.hh>
-#include <menubar/editmenu.hh>
-#include <settings/settings_dialog.hh>
+#include <window.hpp>
+#include <icon.hpp>
+#include <tabpane.hpp>
+#include <menubar/editmenu.hpp>
+#include <settings/settings_dialog.hpp>
 
 EditMenu::EditMenu() {
     this->setTitle("Edit");

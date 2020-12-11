@@ -34,10 +34,10 @@
 #include <QColorDialog>
 #include <QSettings>
 
-#include <tabpane.hh>
-#include <editor.hh>
-#include <global.hh>
-#include <settings/editor_page.hh>
+#include <tabpane.hpp>
+#include <editor.hpp>
+#include <global.hpp>
+#include <settings/editor_page.hpp>
 
 EditorPage::EditorPage() {
     layout = new QVBoxLayout;
