@@ -21,3 +21,10 @@ The following are needed to build CppEditor:
 4. KDBusAddons
 6. KDE syntax-highlighting
 
+These are the packages you need across different Linux distros:   
+- Ubuntu/Linux Mint: `qt5-default qtbase5-dev libkf5syntaxhighlighting5 libkf5syntaxhighlighting-dev libkf5dbusaddons5 libkf5dbusaddons-dev`   
+- Fedora: `qt5-qtbase qt5-qtbase-devel kf5-syntax-highlighting kf5-syntax-highlighting-devel kf5-kdbusaddons kf5-kdbusaddons-devel`   
+- Manjaro/Arch Linux: `qt5-base syntax-highlighting kdbusaddons`   
+
+In addition, you will need a C++ compiler and CMake. I generally use G++, but I don't think it matters.
+

@@ -43,6 +43,8 @@ int getCurrentDesktop() {
     
     XCloseDisplay(dsp);
 
+    if (current_desktop == nullptr)
+    	return 0;
     return current_desktop[0];
 }
 
