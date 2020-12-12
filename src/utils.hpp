@@ -1,4 +1,4 @@
-// Copyright 2018, 2020 Patrick Flynn
+// Copyright 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification,
 // are permitted provided that the following conditions are met:
@@ -24,49 +24,11 @@
 // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#include <QDir>
-#include <QFileInfo>
-#include <QProcess>
 
-#include "ipc.hpp"
-#include "window.hpp"
-#include "utils.hpp"
+// Before someone asks, the reason we have to have a seperate source/header for this one function
+// is because when we include the X11 headers, that creates tons of naming conflicts for some reason
+// (mainly with the Window class I believe). Moving it like this sovled that problem.
 
-IPC::IPC() : KDBusService(KDBusService::Unique | KDBusService::NoExitOnFailure) {
-    connect(this,SIGNAL(activateRequested(QStringList,QString)),this,SLOT(onActivate(QStringList,QString)));
-    wksp = getCurrentDesktop();
-}
+#pragma once
 
-void IPC::setWindow(Window *window) {
-    win = window;
-}
-
-void IPC::onActivate(QStringList args, QString wd) {
-    if (args.size()<1) {
-        return;
-    }
-    
-    QStringList items;
-    for (int i = 1; i<args.size(); i++) {
-        if (args.at(i).contains("/")) {
-            items.push_back(args.at(i));
-        } else {        
-            QString path = wd + "/" + args.at(i);
-            items.push_back(path);
-        }
-    }
-    
-    int desktop2 = getCurrentDesktop();
-    if (desktop2 != wksp) {
-        items.push_front("--single");
-        QProcess::startDetached("CppEditor", items);
-        return;
-    }
-    
-    for (int i = 0; i<items.size(); i++) {
-        Window::addFile(items.at(i));
-    }
-    
-    win->raise();
-}
-
+int getCurrentDesktop();

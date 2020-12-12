@@ -49,6 +49,7 @@ set(BASE_SRC
     rsc.qrc
     icon.cxx
     finder.cxx
+    utils.cxx
 )
 
 set(SRC_ALL
@@ -74,7 +75,7 @@ target_link_libraries(CppEditor
     Qt5::Widgets
     KF5::SyntaxHighlighting
     KF5::DBusAddons
-    KF5::WindowSystem
+    X11
 )
 
 if (UNIX)
