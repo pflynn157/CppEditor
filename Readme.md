@@ -28,3 +28,11 @@ These are the packages you need across different Linux distros:
 
 In addition, you will need a C++ compiler and CMake. I generally use G++, but I don't think it matters.
 
+#### Ubuntu Fixes
+
+I recently switched one of my computers to Ubuntu, which as you know uses the Gnome desktop. In order to get it to look like the rest of the applications, you need a few additional packages/fixes:   
+* `sudo apt install qt5-style-plugins` -> Installs additional Qt styles (including the Gtk one we want)
+* `echo "export QT_QPA_PLATFORMTHEME=gtk2" >> ~/.profile` -> Enable the theme. Make sure to log out and back in when you're done
+* `sudo apt install appmenu-gtk2-module` -> If you have a delay launching, installing this will fix it.
+
+

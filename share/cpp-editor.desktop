@@ -13,6 +13,7 @@ StartupNotify=true
 Terminal=false
 TerminalOptions=
 Type=Application
+StartupWMClass=CppEditor
 X-DBUS-ServiceName=
 X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
