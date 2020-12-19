@@ -68,6 +68,11 @@ Window::Window() {
     this->menuBar()->addMenu(insertmenu);
     this->menuBar()->addMenu(viewmenu);
     this->menuBar()->addMenu(helpmenu);
+    
+    toolbar = new MainToolBar(this);
+    toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
+    toolbar->setFloatable(false);
+    this->addToolBar(Qt::TopToolBarArea, toolbar);
 
     statusbar = new QStatusBar();
     statusbar->setContextMenuPolicy(Qt::PreventContextMenu);
@@ -94,11 +99,6 @@ Window::Window() {
 
     centralSplitter->addWidget(projectPane);
     centralSplitter->addWidget(tabs);
-
-    MainToolBar *toolbar = new MainToolBar(this);
-    toolbar->setAllowedAreas(Qt::TopToolBarArea | Qt::BottomToolBarArea);
-    toolbar->setFloatable(false);
-    this->addToolBar(Qt::TopToolBarArea, toolbar);
 
     dateDockWidget = new DateDockWidget;
     dateDockWidget->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
@@ -133,6 +133,10 @@ void Window::setTitle(QString title, bool custom) {
         QString t = title + " [CppEditor]";
         this->setWindowTitle(t);
     }
+}
+
+MainToolBar *Window::getMainToolbar() {
+    return toolbar;
 }
 
 void Window::addFile(QString path) {
@@ -274,11 +278,7 @@ void Window::onWindowStateChanged(Qt::ApplicationState state) {
             TabPane::currentEditor()->setReadOnly(false);
             if (ret==QMessageBox::Yes) {
                 QString content = FileActions::fileContents(path);
-                if (path.endsWith(".rtf")) {
-                    TabPane::currentEditor()->setHtml(content);
-                } else {
-                    TabPane::setCurrentTabText(content);
-                }
+                TabPane::setCurrentTabText(content);
                 TabPane::currentWidget()->setModified(false);
             } else {
                 return;

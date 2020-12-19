@@ -1,4 +1,4 @@
-// Copyright 2017-2018 Patrick Flynn
+// Copyright 2017-2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -32,20 +32,21 @@
 #include <QSpinBox>
 #include <QComboBox>
 
-class FontSpinner;
-
 class MainToolBar : public QToolBar {
     Q_OBJECT
 public:
     explicit MainToolBar(QMainWindow *parentWindow);
     ~MainToolBar();
-    static QComboBox *syntaxmenu;
-    static QSpinBox *fontSize;
+    void setFontSize(int val);
+    void setSyntaxName(QString name);
 private:
     QMainWindow *parent;
     QToolButton *newFile, *openFile, *saveFile, *saveFileAs;
     QToolButton *cut, *copy, *paste, *undo, *redo;
+    QSpinBox *fontSize;
+    QComboBox *syntaxmenu;
 private slots:
     void onFontSizeChanged();
     void onComboTextChanged(QString item);
 };
+

@@ -37,6 +37,7 @@
 #include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
 #include "finder.hpp"
+#include "window.hpp"
 
 using namespace KSyntaxHighlighting;
 
@@ -50,7 +51,7 @@ public:
     static bool autoindent;
     static QString colorID;
     static void updateSettings();
-    explicit Editor(QString path);
+    explicit Editor(QString path, Window *parent);
     TextEdit *editorWidget();
     void updateFont();
     void updateTabWidth();
@@ -71,6 +72,7 @@ public:
 protected:
     void contextMenuEvent(QContextMenuEvent *);
 private:
+    Window *parent;
     QVBoxLayout *layout;
     TextEdit *editor;
     Finder *finder;

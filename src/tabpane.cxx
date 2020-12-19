@@ -78,14 +78,14 @@ TabPane::~TabPane() {
 
 void TabPane::addNewTab(QString path) {
     int count = tabs->count();
-    tabs->addTab(new Editor(path),QFileInfo(path).fileName());
+    tabs->addTab(new Editor(path, window),QFileInfo(path).fileName());
     tabs->setCurrentIndex(count);
     window->setTitle(path);
 }
 
 void TabPane::addNewUntitledTab() {
     int count = tabs->count();
-    Editor *edit = new Editor("untitled");
+    Editor *edit = new Editor("untitled", window);
     tabs->addTab(edit,"untitled");
     tabs->setCurrentIndex(count);
     window->setTitle("untitled");
@@ -149,9 +149,11 @@ void TabPane::onTabClosed(int index) {
 void TabPane::onTabChanged() {
     Window::setStatusBarPath(currentWidget()->path());
     Window::setStatusBarModified(currentWidget()->isModified());
-
-    MainToolBar::syntaxmenu->setCurrentText(currentWidget()->currentID());
-    MainToolBar::fontSize->setValue(currentWidget()->font().pointSize());
+    
+    auto toolbar = window->getMainToolbar();
+    toolbar->setFontSize(currentWidget()->font().pointSize());
+    toolbar->setSyntaxName(currentWidget()->currentID());
 
     window->setTitle(currentWidget()->path());
 }
+

@@ -49,17 +49,18 @@ void Editor::updateSettings() {
     Editor::colorID = settings.value("editor/line_color","#d9d9d9").toString();
 }
 
-Editor::Editor(QString path)
+Editor::Editor(QString path, Window *parent)
     : layout(new QVBoxLayout),
       editor(new TextEdit(this)),
       finder(new Finder(this))
 {
+    this->parent = parent;
+    filePath = path;
+
     layout->setContentsMargins(0,0,0,0);
     this->setLayout(layout);
     layout->addWidget(editor);
     layout->addWidget(finder,0,Qt::AlignBottom);
-
-    filePath = path;
 
     connect(editor,&QTextEdit::textChanged,this,&Editor::onModified);
     connect(editor,&QTextEdit::cursorPositionChanged,this,&Editor::highlightCurrentLine);
@@ -85,8 +86,8 @@ void Editor::updateFont() {
     int fontSize = settings.value("editor/font_size", 12).toInt();
     this->setFont(QFont(fontStr, fontSize));
     
-    if (MainToolBar::fontSize != nullptr)
-        MainToolBar::fontSize->setValue(fontSize);
+    auto toolbar = parent->getMainToolbar();
+    toolbar->setFontSize(fontSize);
 }
 
 void Editor::updateTabWidth() {
@@ -123,12 +124,8 @@ void Editor::setModified(bool mod) {
     modified = mod;
     Window::setStatusBarModified(mod);
 
-    if (mod==false) {
-        if (filePath.endsWith(".rtf")) {
-            setSavedContent(editor->toHtml());
-        } else {
-            setSavedContent(editor->toPlainText());
-        }
+    if (mod == false) {
+        setSavedContent(editor->toPlainText());
     }
 }
 
@@ -136,7 +133,9 @@ void Editor::setEditorText(QString text) {
     Definition def = repository->definitionForFileName(filePath);
     QString name = def.name();
     this->syntaxHighlight(name);
-    MainToolBar::syntaxmenu->setCurrentText(name);
+    
+    auto toolbar = parent->getMainToolbar();
+    toolbar->setSyntaxName(name);
 
     editor->setPlainText(text);
 }
@@ -302,3 +301,4 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
         QTextEdit::keyPressEvent(event);
     }
 }
+

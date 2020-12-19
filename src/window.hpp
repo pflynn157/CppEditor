@@ -35,6 +35,7 @@
 
 #include "windows/date_selector.hpp"
 #include "project/project_pane.hpp"
+#include <main_toolbar.hpp>
 
 #include "menubar/filemenu.hpp"
 #include "menubar/editmenu.hpp"
@@ -48,6 +49,8 @@ public:
     Window();
     ~Window();
     void setTitle(QString title, bool custom = false);
+    MainToolBar *getMainToolbar();
+    
     static void addFile(QString path);
     static QStatusBar *statusbar;
     static void setStatusBarModified(bool modified);
@@ -72,6 +75,8 @@ private:
     InsertMenu *insertmenu;
     ViewMenu *viewmenu;
     HelpMenu *helpmenu;
+    
+    MainToolBar *toolbar;
 
     bool customTitle = false;
 private slots:

@@ -36,9 +36,6 @@
 #include "global.hpp"
 #include "icon.hpp"
 
-QComboBox *MainToolBar::syntaxmenu;
-QSpinBox *MainToolBar::fontSize;
-
 using namespace KSyntaxHighlighting;
 
 MainToolBar::MainToolBar(QMainWindow *parentWindow)
@@ -134,6 +131,14 @@ MainToolBar::~MainToolBar() {
     delete fontSize;
 }
 
+void MainToolBar::setFontSize(int val) {
+    fontSize->setValue(val);
+}
+
+void MainToolBar::setSyntaxName(QString name) {
+    syntaxmenu->setCurrentText(name);
+}
+
 void MainToolBar::onFontSizeChanged() {
     QFont font = TabPane::currentWidget()->font();
     font.setPointSize(fontSize->value());
@@ -143,3 +148,4 @@ void MainToolBar::onFontSizeChanged() {
 void MainToolBar::onComboTextChanged(QString item) {
     TabPane::currentWidget()->syntaxHighlight(item);
 }
+
