@@ -70,6 +70,7 @@ Editor::Editor(QString path)
     highlight = new SyntaxHighlighter(doc);
     highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
 
+    updateFont();
     updateTabWidth();
 
     finder->hide();
@@ -77,6 +78,15 @@ Editor::Editor(QString path)
 
 TextEdit *Editor::editorWidget() {
     return editor;
+}
+
+void Editor::updateFont() {
+    QString fontStr = settings.value("editor/font").toString();
+    int fontSize = settings.value("editor/font_size", 12).toInt();
+    this->setFont(QFont(fontStr, fontSize));
+    
+    if (MainToolBar::fontSize != nullptr)
+        MainToolBar::fontSize->setValue(fontSize);
 }
 
 void Editor::updateTabWidth() {

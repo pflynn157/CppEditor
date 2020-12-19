@@ -67,10 +67,12 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow)
     syntaxItems.sort(Qt::CaseInsensitive);
     syntaxItems.push_front("Plain Text");
     syntaxmenu->addItems(syntaxItems);
+    
+    int size = settings.value("editor/font_size", 12).toInt();
 
     fontSize->setMinimum(1);
     fontSize->setMaximum(100);
-    fontSize->setValue(TabPane::currentWidget()->fontInfo().pointSize());
+    fontSize->setValue(size);
 
     newFile->setIcon(IconManager::getIcon("document-new"));
     openFile->setIcon(IconManager::getIcon("document-open"));

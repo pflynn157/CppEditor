@@ -74,7 +74,7 @@ EditorPage::EditorPage() {
 
     currentColor = new QLineEdit;
     currentColor->setReadOnly(true);
-    currentColor->setStyleSheet("background-color: "+settings.value("editor/ine_color","#d9d9d9").toString()+";");
+    currentColor->setStyleSheet("background-color: "+settings.value("editor/line_color","#d9d9d9").toString()+";");
     currentColor->setFixedWidth(50);
     lineColorLayout->addWidget(currentColor);
 
@@ -105,8 +105,9 @@ void EditorPage::onChooseFontClicked() {
     dialog.setCurrentFont(TabPane::currentWidget()->font());
     if (dialog.exec()) {
         QFont font = dialog.selectedFont();
-        TabPane::currentWidget()->setFont(font);
         settings.setValue("editor/font", font.family());
+        settings.setValue("editor/font_size", font.pointSize());
+        TabPane::currentWidget()->updateFont();
     }
 }
 
