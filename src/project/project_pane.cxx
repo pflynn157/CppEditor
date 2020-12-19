@@ -31,6 +31,8 @@
 #include <QFile>
 
 #include "project_pane.hpp"
+#include <tabpane.hpp>
+#include <editor.hpp>
 
 ProjectPane::ProjectPane() {
     layout = new QVBoxLayout;
@@ -72,7 +74,13 @@ void ProjectPane::loadTree() {
     QString currentPath = projectTree->getFilePath();
 
     if (currentPath == "") {
-        currentPath = QDir::currentPath();
+        Editor *current = TabPane::widgetAt(0);
+        if (current->isUntitled()) {
+            currentPath = QDir::currentPath();
+        } else {
+        	QString path = current->path();
+        	currentPath = QFileInfo(path).absolutePath();
+        }
     }
 
     projectTree->setFilePath(currentPath);
