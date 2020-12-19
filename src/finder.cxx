@@ -1,4 +1,4 @@
-// Copyright 2018 Patrick Flynn
+// Copyright 2018, 2020 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -140,10 +140,10 @@ void Finder::findText(bool next, bool replaceText) {
     hFormat.setBackground(Qt::yellow);
 
     while (!hCursor.isNull() && !hCursor.atEnd()) {
-        hCursor = doc->find(toSearch,hCursor,QTextDocument::FindWholeWords);
+        hCursor = doc->find(toSearch,hCursor,QTextDocument::FindWholeWords | QTextDocument::FindCaseSensitively);
         if (!hCursor.isNull()) {
             found = true;
-            hCursor.movePosition(QTextCursor::WordRight,QTextCursor::KeepAnchor);
+            hCursor.movePosition(QTextCursor::EndOfWord, QTextCursor::KeepAnchor);
             hCursor.mergeCharFormat(hFormat);
             if (next) {
                 if (index==c) {
@@ -153,8 +153,15 @@ void Finder::findText(bool next, bool replaceText) {
                     if (replaceText) {
                         hFormat.setBackground(Qt::white);
                         hCursor.mergeCharFormat(hFormat);
-
+                        
                         QString toReplace = replaceEntry->text();
+                        QString currentSelect = hCursor.selectedText();
+                        
+                        if (currentSelect.length() > toSearch.length()) {
+                            for (int i = toSearch.length(); i<currentSelect.length(); i++)
+                                toReplace += currentSelect.at(i);
+                        }
+                        
                         if (hCursor.hasSelection()) {
                             hCursor.insertText(toReplace);
                         }
@@ -204,3 +211,4 @@ void Finder::onCloseClicked() {
     clear();
     this->hide();
 }
+
