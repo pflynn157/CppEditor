@@ -96,4 +96,6 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 private:
     Editor *parent;
+    bool indent_next = false;
+    bool unindent_next = false;
 };
