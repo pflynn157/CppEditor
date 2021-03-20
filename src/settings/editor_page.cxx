@@ -121,8 +121,11 @@ void EditorPage::onChooseLineHighlighterClicked() {
 void EditorPage::onAutoIndentClicked(bool ai) {
     if (ai) {
         settings.setValue("editor/autoindent","true");
+        Window::intelIndent->show();
     } else {
         settings.setValue("editor/autoindent","false");
+        Window::intelIndent->hide();
     }
     Editor::updateSettings();
 }
+

@@ -221,7 +221,7 @@ bool TextEdit::canInsertFromMimeData(const QMimeData *source) {
 void TextEdit::insertFromMimeData(const QMimeData *source) {
     this->insertPlainText(source->text());
 }
-#include <iostream>
+
 // This function handles all key-press events in the editor
 // Auto-indent happens here
 void TextEdit::keyPressEvent(QKeyEvent *event) {
@@ -255,46 +255,53 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
 		return;
 		
     // TODO: For these sections, we may want some kind of lookup, rather than this big if-else
-	} else if (event->key() == Qt::Key_BraceLeft) {
-	    QString currentLang = parent->currentID();
-	    if (currentLang == "C" || currentLang == "C#" || currentLang == "C++"
-	        || currentLang == "CSS" || currentLang == "D" || currentLang == "Go"
-	        || currentLang == "Java" || currentLang == "JavaScript" || currentLang == "JSON"
-	        || currentLang == "Objective-C" || currentLang == "Objective-C++" || currentLang == "Pony"
-	        || currentLang == "Rust" || currentLang == "Vala") {
-	        indent_next = true;    
+    } else if (Window::intelIndent->isChecked() && parent->autoindent) {
+        if (event->key() == Qt::Key_BraceLeft) {
+	        QString currentLang = parent->currentID();
+	        if (currentLang == "C" || currentLang == "C#" || currentLang == "C++"
+	            || currentLang == "CSS" || currentLang == "D" || currentLang == "Go"
+	            || currentLang == "Java" || currentLang == "JavaScript" || currentLang == "JSON"
+	            || currentLang == "Objective-C" || currentLang == "Objective-C++" || currentLang == "Pony"
+	            || currentLang == "Rust" || currentLang == "Vala") {
+	            indent_next = true;    
+	        }
+	    } else if (event->key() == Qt::Key_BraceRight) {
+	        QString currentLang = parent->currentID();
+	        if (currentLang == "C" || currentLang == "C#" || currentLang == "C++"
+	            || currentLang == "CSS" || currentLang == "D" || currentLang == "Go"
+	            || currentLang == "Java" || currentLang == "JavaScript" || currentLang == "JSON"
+	            || currentLang == "Objective-C" || currentLang == "Objective-C++" || currentLang == "Pony"
+	            || currentLang == "Rust" || currentLang == "Vala") {
+	            unindent_next = true;    
+	        }
+	    } else if (event->key() == Qt::Key_Colon) {
+	        QString currentLang = parent->currentID();
+	        if (currentLang == "Python") {
+	            indent_next = true;
+	        }
+	    } else if (event->key() == Qt::Key_BracketLeft) {
+	        QString currentLang = parent->currentID();
+	        if (currentLang == "JSON") {
+	            indent_next = true;
+	        }
+	    } else if (event->key() == Qt::Key_BracketRight) {
+	        QString currentLang = parent->currentID();
+	        if (currentLang == "JSON") {
+	            unindent_next = true;
+	        }
 	    }
-	} else if (event->key() == Qt::Key_BraceRight) {
-	    QString currentLang = parent->currentID();
-	    if (currentLang == "C" || currentLang == "C#" || currentLang == "C++"
-	        || currentLang == "CSS" || currentLang == "D" || currentLang == "Go"
-	        || currentLang == "Java" || currentLang == "JavaScript" || currentLang == "JSON"
-	        || currentLang == "Objective-C" || currentLang == "Objective-C++" || currentLang == "Pony"
-	        || currentLang == "Rust" || currentLang == "Vala") {
-	        unindent_next = true;    
-	    }
-	} else if (event->key() == Qt::Key_Colon) {
-	    QString currentLang = parent->currentID();
-	    if (currentLang == "Python") {
-	        indent_next = true;
-	    }
-	} else if (event->key() == Qt::Key_BracketLeft) {
-	    QString currentLang = parent->currentID();
-	    if (currentLang == "JSON") {
-	        indent_next = true;
-	    }
-	} else if (event->key() == Qt::Key_BracketRight) {
-	    QString currentLang = parent->currentID();
-	    if (currentLang == "JSON") {
-	        unindent_next = true;
-	    }
-	}
+    } else if (!Window::intelIndent->isChecked() || !parent->autoindent) {
+        indent_next = false;
+        unindent_next = false;
+    }
 
+    // If the user wants autoindent, then do the work
     if (parent->autoindent) {
         if ((event->key()==Qt::Key_Enter)||(event->key()==Qt::Key_Return)) {
             int tabCount = 0;
             int spaceCount = 0;
             
+            // First, we get the last line and count the number of tabs and spaces preceding
             QString lastLine = parent->editor->document()->findBlockByLineNumber(
                         parent->editor->textCursor().blockNumber()).text();
             
@@ -314,6 +321,8 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
                 }
             }
             
+            // If we need to automatically indent the next line, increase the tab/space count
+            // TODO: The increased amount should be based on the detection from the loop above
             if (indent_next) {
                 if (Window::useTabs->isChecked()) {
                     ++tabCount;
@@ -322,6 +331,9 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
                 }
                 
                 indent_next = false;
+                
+            // Otherwise, we need to decrease the amount to indent, and if necessary, unindent the last line
+            // For example, we don't want to leave a closing curly-brace indented if it forms the end of a block
             } else if (unindent_next) {
                 if (Window::useTabs->isChecked()) {
                     --tabCount;
@@ -329,6 +341,7 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
                     spaceCount -= 4;
                 }
                 
+                // Re-construct the last line
                 QString lastLine_mod = "";
                 if (Window::useTabs->isChecked()) {
                     for (int i = 0; i<tabCount; i++) lastLine_mod += "\t";											
@@ -340,6 +353,7 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
                 
                 lastLine_mod += lastLine.trimmed();
                 
+                // And find and replace the last occurrence of it
                 QTextDocument *doc = parent->editor->document();
                 QTextCursor cursor(doc);
                 cursor = doc->find(lastLine,cursor,QTextDocument::FindWholeWords | QTextDocument::FindCaseSensitively);
@@ -352,6 +366,7 @@ void TextEdit::keyPressEvent(QKeyEvent *event) {
                 unindent_next = false;
             }
                 
+            // Finally, indent the current line
             if (tabCount>0 || spaceCount>0) {
                 QTextEdit::keyPressEvent(event);
                 

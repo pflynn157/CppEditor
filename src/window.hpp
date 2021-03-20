@@ -62,6 +62,7 @@ public:
     static void appExit(QMainWindow *win, bool quit);
     
     static QCheckBox *useTabs;
+    static QCheckBox *intelIndent;
 protected:
 	void closeEvent(QCloseEvent *event);
 private:

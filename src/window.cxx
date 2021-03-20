@@ -45,7 +45,7 @@
 
 QStatusBar *Window::statusbar;
 QLabel *Window::modLabel, *Window::pathLabel, *Window::lineCountLabel;
-QCheckBox *Window::useTabs;
+QCheckBox *Window::useTabs, *Window::intelIndent;
 QSplitter *Window::centralSplitter;
 ProjectPane *Window::projectPane;
 DateDockWidget *Window::dateDockWidget;
@@ -80,11 +80,20 @@ Window::Window() {
 
     modLabel = new QLabel();
     pathLabel = new QLabel();
+    intelIndent = new QCheckBox("Intelligent Auto-indent");
     useTabs = new QCheckBox("Use Tabs");
     lineCountLabel = new QLabel("Current Line: 1");
+    
+    intelIndent->setChecked(true);
+    if (settings.value("editor/autoindent", "true").toBool()) {
+        intelIndent->show();
+    } else {
+        intelIndent->hide();
+    }
 
     statusbar->addWidget(pathLabel);
     statusbar->addWidget(modLabel);
+    statusbar->addPermanentWidget(intelIndent);
     statusbar->addPermanentWidget(useTabs);
     statusbar->addPermanentWidget(lineCountLabel);
 
