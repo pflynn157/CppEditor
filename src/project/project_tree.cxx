@@ -104,6 +104,10 @@ QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *pa
     QList<QTreeWidgetItem *> items;
     QList<QTreeWidgetItem *> toExpand;
     
+    // Holds file and folder items so that they are properly sorted when loaded
+    QList<QTreeWidgetItem *> folderList;
+    QList<QTreeWidgetItem *> fileList;
+    
     if (!path.endsWith("/")) {
         path+="/";
     }
@@ -125,14 +129,28 @@ QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *pa
             if (expandedPaths.contains(itemPath)) {
                 toExpand.append(item);
             }
+            
+            folderList.push_back(item);
         } else {
             item->setIcon(0,QIcon::fromTheme("text-x-generic",QPixmap(":/icons/text-x-generic.png")));
+            fileList.push_back(item);
         }
         
-        if (parent == nullptr)
+        /*if (parent == nullptr)
             items.push_back(item);
         else
-            parent->addChild(item);
+            parent->addChild(item);*/
+    }
+    
+    // Now, add
+    for (QTreeWidgetItem *item : folderList) {
+        if (parent == nullptr) items.push_back(item);
+        else parent->addChild(item);
+    }
+    
+    for (QTreeWidgetItem *item : fileList) {
+        if (parent == nullptr) items.push_back(item);
+        else parent->addChild(item);
     }
     
     this->insertTopLevelItems(0,items);
