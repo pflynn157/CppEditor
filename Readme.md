@@ -28,10 +28,12 @@ These are the packages you need across different Linux distros:
 
 In addition, you will need a C++ compiler and CMake. I generally use G++, but I don't think it matters.
 
-#### Ubuntu Fixes
+#### Theme Fixes
 
-I recently switched one of my computers to Ubuntu, which as you know uses the Gnome desktop. In order to get it to look like the rest of the applications, you need a few additional packages/fixes:   
-* `sudo apt install qt5-style-plugins` -> Installs additional Qt styles (including the Gtk one we want)
+On Gtk-based desktops such as Gnome and Cinnamon (the latter of which I use on all my systems), you may have issues with Qt applications such as this not looking like the rest of the system. If that's the case, follow these instructions to fix that:
+
+* `sudo apt install qt5-style-plugins` -> Installs additional Qt styles (including the Gtk one we want) (Ubuntu/Linux Mint/Debian)
+* `sudo dnf install qt5-qtstyleplugins` -> Same as above, except for Fedora
 * `echo "export QT_QPA_PLATFORMTHEME=gtk2" >> ~/.profile` -> Enable the theme. Make sure to log out and back in when you're done
 * `sudo apt install appmenu-gtk2-module` -> If you have a delay launching, installing this will fix it.
 
