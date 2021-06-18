@@ -78,8 +78,8 @@ void ProjectPane::loadTree() {
         if (current->isUntitled()) {
             currentPath = QDir::currentPath();
         } else {
-        	QString path = current->path();
-        	currentPath = QFileInfo(path).absolutePath();
+        	    QString path = current->path();
+        	    currentPath = QFileInfo(path).absolutePath();
         }
     }
 

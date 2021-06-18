@@ -43,7 +43,7 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 private:
     void loadTreeData(QString path);
-    QList<QTreeWidgetItem *> loadTree(QString path, QTreeWidgetItem *parent);
+    QList<QTreeWidgetItem *> loadTree(QString path, QTreeWidgetItem *parent, int layer = 0);
     QString getItemPath(QTreeWidgetItem *item, int col);
     QString currentSelected();
     QString filePath;

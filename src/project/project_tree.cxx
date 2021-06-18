@@ -95,11 +95,18 @@ void ProjectTree::loadTreeData(QString path) {
     this->clear();
     
     auto toExpand = loadTree(path, nullptr);
-    for (auto current : toExpand)
-        current->setExpanded(true);
+    for (auto current : toExpand) {
+        QString path = getItemPath(current, 0);
+        for (QString currentPath : expandedPaths) {
+            if (currentPath == path) {
+                current->setExpanded(true);
+                break;
+            }
+        }
+    }
 }
 
-QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *parent) {
+QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *parent, int layer) {
     QStringList entries = QDir(path).entryList();
     QList<QTreeWidgetItem *> items;
     QList<QTreeWidgetItem *> toExpand;
@@ -124,7 +131,9 @@ QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *pa
         
         if (QFileInfo(itemPath).isDir()) {
             item->setIcon(0,QIcon::fromTheme("inode-directory",QPixmap(":/icons/inode-directory.png")));
-            toExpand.append(loadTree(itemPath,item));
+            if (layer < 10) {
+                toExpand.append(loadTree(itemPath,item, layer + 1));
+            }
             
             if (expandedPaths.contains(itemPath)) {
                 toExpand.append(item);
@@ -135,11 +144,6 @@ QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *pa
             item->setIcon(0,QIcon::fromTheme("text-x-generic",QPixmap(":/icons/text-x-generic.png")));
             fileList.push_back(item);
         }
-        
-        /*if (parent == nullptr)
-            items.push_back(item);
-        else
-            parent->addChild(item);*/
     }
     
     // Now, add
@@ -200,7 +204,7 @@ void ProjectTree::onItemExpanded(QTreeWidgetItem *item) {
 
 void ProjectTree::onItemCollapsed(QTreeWidgetItem *item) {
     QString path = getItemPath(item, 0);
-    expandedPaths.removeOne(path);
+    expandedPaths.removeAll(path);
 }
 
 void ProjectTree::onRenameClicked() {
