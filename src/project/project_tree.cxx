@@ -124,6 +124,12 @@ QList<QTreeWidgetItem *> ProjectTree::loadTree(QString path, QTreeWidgetItem *pa
             continue;
         }
         
+        // TODO: Maybe we want to add some kind of setting for this?
+        if (entries.at(i).endsWith(".o") || entries.at(i).endsWith(".d")
+            || entries.at(i).endsWith(".elf") || entries.at(i).endsWith(".bin")) {
+            continue;
+        }
+        
         QTreeWidgetItem *item = new QTreeWidgetItem;
         item->setText(0,QFileInfo(entries.at(i)).fileName());
         
