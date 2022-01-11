@@ -76,6 +76,7 @@ target_link_libraries(CppEditor
     KF5::SyntaxHighlighting
     KF5::DBusAddons
     X11
+    cppedit_highlighter
 )
 
 if (UNIX)

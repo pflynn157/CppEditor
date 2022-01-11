@@ -23,13 +23,14 @@ endif()
 
 add_compile_options(-std=c++11)
 include_directories("${CMAKE_BINARY_DIR}/src")
-include_directories(src)
+include_directories(src highlighter)
 
 if (WIN32)
     include_directories(C:/Unix/include)
     include_directories(C:/Unix/include/cpplib)
 endif()
 
+add_subdirectory(highlighter)
 add_subdirectory(src)
 
 if (UNIX)

@@ -45,7 +45,7 @@
 #include "icon.hpp"
 #include "ipc.hpp"
 
-Repository *repository;
+QSourceRepository *repository;
 QSettings settings("CppEditor", "CppEditor");
 
 int main(int argc, char *argv[]) {
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    repository = new Repository;
+    repository = new QSourceRepository;
     Recent::initRecentItems();
     Editor::updateSettings();
     IconManager::init();

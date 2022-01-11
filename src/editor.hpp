@@ -34,12 +34,15 @@
 #include <QContextMenuEvent>
 #include <QTextCharFormat>
 #include <QMimeData>
-#include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
+#include <qsourcerepository.h>
+#include <qsourcehighliter.h>
+//#include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
 #include "finder.hpp"
 #include "window.hpp"
 
-using namespace KSyntaxHighlighting;
+//using namespace KSyntaxHighlighting;
+using namespace QSourceHighlite;
 
 class Finder;
 class TextEdit;
@@ -77,7 +80,8 @@ private:
     TextEdit *editor;
     Finder *finder;
     QString filePath;
-    SyntaxHighlighter *highlight;
+    QSourceHighliter *highlight;
+    QString langName = "";
     bool modified = false;
     bool foundText = false;
     QString lastSavedContent = "";

@@ -1,4 +1,4 @@
-// Copyright 2017-2018, 2020 Patrick Flynn
+// Copyright 2017-2018, 2020-201 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -28,15 +28,12 @@
 #include <QPixmap>
 #include <QFont>
 #include <QStringList>
-#include <KF5/KSyntaxHighlighting/Definition>
 
 #include "main_toolbar.hpp"
 #include "global/slots.hpp"
 #include "tabpane.hpp"
 #include "global.hpp"
 #include "icon.hpp"
-
-using namespace KSyntaxHighlighting;
 
 MainToolBar::MainToolBar(QMainWindow *parentWindow)
     : newFile(new QToolButton),
@@ -55,12 +52,8 @@ MainToolBar::MainToolBar(QMainWindow *parentWindow)
 
     syntaxmenu = new QComboBox;
     fontSize = new QSpinBox;
-
-    auto list = repository->definitions();
-    QStringList syntaxItems;
-    for (int i = 0; i<list.size(); i++) {
-        syntaxItems.push_back(list.at(i).name());
-    }
+    
+    QStringList syntaxItems = repository->getSyntaxList();
     syntaxItems.sort(Qt::CaseInsensitive);
     syntaxItems.push_front("Plain Text");
     syntaxmenu->addItems(syntaxItems);

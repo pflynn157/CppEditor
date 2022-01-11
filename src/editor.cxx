@@ -30,8 +30,8 @@
 #include <QFont>
 #include <QTextCursor>
 #include <QVariant>
-#include <KF5/KSyntaxHighlighting/Definition>
-#include <KF5/KSyntaxHighlighting/Theme>
+//#include <KF5/KSyntaxHighlighting/Definition>
+//#include <KF5/KSyntaxHighlighting/Theme>
 
 #include <editor.hpp>
 #include <global.hpp>
@@ -39,7 +39,8 @@
 #include <main_toolbar.hpp>
 #include <menus/editor_context.hpp>
 
-using namespace KSyntaxHighlighting;
+//using namespace KSyntaxHighlighting;
+using namespace QSourceHighlite;
 
 bool Editor::autoindent = true;
 QString Editor::colorID = "#d9d9d9";
@@ -68,8 +69,9 @@ Editor::Editor(QString path, Window *parent)
     QTextDocument *doc = new QTextDocument();
     editor->setDocument(doc);
 
-    highlight = new SyntaxHighlighter(doc);
-    highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
+    //highlight = new SyntaxHighlighter(doc);
+    //highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
+    highlight = new QSourceHighliter(doc);
 
     updateFont();
     updateTabWidth();
@@ -130,9 +132,12 @@ void Editor::setModified(bool mod) {
 }
 
 void Editor::setEditorText(QString text) {
-    Definition def = repository->definitionForFileName(filePath);
-    QString name = def.name();
-    this->syntaxHighlight(name);
+    //Definition def = repository->definitionForFileName(filePath);
+    //QString name = def.name();
+    //this->syntaxHighlight(name);
+    QString name = repository->getSyntaxForFile(filePath);
+    highlight->setCurrentLanguage(repository->getLanguage(name));
+    langName = name;
     
     auto toolbar = parent->getMainToolbar();
     toolbar->setSyntaxName(name);
@@ -141,13 +146,15 @@ void Editor::setEditorText(QString text) {
 }
 
 void Editor::syntaxHighlight(QString id) {
-    highlight->setDefinition(repository->definitionForName(id));
+    highlight->setCurrentLanguage(repository->getLanguage(id));
+    langName = id;
 }
 
 QString Editor::currentID() {
-    QString name = highlight->definition().name();
-    if (name=="") {
-        name="Plain Text";
+    //QString name = repository->getCurrentSyntaxName();
+    QString name = langName;
+    if (name == "") {
+        name = "Plain Text";
     }
     return name;
 }
