@@ -22,6 +22,7 @@ public:
         syntaxList.push_back("Java");
         syntaxList.push_back("Lua");
         syntaxList.push_back("Make");
+        syntaxList.push_back("Markdown");
         syntaxList.push_back("Php");
         syntaxList.push_back("Python");
         syntaxList.push_back("Qml");
@@ -50,6 +51,7 @@ public:
             { QLatin1String("Json"), QSourceHighliter::CodeJSON },
             { QLatin1String("Lua"), QSourceHighliter::CodeLua },
             { QLatin1String("Make"), QSourceHighliter::CodeMake },
+            { QLatin1String("Markdown"), QSourceHighliter::CodeMarkdown },
             { QLatin1String("Php"), QSourceHighliter::CodePHP },
             { QLatin1String("Python"), QSourceHighliter::CodePython },
             { QLatin1String("Qml"), QSourceHighliter::CodeQML },
@@ -87,6 +89,7 @@ public:
         else if (input.endsWith(".java")) return "Java";
         else if (input.endsWith(".lua")) return "Lua";
         else if (input.endsWith("Makefile")) return "Make";
+        else if (input.endsWith(".md")) return "Markdown";
         else if (input.endsWith(".php")) return "Php";
         else if (input.endsWith(".py")) return "Python";
         else if (input.endsWith(".qml")) return "Qml";

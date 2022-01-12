@@ -219,9 +219,20 @@ void loadMakeData(QMultiHash<char, QLatin1String>& types,
     QMultiHash<char, QLatin1String>& literals,
     QMultiHash<char, QLatin1String>& other);
 
+/********************************************************/
+/***   Asm-x86 DATA  ***************************************/
+/********************************************************/
 void loadAsmData(QMultiHash<char, QLatin1String>& types,
     QMultiHash<char, QLatin1String>& keywords,
     QMultiHash<char, QLatin1String>& builtin,
     QMultiHash<char, QLatin1String>& literals,
     QMultiHash<char, QLatin1String>& other);
 
+/********************************************************/
+/***   Markdown DATA*************************************/
+/********************************************************/
+void loadMarkdownData(QMultiHash<char, QLatin1String>& types,
+    QMultiHash<char, QLatin1String>& keywords,
+    QMultiHash<char, QLatin1String>& builtin,
+    QMultiHash<char, QLatin1String>& literals,
+    QMultiHash<char, QLatin1String>& other);

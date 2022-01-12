@@ -90,7 +90,9 @@ public:
         CodeLua = 246,
         CodeLuaComment = 247,
         CodeVHDL = 248,
-        CodeVHDLComment = 249
+        CodeVHDLComment = 249,
+        CodeMarkdown = 250,
+        CodeMarkdownComment = 251
     };
     Q_ENUM(Language)
 

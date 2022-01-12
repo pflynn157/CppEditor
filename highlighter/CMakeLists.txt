@@ -24,6 +24,7 @@ set(SRC
     language/cmake_lang.cpp
     language/make_lang.cpp
     language/x86_lang.cpp
+    language/markdown_lang.cpp
 
     qsourcehighliter.cpp
     qsourcehighliterthemes.cpp

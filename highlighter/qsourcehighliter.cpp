@@ -237,6 +237,10 @@ void QSourceHighliter::highlightSyntax(const QString &text)
             isAda = true;
             loadVHDLData(types, keywords, builtin, literals, others);
             break;
+        case CodeMarkdown:
+        case CodeMarkdownComment:
+            loadMarkdownData(types, keywords, builtin, literals, others);
+            break;
         default:
             break;
     }
