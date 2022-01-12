@@ -36,12 +36,10 @@
 #include <QMimeData>
 #include <qsourcerepository.h>
 #include <qsourcehighliter.h>
-//#include <KF5/KSyntaxHighlighting/SyntaxHighlighter>
 
 #include "finder.hpp"
 #include "window.hpp"
 
-//using namespace KSyntaxHighlighting;
 using namespace QSourceHighlite;
 
 class Finder;

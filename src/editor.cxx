@@ -30,8 +30,6 @@
 #include <QFont>
 #include <QTextCursor>
 #include <QVariant>
-//#include <KF5/KSyntaxHighlighting/Definition>
-//#include <KF5/KSyntaxHighlighting/Theme>
 
 #include <editor.hpp>
 #include <global.hpp>
@@ -39,7 +37,6 @@
 #include <main_toolbar.hpp>
 #include <menus/editor_context.hpp>
 
-//using namespace KSyntaxHighlighting;
 using namespace QSourceHighlite;
 
 bool Editor::autoindent = true;
@@ -68,9 +65,7 @@ Editor::Editor(QString path, Window *parent)
 
     QTextDocument *doc = new QTextDocument();
     editor->setDocument(doc);
-
-    //highlight = new SyntaxHighlighter(doc);
-    //highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
+    
     highlight = new QSourceHighliter(doc);
 
     updateFont();
@@ -132,9 +127,6 @@ void Editor::setModified(bool mod) {
 }
 
 void Editor::setEditorText(QString text) {
-    //Definition def = repository->definitionForFileName(filePath);
-    //QString name = def.name();
-    //this->syntaxHighlight(name);
     QString name = repository->getSyntaxForFile(filePath);
     highlight->setCurrentLanguage(repository->getLanguage(name));
     langName = name;
@@ -151,7 +143,6 @@ void Editor::syntaxHighlight(QString id) {
 }
 
 QString Editor::currentID() {
-    //QString name = repository->getCurrentSyntaxName();
     QString name = langName;
     if (name == "") {
         name = "Plain Text";

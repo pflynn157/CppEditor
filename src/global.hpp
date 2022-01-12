@@ -26,11 +26,9 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #pragma once
 
-//#include <KF5/KSyntaxHighlighting/Repository>
 #include <qsourcerepository.h>
 #include <QSettings>
 
-//using namespace KSyntaxHighlighting;
 using namespace QSourceHighlite;
 
 extern QSourceRepository *repository;

@@ -73,7 +73,6 @@ endif()
 target_link_libraries(CppEditor
     Qt5::Core
     Qt5::Widgets
-    KF5::SyntaxHighlighting
     KF5::DBusAddons
     X11
     cppedit_highlighter
