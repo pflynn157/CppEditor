@@ -43,7 +43,6 @@
 #include "global/file_actions.hpp"
 #include "global/recent.hpp"
 #include "icon.hpp"
-#include "ipc.hpp"
 
 QSourceRepository *repository;
 QSettings settings("CppEditor", "CppEditor");
@@ -52,16 +51,6 @@ int main(int argc, char *argv[]) {
     QApplication app(argc,argv);
     QCoreApplication::setApplicationName("CppEditor");
     QCoreApplication::setOrganizationName("CppEditor");
-    
-    int arg_start = 1;
-    bool single = false;
-    
-    for (int i = 1; i<argc; i++) {
-        if (std::string(argv[i]) == "--single") {
-            ++arg_start;
-            single = true;
-        }
-    }
 
     repository = new QSourceRepository;
     Recent::initRecentItems();
@@ -70,16 +59,8 @@ int main(int argc, char *argv[]) {
 
     Window *window = new Window;
     window->show();
-    
-    if (!single) {
-        IPC *ipc = new IPC;
-        ipc->setWindow(window);
-        if (ipc->isRegistered()) {
-            std::cout << "[DBUS] CppEditor has been registered." << std::endl;
-        }
-    }
 
-    for (int i = arg_start; i<argc; i++) {
+    for (int i = 1; i<argc; i++) {
         QString fullPath = QFileInfo(argv[i]).absoluteFilePath();
         Window::addFile(fullPath);
     }

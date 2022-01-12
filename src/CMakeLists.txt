@@ -44,12 +44,10 @@ set(BASE_SRC
     main_toolbar.cxx
     tabpane.cxx
     window.cxx
-    ipc.cxx
     icons.qrc
     rsc.qrc
     icon.cxx
     finder.cxx
-    utils.cxx
 )
 
 set(SRC_ALL
@@ -73,8 +71,6 @@ endif()
 target_link_libraries(CppEditor
     Qt5::Core
     Qt5::Widgets
-    KF5::DBusAddons
-    X11
     cppedit_highlighter
 )
 
