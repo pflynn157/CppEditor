@@ -2,7 +2,29 @@ cmake_minimum_required(VERSION 3.0.0)
 project(CppEditor_highlighter)
 
 set(SRC
-    languagedata.cpp
+    language/lua_lang.cpp
+    language/cpp_lang.cpp
+    language/vhdl_lang.cpp
+    language/sh_lang.cpp
+    language/js_lang.cpp
+    language/php_lang.cpp
+    language/qml_lang.cpp
+    language/py_lang.cpp
+    language/rust_lang.cpp
+    language/java_lang.cpp
+    language/cs_lang.cpp
+    language/go_lang.cpp
+    language/v_lang.cpp
+    language/sql_lang.cpp
+    language/json_lang.cpp
+    language/css_lang.cpp
+    language/ts_lang.cpp
+    language/yaml_lang.cpp
+    language/vex_lang.cpp
+    language/cmake_lang.cpp
+    language/make_lang.cpp
+    language/x86_lang.cpp
+
     qsourcehighliter.cpp
     qsourcehighliterthemes.cpp
 )
