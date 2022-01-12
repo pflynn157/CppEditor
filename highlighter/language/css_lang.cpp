@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   CSS DATA      ***********************************/
 /********************************************************/
@@ -357,6 +355,4 @@ void loadCSSData(LanguageData &types,
     builtin = css_builtin;
     literals = css_literals;
     other = css_other;
-}
-
 }

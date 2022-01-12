@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   Java DATA      ***********************************/
 /********************************************************/
@@ -111,6 +109,4 @@ void loadJavaData(LanguageData &types,
     builtin = java_builtin;
     literals = java_literals;
     other = java_other;
-}
-
 }

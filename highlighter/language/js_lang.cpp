@@ -1,9 +1,6 @@
-
 #include <QMultiHash>
 #include <QLatin1String>
 #include <languagedata.h>
-
-namespace QSourceHighlite {
 
 /**********************************************************/
 /* JS Data *********************************************/
@@ -155,6 +152,4 @@ void loadJSData(LanguageData &types,
     builtin = js_builtin;
     literals = js_literals;
     other = js_other;
-}
-
 }

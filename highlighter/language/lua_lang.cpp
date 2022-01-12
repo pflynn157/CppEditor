@@ -1,10 +1,6 @@
-
 #include <QMultiHash>
 #include <QLatin1String>
-
 #include <languagedata.h>
-
-namespace QSourceHighlite {
 
 /**********************************************************/
 /* LuaData ************************************************/
@@ -111,6 +107,4 @@ void loadLuaData(LanguageData &typess,
     builtins  = lua_builtin;
     literalss = lua_literals;
     others    = lua_other;
-}
-
 }

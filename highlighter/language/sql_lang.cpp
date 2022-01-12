@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   SQL DATA      ************************************/
 /********************************************************/
@@ -371,6 +369,4 @@ void loadSQLData(LanguageData &types,
     builtin = sql_builtin;
     literals = sql_literals;
     other = sql_other;
-}
-
 }

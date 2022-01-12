@@ -37,8 +37,6 @@
 #include <main_toolbar.hpp>
 #include <menus/editor_context.hpp>
 
-using namespace QSourceHighlite;
-
 bool Editor::autoindent = true;
 QString Editor::colorID = "#d9d9d9";
 

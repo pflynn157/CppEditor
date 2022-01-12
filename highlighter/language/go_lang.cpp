@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   Go DATA      *************************************/
 /********************************************************/
@@ -108,6 +106,4 @@ void loadGoData(LanguageData &types,
     builtin = go_builtin;
     literals = go_literals;
     other = go_other;
-}
-
 }

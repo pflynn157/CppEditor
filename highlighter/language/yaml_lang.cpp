@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   YAML DATA  ***************************************/
 /********************************************************/
@@ -39,6 +37,4 @@ void loadYAMLData(LanguageData &types,
     builtin = YAML_builtin;
     literals = YAML_literals;
     other = YAML_other;
-}
-
 }

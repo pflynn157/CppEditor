@@ -29,7 +29,5 @@
 #include <qsourcerepository.h>
 #include <QSettings>
 
-using namespace QSourceHighlite;
-
 extern QSourceRepository *repository;
 extern QSettings settings;

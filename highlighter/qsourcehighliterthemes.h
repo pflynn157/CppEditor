@@ -20,13 +20,9 @@
  * SOFTWARE.
  *
  */
-
-#ifndef QSOURCEHIGHLITERTHEMES_H
-#define QSOURCEHIGHLITERTHEMES_H
+#pragma once
 
 #include "qsourcehighliter.h"
-
-namespace QSourceHighlite {
 
 namespace QSourceHighliterTheme
 {
@@ -34,5 +30,3 @@ namespace QSourceHighliterTheme
 
 } // namespace QSourceHighliterTheme
 
-} // namespace QSourceHighlite
-#endif // QSOURCEHIGHLITERTHEMES_H

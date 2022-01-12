@@ -40,8 +40,6 @@
 #include "finder.hpp"
 #include "window.hpp"
 
-using namespace QSourceHighlite;
-
 class Finder;
 class TextEdit;
 

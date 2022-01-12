@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   Typescript DATA  *********************************/
 /********************************************************/
@@ -152,6 +150,4 @@ void loadTypescriptData(LanguageData &types,
     builtin = typescript_builtin;
     literals = typescript_literals;
     other = typescript_other;
-}
-
 }

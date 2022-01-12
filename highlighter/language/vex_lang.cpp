@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   VEX DATA   ***************************************/
 /********************************************************/
@@ -742,6 +740,4 @@ void loadVEXData(LanguageData &types,
     builtin = vex_builtin;
     literals = vex_literals;
     other = vex_other;
-}
-
 }

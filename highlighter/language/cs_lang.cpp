@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   C# DATA      *************************************/
 /********************************************************/
@@ -156,6 +154,4 @@ void loadCSharpData(LanguageData &types,
     builtin = csharp_builtin;
     literals = csharp_literals;
     other = csharp_other;
-}
-
 }

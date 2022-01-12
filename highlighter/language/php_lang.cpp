@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /**********************************************************/
 /* PHP Data *********************************************/
 /**********************************************************/
@@ -135,6 +133,4 @@ void loadPHPData(LanguageData &types,
     builtin = php_builtin;
     literals = php_literals;
     other = php_other;
-}
-
 }

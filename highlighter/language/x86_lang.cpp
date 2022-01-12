@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 void loadAsmData(QMultiHash<char, QLatin1String>& types, QMultiHash<char, QLatin1String>& keywords, QMultiHash<char, QLatin1String>& builtin, QMultiHash<char, QLatin1String>& literals, QMultiHash<char, QLatin1String>& other)
 {
     Q_UNUSED(literals);
@@ -2083,6 +2081,4 @@ void loadAsmData(QMultiHash<char, QLatin1String>& types, QMultiHash<char, QLatin
         { 'd', QLatin1String("data") },
         { 'b', QLatin1String("bss") }
     };
-}
-
 }

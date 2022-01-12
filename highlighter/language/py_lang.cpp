@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /**********************************************************/
 /* Python Data *********************************************/
 /**********************************************************/
@@ -163,6 +161,4 @@ void loadPythonData(LanguageData &types,
     builtin = py_builtin;
     literals = py_literals;
     other = py_other;
-}
-
 }

@@ -20,17 +20,13 @@
  * SOFTWARE.
  *
  */
-
-#ifndef QSOURCEHIGHLITER_H
-#define QSOURCEHIGHLITER_H
+#pragma once
 
 #include <QSyntaxHighlighter>
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QStringView>
 #endif
-
-namespace QSourceHighlite {
 
 class QSourceHighliter : public QSyntaxHighlighter
 {
@@ -167,5 +163,3 @@ private:
     QHash<Token, QTextCharFormat> _formats;
     Language _language;
 };
-}
-#endif // QSOURCEHIGHLITER_H

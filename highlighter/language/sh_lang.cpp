@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /**********************************************************/
 /* Shell Data *********************************************/
 /**********************************************************/
@@ -194,7 +192,5 @@ void loadShellData(LanguageData &types,
     builtin = shell_builtin;
     literals = shell_literals;
     other = shell_other;
-
-}
 
 }

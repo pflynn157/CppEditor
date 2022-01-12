@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   MAKE DATA   ***************************************/
 /********************************************************/
@@ -96,6 +94,4 @@ void loadMakeData(QMultiHash<char, QLatin1String> &types, QMultiHash<char, QLati
     builtin = make_builtin;
     literals = make_literals;
     other = make_other;
-}
-
 }

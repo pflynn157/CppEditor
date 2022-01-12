@@ -21,15 +21,12 @@
  *
  */
 
-#ifndef QOWNLANGUAGEDATA_H
-#define QOWNLANGUAGEDATA_H
+#pragma once
 
 template<typename key, typename val>
 class QMultiHash;
 
 class QLatin1String;
-
-namespace QSourceHighlite {
 
 using LanguageData = QMultiHash<char, QLatin1String>;
 
@@ -227,5 +224,4 @@ void loadAsmData(QMultiHash<char, QLatin1String>& types,
     QMultiHash<char, QLatin1String>& builtin,
     QMultiHash<char, QLatin1String>& literals,
     QMultiHash<char, QLatin1String>& other);
-}
-#endif
+

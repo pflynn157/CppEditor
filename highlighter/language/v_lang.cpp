@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   V DATA      **************************************/
 /********************************************************/
@@ -84,6 +82,4 @@ void loadVData(LanguageData &types,
     builtin = v_builtin;
     literals = v_literals;
     other = v_other;
-}
-
 }

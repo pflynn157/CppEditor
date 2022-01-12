@@ -1,9 +1,6 @@
-
 #include <QMultiHash>
 #include <QLatin1String>
 #include <languagedata.h>
-
-namespace QSourceHighlite {
 
 /**********************************************************/
 /* C/C++ Data *********************************************/
@@ -294,7 +291,5 @@ void loadCppData(LanguageData &typess,
     builtins = cpp_builtin;
     literalss = cpp_literals;
     others = cpp_other;
-
-}
 
 }

@@ -29,8 +29,6 @@
 #include <algorithm>
 #include <QTextDocument>
 
-namespace QSourceHighlite {
-
 QSourceHighliter::QSourceHighliter(QTextDocument *doc)
     : QSyntaxHighlighter(doc)//,
       //_language(CodeC)
@@ -943,5 +941,4 @@ void QSourceHighliter::asmHighlighter(const QString& text)
 
     if (!isLabel && i < text.length() && text.at(i) == QLatin1Char('#'))
         setFormat(0, colonPos, format);
-}
 }

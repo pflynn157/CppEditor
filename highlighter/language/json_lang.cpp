@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   JSON DATA      ***********************************/
 /********************************************************/
@@ -46,6 +44,4 @@ void loadJSONData(LanguageData &types,
     builtin = json_builtin;
     literals = json_literals;
     other = json_other;
-}
-
 }

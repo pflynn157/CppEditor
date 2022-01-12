@@ -23,8 +23,6 @@
 
 #include "qsourcehighliterthemes.h"
 
-namespace QSourceHighlite {
-
 static QHash<QSourceHighliter::Token, QTextCharFormat> formats()
 {
     QHash<QSourceHighliter::Token, QTextCharFormat> _formats;
@@ -67,6 +65,4 @@ QHash<QSourceHighliter::Token, QTextCharFormat>
     default:
         return {};
     }
-}
-
 }

@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /**********************************************************/
 /* QML Data *********************************************/
 /**********************************************************/
@@ -145,6 +143,4 @@ void loadQMLData(LanguageData &types,
     builtin = qml_builtin;
     literals = qml_literals;
     other = qml_other;
-}
-
 }

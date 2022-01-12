@@ -28,8 +28,6 @@
 #include <QDebug>
 #include <QDir>
 
-using namespace QSourceHighlite;
-
 QHash<QString, QSourceHighliter::Language> MainWindow::_langStringToEnum;
 
 MainWindow::MainWindow(QWidget *parent)

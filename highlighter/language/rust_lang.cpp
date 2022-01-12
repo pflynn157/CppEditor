@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   Rust DATA      ***********************************/
 /********************************************************/
@@ -156,6 +154,4 @@ void loadRustData(LanguageData &types,
     builtin = rust_builtin;
     literals = rust_literals;
     other = rust_other;
-}
-
 }

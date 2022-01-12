@@ -2,8 +2,6 @@
 #include <QLatin1String>
 #include <languagedata.h>
 
-namespace QSourceHighlite {
-
 /********************************************************/
 /***   CMAKE DATA   ***************************************/
 /********************************************************/
@@ -614,6 +612,4 @@ void loadCMakeData(QMultiHash<char, QLatin1String> &types, QMultiHash<char, QLat
     builtin = cmake_builtin;
     literals = cmake_literals;
     other = cmake_other;
-}
-
 }

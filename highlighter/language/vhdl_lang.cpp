@@ -1,9 +1,6 @@
-
 #include <QMultiHash>
 #include <QLatin1String>
 #include <languagedata.h>
-
-namespace QSourceHighlite {
 
 /**********************************************************/
 /* VHDL Data *********************************************/
@@ -179,7 +176,5 @@ void loadVHDLData(LanguageData &typess,
     builtins = vhdl_builtin;
     literalss = vhdl_literals;
     others = vhdl_other;
-
-}
 
 }

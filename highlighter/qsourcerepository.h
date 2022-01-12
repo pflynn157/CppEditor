@@ -5,8 +5,6 @@
 
 #include <qsourcehighliter.h>
 
-namespace QSourceHighlite {
-
 class QSourceRepository {
 public:
     QSourceRepository() {
@@ -105,4 +103,3 @@ private:
     QHash<QString, QSourceHighliter::Language> langMap;
 };
 
-}
