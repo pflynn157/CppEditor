@@ -84,7 +84,7 @@ Window::Window() {
     useTabs = new QCheckBox("Use Tabs");
     lineCountLabel = new QLabel("Current Line: 1");
     
-    intelIndent->setChecked(true);
+    intelIndent->setChecked(false);
     if (settings.value("editor/autoindent", "true").toBool()) {
         intelIndent->show();
     } else {
