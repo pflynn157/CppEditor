@@ -48,6 +48,7 @@ class Editor : public QFrame {
     Q_OBJECT
     friend class TextEdit;
 public:
+    static bool darkTheme;
     static bool autoindent;
     static QString colorID;
     static void updateSettings();

@@ -41,12 +41,14 @@
 
 using namespace KSyntaxHighlighting;
 
+bool Editor::darkTheme = false;
 bool Editor::autoindent = true;
 QString Editor::colorID = "#d9d9d9";
 
 void Editor::updateSettings() {
-    Editor::autoindent = settings.value("editor/autoindent","true").toBool();
-    Editor::colorID = settings.value("editor/line_color","#d9d9d9").toString();
+    Editor::darkTheme = settings.value("editor/dark_theme", "false").toBool();
+    Editor::autoindent = settings.value("editor/autoindent", "true").toBool();
+    Editor::colorID = settings.value("editor/line_color", "#d9d9d9").toString();
 }
 
 Editor::Editor(QString path, Window *parent)
@@ -69,7 +71,8 @@ Editor::Editor(QString path, Window *parent)
     editor->setDocument(doc);
 
     highlight = new SyntaxHighlighter(doc);
-    highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
+    if (darkTheme) highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::DarkTheme));
+    else highlight->setTheme(repository->defaultTheme(KSyntaxHighlighting::Repository::LightTheme));
 
     updateFont();
     updateTabWidth();

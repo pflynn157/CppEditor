@@ -1,4 +1,4 @@
-// Copyright 2017, 2020 Patrick Flynn
+// Copyright 2017, 2020-2022 Patrick Flynn
 //
 // Redistribution and use in source and binary forms, with or without modification, 
 // are permitted provided that the following conditions are met:
@@ -81,6 +81,17 @@ EditorPage::EditorPage() {
     QPushButton *lineColorButton = new QPushButton("Choose");
     connect(lineColorButton,&QPushButton::clicked,this,&EditorPage::onChooseLineHighlighterClicked);
     lineColorLayout->addWidget(lineColorButton);
+    
+    // Dark theme settings
+    QFrame *dkThemeWidget = new QFrame;
+    QHBoxLayout *dkThemeLayout = new QHBoxLayout;
+    dkThemeWidget->setLayout(dkThemeLayout);
+    subLayout->addWidget(dkThemeWidget);
+    
+    QCheckBox *dkCheckBox = new QCheckBox("Dark Theme");
+    dkCheckBox->setChecked(settings.value("editor/dark_theme", "false").toBool());
+    connect(dkCheckBox,SIGNAL(clicked(bool)),this,SLOT(onDarkThemeClicked(bool)));
+    dkThemeLayout->addWidget(dkCheckBox);
 
     //Autoindent settings
     QFrame *aiWidget = new QFrame;
@@ -115,6 +126,15 @@ void EditorPage::onChooseLineHighlighterClicked() {
     QColor color = QColorDialog::getColor(QColor("#d9d9d9"));
     currentColor->setStyleSheet("background-color: "+color.name()+";");
     settings.setValue("editor/line_color",color.name());
+    Editor::updateSettings();
+}
+
+void EditorPage::onDarkThemeClicked(bool ai) {
+    if (ai) {
+        settings.setValue("editor/dark_theme", "true");
+    } else {
+        settings.setValue("editor/dark_theme", "false");
+    }
     Editor::updateSettings();
 }
 
